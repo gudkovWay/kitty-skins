@@ -1,0 +1,10 @@
+[repository]
+name = "kitty-skins"
+authors = ["q"]
+
+[kitty-skins]
+description = "Adaptive Gothic Eclipse window decoration for Kitty windows under Hyprland."
+output = "build/libkitty-skins.so"
+build = [
+    "cmake -S . -B build && cmake --build build"
+]
