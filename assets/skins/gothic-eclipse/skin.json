@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "id": "gothic-eclipse",
+  "name": "Gothic Eclipse",
+  "filter": "nearest",
+  "frame": {
+    "asset": "frame.png",
+    "slices": {"left": 180, "right": 180, "top": 220, "bottom": 200},
+    "edges": {"left": "tile", "right": "tile", "top": "tile", "bottom": "tile"}
+  },
+  "tiers": [
+    {
+      "id": "full",
+      "min_width": 900,
+      "min_height": 600,
+      "scale": 0.45,
+      "extents": {"left": 81, "right": 81, "top": 99, "bottom": 90},
+      "visible_sprites": ["eclipse", "candles", "controls"]
+    },
+    {
+      "id": "compact",
+      "min_width": 560,
+      "min_height": 360,
+      "scale": 0.30,
+      "extents": {"left": 54, "right": 54, "top": 66, "bottom": 60},
+      "visible_sprites": ["eclipse"]
+    },
+    {
+      "id": "border-only",
+      "min_width": 0,
+      "min_height": 0,
+      "scale": 0.18,
+      "extents": {"left": 32.4, "right": 32.4, "top": 39.6, "bottom": 36},
+      "visible_sprites": []
+    }
+  ],
+  "sprites": [
+    {"id": "eclipse", "asset": "ornaments/eclipse.png", "anchor": "top-center", "offset_x": 0, "offset_y": 0, "scale": 1, "z_index": 10},
+    {"id": "candles", "asset": "ornaments/candles.png", "anchor": "bottom-left", "offset_x": -8, "offset_y": 0, "scale": 1, "z_index": 20},
+    {"id": "controls", "asset": "ornaments/controls.png", "anchor": "top-right", "offset_x": -18, "offset_y": 4, "scale": 1, "z_index": 20}
+  ]
+}
