@@ -1,42 +1,50 @@
 {
-  "schema": 1,
+  "schema": 2,
   "id": "gothic-eclipse",
   "name": "Gothic Eclipse",
   "filter": "nearest",
-  "frame": {
-    "asset": "frame.png",
-    "slices": {"left": 180, "right": 180, "top": 220, "bottom": 200},
-    "edges": {"left": "tile", "right": "tile", "top": "tile", "bottom": "tile"}
+  "source": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "4e8b2bd7c5233956747dc24c1540214996d9178714556786efb0b464bdacd0dd"
   },
-  "tiers": [
-    {
-      "id": "full",
-      "min_width": 900,
-      "min_height": 600,
-      "scale": 0.45,
-      "extents": {"left": 81, "right": 81, "top": 99, "bottom": 90},
-      "visible_sprites": ["eclipse", "candles", "controls"]
-    },
-    {
-      "id": "compact",
-      "min_width": 560,
-      "min_height": 360,
-      "scale": 0.30,
-      "extents": {"left": 54, "right": 54, "top": 66, "bottom": 60},
-      "visible_sprites": ["eclipse"]
-    },
-    {
-      "id": "border-only",
-      "min_width": 0,
-      "min_height": 0,
-      "scale": 0.18,
-      "extents": {"left": 32.4, "right": 32.4, "top": 39.6, "bottom": 36},
-      "visible_sprites": []
-    }
-  ],
-  "sprites": [
-    {"id": "eclipse", "asset": "ornaments/eclipse.png", "anchor": "top-center", "offset_x": 0, "offset_y": 0, "scale": 1, "z_index": 10},
-    {"id": "candles", "asset": "ornaments/candles.png", "anchor": "bottom-left", "offset_x": -8, "offset_y": 0, "scale": 1, "z_index": 20},
-    {"id": "controls", "asset": "ornaments/controls.png", "anchor": "top-right", "offset_x": -18, "offset_y": 4, "scale": 1, "z_index": 20}
+  "aperture": {"left": 140, "right": 137, "top": 196, "bottom": 109},
+  "exact": {
+    "atlas": "exact.png",
+    "aspect": 1.5,
+    "aspect_tolerance": 0.06,
+    "min_width": 900,
+    "min_height": 600
+  },
+  "adaptive": {
+    "atlas": "adaptive.png",
+    "scale": 0.45,
+    "min_client_width": 560,
+    "min_client_height": 360
+  },
+  "regions": [
+    {"id": "top-left-corner", "atlas": "adaptive", "rect": [0, 0, 161, 225], "role": "corner-top-left", "anchor": "top-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "top-right-corner", "atlas": "adaptive", "rect": [1374, 0, 162, 225], "role": "corner-top-right", "anchor": "top-right", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "bottom-left-corner", "atlas": "adaptive", "rect": [0, 901, 161, 123], "role": "corner-bottom-left", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "bottom-right-corner", "atlas": "adaptive", "rect": [1374, 901, 162, 123], "role": "corner-bottom-right", "anchor": "bottom-right", "offset": [0, 0], "repeat": "none", "z": 0},
+
+    {"id": "top-rail-left", "atlas": "adaptive", "rect": [161, 0, 387, 225], "role": "rail-top", "anchor": "top-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "top-rail-right", "atlas": "adaptive", "rect": [988, 0, 386, 225], "role": "rail-top", "anchor": "top-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "bottom-rail-left", "atlas": "adaptive", "rect": [161, 901, 431, 123], "role": "rail-bottom", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "bottom-rail-right", "atlas": "adaptive", "rect": [928, 901, 372, 123], "role": "rail-bottom", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 0},
+
+    {"id": "left-column-top", "atlas": "adaptive", "rect": [0, 225, 161, 120], "role": "column-left-top", "anchor": "top-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "left-column-shaft", "atlas": "adaptive", "rect": [0, 345, 161, 320], "role": "column-left-middle", "anchor": "top-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "left-column-bottom", "atlas": "adaptive", "rect": [0, 665, 161, 236], "role": "column-left-bottom", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "right-column-top", "atlas": "adaptive", "rect": [1374, 225, 162, 120], "role": "column-right-top", "anchor": "top-right", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "right-column-shaft", "atlas": "adaptive", "rect": [1374, 345, 162, 320], "role": "column-right-middle", "anchor": "top-right", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "right-column-bottom", "atlas": "adaptive", "rect": [1374, 665, 162, 236], "role": "column-right-bottom", "anchor": "bottom-right", "offset": [0, 0], "repeat": "none", "z": 0},
+
+    {"id": "bottom-architecture-centre", "atlas": "adaptive", "rect": [592, 880, 336, 144], "role": "ornament", "anchor": "bottom-center", "offset": [3.6, 0], "repeat": "none", "z": 5},
+    {"id": "bottom-architecture-right", "atlas": "adaptive", "rect": [1300, 880, 74, 144], "role": "ornament", "anchor": "bottom-right", "offset": [-72.9, 0], "repeat": "none", "z": 5},
+
+    {"id": "eclipse", "atlas": "exact", "rect": [548, 0, 440, 240], "role": "ornament", "anchor": "top-center", "offset": [0, 0], "repeat": "none", "z": 10},
+    {"id": "controls", "atlas": "exact", "rect": [1110, 20, 320, 190], "role": "ornament", "anchor": "top-right", "offset": [-47.7, 9], "repeat": "none", "z": 10},
+    {"id": "candles", "atlas": "exact", "rect": [0, 740, 340, 284], "role": "ornament", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 10}
   ]
 }

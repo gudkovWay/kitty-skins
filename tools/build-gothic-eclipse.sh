@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
-# Reproducible Gothic Eclipse asset decomposition.
-# Regenerates frame.png and the three ornaments from the pinned source asset.
+# Reproducible Gothic Eclipse atlas generation (manifest schema 2).
+#
+#   exact.png    the complete pinned source: transparency and every ornament kept,
+#                drawn in exact mode as a single full-atlas operation.
+#   adaptive.png the same atlas with ONLY the regions behind the separately drawn
+#                one-shot ornaments repaired with neutral material, so those
+#                ornaments are not duplicated underneath when placed over the base.
+#
+# The side columns, rails, corners and bottom architecture are never synthesised
+# or removed: adaptive.png differs from the source only inside the three ornament
+# rectangles below.
 set -eu
 
 repo_root="$(cd "$(dirname "$0")/.." && pwd)"
@@ -18,16 +27,14 @@ fi
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 
-# Strip metadata and date/tIME chunks so output bytes are deterministic.
+# Strip metadata and date/time chunks, and force straight RGBA, so output bytes
+# are deterministic. Cairo premultiplies on load.
 magick_args=(-strip -define png:color-type=6 -define png:exclude-chunk=date,time)
 
-magick "$src" -crop 440x240+548+0 +repage "${magick_args[@]}" "$tmp/eclipse.png"
-magick "$src" -crop 320x190+1110+20 +repage "${magick_args[@]}" "$tmp/controls.png"
-magick "$src" -crop 340x284+0+740 +repage "${magick_args[@]}" "$tmp/candles.png"
+# exact.png: the faithful source atlas.
+magick "$src" "${magick_args[@]}" "$tmp/exact.png"
 
-# Base frame: repair eclipse/controls regions with tiled clean-top material,
-# repair the candles region with the mirrored bottom-right area, keep the
-# transparent client aperture. The 1536x1024 base atlas is never resized.
+# Neutral material used to repair the ornament regions.
 magick "$src" -crop 340x284+1196+740 +repage -flop "$tmp/bottom-repair.png"
 magick "$src" -crop 256x220+270+0 +repage "$tmp/top-sample.png"
 magick -size 440x240 tile:"$tmp/top-sample.png" "$tmp/eclipse-repair.png"
@@ -46,9 +53,7 @@ magick "$src" \
     "$tmp/eclipse-repair.png" -geometry +548+0 -composite \
     "$tmp/controls-repair.png" -geometry +1110+20 -composite \
     "$tmp/bottom-repair.png" -geometry +0+740 -composite \
-    "${magick_args[@]}" "$tmp/frame.png"
+    "${magick_args[@]}" "$tmp/adaptive.png"
 
-for name in eclipse controls candles; do
-    mv "$tmp/$name.png" "$pack/ornaments/$name.png"
-done
-mv "$tmp/frame.png" "$pack/frame.png"
+mv "$tmp/exact.png" "$pack/exact.png"
+mv "$tmp/adaptive.png" "$pack/adaptive.png"
