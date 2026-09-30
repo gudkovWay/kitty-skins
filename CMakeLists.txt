@@ -42,4 +42,11 @@ target_link_libraries(kitty-skins PRIVATE
   rt)
 
 target_compile_definitions(kitty-skins PRIVATE VERSION="${PROJECT_VERSION}")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  # GNU-unique C++ symbols make glibc keep the plugin DSO mapped after
+  # dlclose(), so `hyprctl plugin unload/load` silently reuses stale code.
+  target_compile_options(kitty-skins-core PRIVATE -fno-gnu-unique)
+  target_compile_options(kitty-skins PRIVATE -fno-gnu-unique)
+endif()
+
 set_target_properties(kitty-skins PROPERTIES PREFIX "lib")

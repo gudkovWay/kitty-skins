@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <memory>
 #include <string>
-#include <vector>
+#include <unordered_map>
 
 #include <hyprland/src/config/values/types/StringValue.hpp>
 #include <hyprland/src/desktop/DesktopTypes.hpp>
@@ -13,23 +13,27 @@
 
 #include "texture.hpp"
 
+namespace Desktop::View {
+class CWindow;
+}
+
 namespace kitty_skins::plugin {
 
 class CSkinDecoration;
 
-// Plugin-wide state. The runtime is shared by every decoration; the decoration registry
-// is non-owning because Hyprland windows own their decorations and each decoration
-// removes itself again when it is destroyed.
+// Plugin-wide state. The runtime is shared by every decoration; the decoration
+// registry is a raw-window map so an event resolves the owning frame in O(1)
+// without taking ownership or bouncing through a window lookup.
 struct SGlobalState {
-    std::shared_ptr<SkinRuntime>      runtime;
-    uint64_t                          generation = 0;
-    std::vector<CSkinDecoration*>     decorations;
-    SP<Config::Values::CStringValue>  rootConfig;
-    SP<Config::Values::CStringValue>  classConfig;
-    CHyprSignalListener               windowOpen;
-    CHyprSignalListener               windowClose;
-    CHyprSignalListener               windowClass;
-    CHyprSignalListener               configReloaded;
+    std::shared_ptr<SkinRuntime>                                  runtime;
+    uint64_t                                                      generation = 0;
+    std::unordered_map<Desktop::View::CWindow*, CSkinDecoration*> decorations;
+    SP<Config::Values::CStringValue>                              rootConfig;
+    SP<Config::Values::CStringValue>                              targetConfig;
+    CHyprSignalListener                                           windowOpen;
+    CHyprSignalListener                                           windowClose;
+    CHyprSignalListener                                           windowClass;
+    CHyprSignalListener                                           configReloaded;
 };
 
 inline UP<SGlobalState> g_pState;
@@ -38,7 +42,11 @@ inline HANDLE           g_pluginHandle = nullptr;
 // `${XDG_CONFIG_HOME:-$HOME/.config}/kitty-skins`
 std::string defaultStoreRoot();
 std::string configuredRoot();
-std::string configuredClass();
+// The decoration target: an exact window class, or "*" for every eligible window.
+std::string configuredTarget();
+
+// True when the window is mapped, visible, and matches the configured target.
+bool windowMatchesTarget(const PHLWINDOW& window);
 
 const SkinRuntime* currentRuntime();
 
@@ -54,5 +62,10 @@ void detachWindow(PHLWINDOW window);
 void syncWindow(PHLWINDOW window);
 void syncWindows();
 void removeAllDecorations();
+
+// Decoration registry: keyed by the raw window pointer, non-owning.
+void             registerDecoration(CSkinDecoration* decoration);
+void             forgetDecoration(CSkinDecoration* decoration);
+CSkinDecoration* decorationFor(Desktop::View::CWindow* window);
 
 }

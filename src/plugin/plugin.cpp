@@ -9,7 +9,6 @@
 #include <hyprland/src/desktop/view/Window.hpp>
 #include <hyprland/src/event/EventBus.hpp>
 #include <hyprland/src/plugins/PluginAPI.hpp>
-#include <hyprland/src/render/Renderer.hpp>
 
 #include "decoration.hpp"
 #include "pass.hpp"
@@ -82,7 +81,7 @@ void onWindowClose(PHLWINDOW window) {
 }
 
 void onWindowClass(PHLWINDOW window) {
-    // A window that stopped matching the configured class must lose its decoration.
+    // A window that stopped matching the configured target must lose its decoration.
     kitty_skins::plugin::syncWindow(window);
 }
 
@@ -91,7 +90,7 @@ void onConfigReloaded() {
     if (!kitty_skins::plugin::reloadActivePack(error))
         Log::logger->log(Log::WARN, "kitty-skins: active pack could not be reloaded: {}", error);
 
-    // Class and store root may have changed: re-evaluate every mapped window.
+    // Target and store root may have changed: re-evaluate every mapped window.
     kitty_skins::plugin::syncWindows();
 }
 
@@ -115,9 +114,12 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
 
     state.rootConfig = makeShared<Config::Values::CStringValue>("plugin:kittyskins:root", "Directory holding the Kitty skin store.",
                                                                kitty_skins::plugin::defaultStoreRoot());
-    state.classConfig = makeShared<Config::Values::CStringValue>("plugin:kittyskins:class", "Exact window class decorated by Kitty skins.", "kitty");
+    // Default target is the exact class "kitty"; "*" decorates every eligible
+    // mapped toplevel; any other value is an exact class match.
+    state.targetConfig = makeShared<Config::Values::CStringValue>("plugin:kittyskins:target",
+                                                                  "Window class to frame, or \"*\" for every eligible window.", "kitty");
     HyprlandAPI::addConfigValueV2(handle, state.rootConfig);
-    HyprlandAPI::addConfigValueV2(handle, state.classConfig);
+    HyprlandAPI::addConfigValueV2(handle, state.targetConfig);
 
     HyprlandAPI::addDispatcherV2(handle, kDispatcherName, dispatchUse);
 
@@ -137,15 +139,17 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
 
     kitty_skins::plugin::syncWindows();
 
-    return {"kitty-skins", "Data-driven frames for Kitty windows.", "q", VERSION};
+    return {"kitty-skins", "Data-driven window frames.", "q", VERSION};
 }
 
 APICALL EXPORT void PLUGIN_EXIT() {
-    // 1. Pass elements first: they only hold non-owning decoration pointers.
-    if (g_pHyprRenderer)
-        g_pHyprRenderer->m_renderPass.removeAllOfType(kitty_skins::plugin::kSkinPassName);
+    // 1. Clear the live and global render passes first: this destroys every queued
+    //    element, including a CSkinPassElement nested inside a transformed-window
+    //    pass, while plugin code is still mapped and before the decorations and
+    //    runtime it points into are destroyed.
+    kitty_skins::plugin::clearAllPendingPassElements();
 
-    // 2. Decorations, which release their cached layout and cached texture references.
+    // 2. Decorations, which release their cached layout.
     kitty_skins::plugin::removeAllDecorations();
 
     // 3. Dispatcher and Lua entry point.
@@ -164,6 +168,6 @@ APICALL EXPORT void PLUGIN_EXIT() {
     // 5. Shared textures last.
     kitty_skins::plugin::g_pState->runtime.reset();
     kitty_skins::plugin::g_pState->rootConfig.reset();
-    kitty_skins::plugin::g_pState->classConfig.reset();
+    kitty_skins::plugin::g_pState->targetConfig.reset();
     kitty_skins::plugin::g_pState.reset();
 }

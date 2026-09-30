@@ -14,29 +14,6 @@
 
 namespace kitty_skins::plugin {
 
-namespace {
-
-CSkinDecoration* findDecoration(const PHLWINDOW& window) {
-    if (!g_pState)
-        return nullptr;
-
-    for (CSkinDecoration* decoration : g_pState->decorations) {
-        if (decoration && decoration->window() == window)
-            return decoration;
-    }
-
-    return nullptr;
-}
-
-bool windowMatches(const PHLWINDOW& window) {
-    if (!window || !window->m_isMapped || window->isHidden())
-        return false;
-
-    return window->m_class == configuredClass();
-}
-
-}
-
 std::string defaultStoreRoot() {
     if (const char* configHome = std::getenv("XDG_CONFIG_HOME"); configHome != nullptr && *configHome != '\0')
         return std::string(configHome) + "/kitty-skins";
@@ -55,11 +32,25 @@ std::string configuredRoot() {
     return value.empty() ? defaultStoreRoot() : value;
 }
 
-std::string configuredClass() {
-    if (!g_pState || !g_pState->classConfig)
+std::string configuredTarget() {
+    if (!g_pState || !g_pState->targetConfig)
         return "kitty";
 
-    return g_pState->classConfig->value();
+    const std::string value = g_pState->targetConfig->value();
+    return value.empty() ? "kitty" : value;
+}
+
+bool windowMatchesTarget(const PHLWINDOW& window) {
+    if (!window || !window->m_isMapped || window->isHidden())
+        return false;
+
+    // "*" decorates every eligible mapped toplevel; any other value is an exact
+    // class match. There is deliberately no regex or CSV language here.
+    const std::string target = configuredTarget();
+    if (target == "*")
+        return true;
+
+    return window->m_class == target;
 }
 
 const SkinRuntime* currentRuntime() {
@@ -67,6 +58,35 @@ const SkinRuntime* currentRuntime() {
         return nullptr;
 
     return g_pState->runtime.get();
+}
+
+void registerDecoration(CSkinDecoration* decoration) {
+    if (!g_pState || decoration == nullptr)
+        return;
+
+    const PHLWINDOW window = decoration->window();
+    if (window)
+        g_pState->decorations[window.get()] = decoration;
+}
+
+void forgetDecoration(CSkinDecoration* decoration) {
+    if (!g_pState || decoration == nullptr)
+        return;
+
+    for (auto it = g_pState->decorations.begin(); it != g_pState->decorations.end();) {
+        if (it->second == decoration)
+            it = g_pState->decorations.erase(it);
+        else
+            ++it;
+    }
+}
+
+CSkinDecoration* decorationFor(Desktop::View::CWindow* window) {
+    if (!g_pState || window == nullptr)
+        return nullptr;
+
+    const auto it = g_pState->decorations.find(window);
+    return it == g_pState->decorations.end() ? nullptr : it->second;
 }
 
 bool applyPack(const std::string& packRoot, std::string& error) {
@@ -77,36 +97,41 @@ bool applyPack(const std::string& packRoot, std::string& error) {
 
     auto candidate = loadRuntime(packRoot);
     if (!candidate) {
+        // A failed reload preserves the previous runtime and every cached resource.
         error = candidate.error();
         return false;
     }
 
-    // Damage the previous bounds before the swap and the new bounds after it, so a tier
-    // or texture change leaves no stale pixels behind.
-    for (CSkinDecoration* decoration : g_pState->decorations) {
-        if (decoration)
-            decoration->damageEntire();
+    // Damage the previous bounds before the swap and the new bounds after it, so a
+    // mode or texture change leaves no stale pixels behind.
+    for (const auto& entry : g_pState->decorations) {
+        if (entry.second)
+            entry.second->damageEntire();
     }
 
     g_pState->runtime = std::move(*candidate);
     ++g_pState->generation;
 
-    for (CSkinDecoration* decoration : g_pState->decorations) {
+    for (const auto& entry : g_pState->decorations) {
+        CSkinDecoration* decoration = entry.second;
         if (!decoration)
             continue;
 
+        // Drops the cached layout: the next frame rebuilds it from the new pack.
         decoration->invalidate();
 
         const PHLWINDOW window = decoration->window();
         if (window) {
-            // Extents may differ between the old and the new tier, so the positioner has
-            // to re-read this decoration's desired extents.
             g_pDecorationPositioner->forceRecalcFor(window);
             window->updateWindowDecos();
         }
 
         decoration->damageEntire();
     }
+
+    // A valid runtime now exists: attach decorations to every window the target
+    // matches and make the newly reserved extents take effect.
+    syncWindows();
 
     return true;
 }
@@ -124,21 +149,25 @@ bool reloadActivePack(std::string& error) {
 }
 
 void attachWindow(PHLWINDOW window) {
-    if (!g_pState || !windowMatches(window) || findDecoration(window) != nullptr)
+    // A decoration is attached whenever a runtime exists and the target matches;
+    // there is no load-order dependency on another plugin any more.
+    if (!g_pState || currentRuntime() == nullptr || !windowMatchesTarget(window))
+        return;
+    if (decorationFor(window.get()) != nullptr)
         return;
 
     auto             decoration = makeUnique<CSkinDecoration>(window);
     CSkinDecoration* raw        = decoration.get();
-    g_pState->decorations.push_back(raw);
+    registerDecoration(raw);
 
     if (!HyprlandAPI::addWindowDecoration(g_pluginHandle, window, std::move(decoration))) {
-        std::erase(g_pState->decorations, raw);
+        forgetDecoration(raw);
         Log::logger->log(Log::WARN, "kitty-skins: could not attach a decoration to window \"{}\"", window->m_title);
     }
 }
 
 void detachWindow(PHLWINDOW window) {
-    CSkinDecoration* decoration = findDecoration(window);
+    CSkinDecoration* decoration = decorationFor(window.get());
     if (!decoration)
         return;
 
@@ -149,8 +178,8 @@ void syncWindow(PHLWINDOW window) {
     if (!g_pState || !window)
         return;
 
-    const bool matches  = windowMatches(window);
-    const bool attached = findDecoration(window) != nullptr;
+    const bool matches  = currentRuntime() != nullptr && windowMatchesTarget(window);
+    const bool attached = decorationFor(window.get()) != nullptr;
 
     if (matches && !attached)
         attachWindow(window);
@@ -169,16 +198,20 @@ void syncWindows() {
         syncWindow(window);
 }
 
+
 void removeAllDecorations() {
     if (!g_pState)
         return;
 
-    // Iterate a copy: a removed decoration erases itself from the registry.
-    const std::vector<CSkinDecoration*> decorations = g_pState->decorations;
-    for (CSkinDecoration* decoration : decorations) {
-        if (decoration)
-            HyprlandAPI::removeWindowDecoration(g_pluginHandle, decoration);
+    std::vector<CSkinDecoration*> decorations;
+    decorations.reserve(g_pState->decorations.size());
+    for (const auto& entry : g_pState->decorations) {
+        if (entry.second)
+            decorations.push_back(entry.second);
     }
+
+    for (CSkinDecoration* decoration : decorations)
+        HyprlandAPI::removeWindowDecoration(g_pluginHandle, decoration);
 
     g_pState->decorations.clear();
 }

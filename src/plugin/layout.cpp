@@ -1,8 +1,8 @@
 #include "layout.hpp"
 
 #include <algorithm>
+#include <array>
 #include <cmath>
-#include <string>
 
 #include <hyprland/src/render/pass/TexPassElement.hpp>
 
@@ -11,202 +11,295 @@ namespace kitty_skins::plugin {
 namespace {
 
 using Hyprutils::Math::CBox;
-using Hyprutils::Math::CRegion;
 using Hyprutils::Math::Vector2D;
 
-// A mirror edge is emulated with paired reversed quads because the GL sampler only
-// offers clamp and repeat. Above this many tiles the edge falls back to a stretch.
-constexpr int kMaxMirrorTiles = 64;
+// Slice the roles out of the manifest once per layout so role lookup is a direct
+// array index, never a scan of the pack.
+struct RoleIndex {
+    std::array<const kitty_skins::RegionSpec*, 4>              corners{}; // TL, TR, BL, BR
+    std::vector<const kitty_skins::RegionSpec*>                railTop;
+    std::vector<const kitty_skins::RegionSpec*>                railBottom;
+    std::array<const kitty_skins::RegionSpec*, 2>              columnTop{};    // left, right
+    std::array<const kitty_skins::RegionSpec*, 2>              columnBottom{}; // left, right
+    std::array<std::vector<const kitty_skins::RegionSpec*>, 2> columnMiddle;   // left, right
+    std::vector<const kitty_skins::RegionSpec*>                ornaments;
+};
 
-int toPhysical(double logical, double scale) {
-    return static_cast<int>(std::lround(logical * scale));
+void indexRoles(const kitty_skins::SkinPack& pack, RoleIndex& out) {
+    for (const kitty_skins::RegionSpec& spec : pack.regions) {
+        switch (spec.role) {
+            case kitty_skins::RegionRole::corner_top_left: out.corners[0] = &spec; break;
+            case kitty_skins::RegionRole::corner_top_right: out.corners[1] = &spec; break;
+            case kitty_skins::RegionRole::corner_bottom_left: out.corners[2] = &spec; break;
+            case kitty_skins::RegionRole::corner_bottom_right: out.corners[3] = &spec; break;
+            case kitty_skins::RegionRole::rail_top: out.railTop.push_back(&spec); break;
+            case kitty_skins::RegionRole::rail_bottom: out.railBottom.push_back(&spec); break;
+            case kitty_skins::RegionRole::column_left_top: out.columnTop[0] = &spec; break;
+            case kitty_skins::RegionRole::column_right_top: out.columnTop[1] = &spec; break;
+            case kitty_skins::RegionRole::column_left_bottom: out.columnBottom[0] = &spec; break;
+            case kitty_skins::RegionRole::column_right_bottom: out.columnBottom[1] = &spec; break;
+            case kitty_skins::RegionRole::column_left_middle: out.columnMiddle[0].push_back(&spec); break;
+            case kitty_skins::RegionRole::column_right_middle: out.columnMiddle[1].push_back(&spec); break;
+            case kitty_skins::RegionRole::ornament: out.ornaments.push_back(&spec); break;
+        }
+    }
 }
 
-int toPhysicalNonNegative(double logical, double scale) {
-    return static_cast<int>(std::lround(std::max(0.0, logical) * scale));
+struct RegionUv {
+    Vector2D topLeft;
+    Vector2D bottomRight;
+};
+
+RegionUv sourceUv(const SkinRuntime& runtime, const kitty_skins::RegionSpec& spec) {
+    const double atlasWidth  = static_cast<double>(runtime.pack.sourceWidth);
+    const double atlasHeight = static_cast<double>(runtime.pack.sourceHeight);
+
+    // Sample pixel centres, not the neighbouring atlas region. This preserves
+    // linear filtering without requiring a copied texture per manifest region.
+    return RegionUv{
+        Vector2D((spec.rect.x + 0.5) / atlasWidth, (spec.rect.y + 0.5) / atlasHeight),
+        Vector2D((spec.rect.x + spec.rect.width - 0.5) / atlasWidth, (spec.rect.y + spec.rect.height - 0.5) / atlasHeight),
+    };
 }
 
-int splitHalf(double value) {
-    return static_cast<int>(std::lround(value / 2.0));
-}
-
-void addOp(std::vector<DrawOp>& ops, const TextureAsset& asset, const CBox& destination, const Vector2D& uvTopLeft, const Vector2D& uvBottomRight, uint8_t wrapX,
-           uint8_t wrapY, int zIndex) {
-    if (!asset.texture || destination.w < 1.0 || destination.h < 1.0)
+void addOp(std::vector<DrawOp>& ops, const SP<Render::ITexture>& texture, const CBox& destination, const Vector2D& uvTopLeft,
+           const Vector2D& uvBottomRight, uint8_t wrapX = WRAP_CLAMP_TO_EDGE, uint8_t wrapY = WRAP_CLAMP_TO_EDGE) {
+    if (!texture || !texture->ok() || destination.w < 1.0 || destination.h < 1.0)
         return;
 
-    ops.push_back(DrawOp{asset.texture, destination, uvTopLeft, uvBottomRight, wrapX, wrapY, zIndex});
+    ops.push_back(DrawOp{texture, destination, uvTopLeft, uvBottomRight, wrapX, wrapY});
 }
 
-// One frame edge between the preserved corners. `horizontal` selects the repeating axis.
-void addEdge(std::vector<DrawOp>& ops, const TextureAsset& asset, const CBox& destination, kitty_skins::EdgeMode mode, bool horizontal, double sliceScale) {
-    if (!asset.texture || destination.w < 1.0 || destination.h < 1.0)
-        return;
+void addRegion(std::vector<DrawOp>& ops, const SkinRuntime& runtime, const kitty_skins::RegionSpec& spec, const CBox& destination) {
+    const RegionUv uv = sourceUv(runtime, spec);
+    addOp(ops, runtime.atlas(spec.exactAtlas), destination, uv.topLeft, uv.bottomRight);
+}
 
-    const double span       = horizontal ? destination.w : destination.h;
-    const double tileLength = (horizontal ? asset.sourceSize.x : asset.sourceSize.y) * sliceScale;
+constexpr int kMaxRepeatTiles = 256;
 
-    const auto stretch = [&] { addOp(ops, asset, destination, Vector2D(0.0, 0.0), Vector2D(1.0, 1.0), WRAP_CLAMP_TO_EDGE, WRAP_CLAMP_TO_EDGE, 0); };
-
-    if (mode == kitty_skins::EdgeMode::stretch || tileLength < 1.0) {
-        stretch();
+void addRepeatedRegion(std::vector<DrawOp>& ops, const SkinRuntime& runtime, const kitty_skins::RegionSpec& spec,
+                       const CBox& destination, bool horizontal, double naturalLength) {
+    const double span = horizontal ? destination.w : destination.h;
+    if (span < 1.0 || naturalLength < 1.0) {
+        addRegion(ops, runtime, spec, destination);
         return;
     }
 
-    if (mode == kitty_skins::EdgeMode::tile) {
-        const double repeats = span / tileLength;
-        if (horizontal)
-            addOp(ops, asset, destination, Vector2D(0.0, 0.0), Vector2D(repeats, 1.0), WRAP_REPEAT, WRAP_CLAMP_TO_EDGE, 0);
-        else
-            addOp(ops, asset, destination, Vector2D(0.0, 0.0), Vector2D(1.0, repeats), WRAP_CLAMP_TO_EDGE, WRAP_REPEAT, 0);
+    const int tiles = static_cast<int>(std::ceil(span / naturalLength));
+    if (tiles < 1 || tiles > kMaxRepeatTiles) {
+        addRegion(ops, runtime, spec, destination);
         return;
     }
 
-    const int tiles = static_cast<int>(std::ceil(span / tileLength));
-    if (tiles < 1 || tiles > kMaxMirrorTiles) {
-        stretch();
-        return;
-    }
+    const SP<Render::ITexture>& texture = runtime.atlas(spec.exactAtlas);
+    const RegionUv             uv      = sourceUv(runtime, spec);
 
     for (int index = 0; index < tiles; ++index) {
-        const double offset = index * tileLength;
-        const double length = std::min(tileLength, span - offset);
+        const double offset = index * naturalLength;
+        const double length = std::min(naturalLength, span - offset);
         if (length < 1.0)
             break;
 
-        const double fraction = std::min(1.0, length / tileLength);
-        const bool   forward  = index % 2 == 0;
-
+        const double fraction = length / naturalLength;
         const CBox piece = horizontal ? CBox(destination.x + offset, destination.y, length, destination.h)
                                       : CBox(destination.x, destination.y + offset, destination.w, length);
-
-        if (horizontal)
-            addOp(ops, asset, piece, forward ? Vector2D(0.0, 0.0) : Vector2D(1.0 - fraction, 0.0),
-                  forward ? Vector2D(fraction, 1.0) : Vector2D(1.0, 1.0), WRAP_CLAMP_TO_EDGE, WRAP_CLAMP_TO_EDGE, 0);
-        else
-            addOp(ops, asset, piece, forward ? Vector2D(0.0, 0.0) : Vector2D(0.0, 1.0 - fraction),
-                  forward ? Vector2D(1.0, fraction) : Vector2D(1.0, 1.0), WRAP_CLAMP_TO_EDGE, WRAP_CLAMP_TO_EDGE, 0);
+        const Vector2D partialBottomRight =
+            horizontal ? Vector2D(uv.topLeft.x + (uv.bottomRight.x - uv.topLeft.x) * fraction, uv.bottomRight.y)
+                       : Vector2D(uv.bottomRight.x, uv.topLeft.y + (uv.bottomRight.y - uv.topLeft.y) * fraction);
+        addOp(ops, texture, piece, uv.topLeft, partialBottomRight);
     }
 }
 
-const kitty_skins::SpriteSpec* findSprite(const kitty_skins::SkinPack& pack, const std::string& id) {
-    for (const kitty_skins::SpriteSpec& sprite : pack.sprites) {
-        if (sprite.id == id)
-            return &sprite;
-    }
-
-    return nullptr;
-}
-
-}
-
-void buildLayout(const SkinRuntime& runtime, const kitty_skins::TierSpec& tier, double clientWidth, double clientHeight, float monitorScale, LayoutCache& out) {
-    out.tier         = &tier;
-    out.monitorScale = monitorScale;
-    out.operations.clear();
-
-    const double tierScale  = tier.scale;
-    const double sliceScale = tierScale * static_cast<double>(monitorScale);
-
-    const int clientW = std::max(1, toPhysicalNonNegative(clientWidth, monitorScale));
-    const int clientH = std::max(1, toPhysicalNonNegative(clientHeight, monitorScale));
-    const int left    = toPhysicalNonNegative(tier.extents.left, monitorScale);
-    const int right   = toPhysicalNonNegative(tier.extents.right, monitorScale);
-    const int top     = toPhysicalNonNegative(tier.extents.top, monitorScale);
-    const int bottom  = toPhysicalNonNegative(tier.extents.bottom, monitorScale);
-
-    out.outerBox       = CBox(-left, -top, clientW + left + right, clientH + top + bottom);
-    out.decorationClip = CRegion(out.outerBox);
-    out.decorationClip.subtract(CRegion(CBox(0, 0, clientW, clientH)));
-
-    // With no band outside the client aperture there is nothing to paint: every layer is
-    // clipped to this ring, so an empty ring must not fall through to unscissored draws.
-    if (out.decorationClip.empty())
+// One flexible run: regions share `span` in proportion to their declared source
+// length. A repeating region is emitted as bounded atlas-sampling tiles; a
+// stretching one is widened.
+void fillFlexibleRun(std::vector<DrawOp>& ops, const std::vector<const kitty_skins::RegionSpec*>& specs, const SkinRuntime& runtime,
+                     double start, double span, bool horizontal, double step, double crossStart, double crossSize) {
+    if (span < 1.0 || crossSize < 1.0 || specs.empty())
         return;
 
-    const kitty_skins::Insets& slices     = runtime.pack.frame.slices;
-    const int                  sliceLeft  = std::max(0, toPhysical(slices.left, sliceScale));
-    const int                  sliceRight = std::max(0, toPhysical(slices.right, sliceScale));
-    const int                  sliceTop   = std::max(0, toPhysical(slices.top, sliceScale));
-    const int                  sliceBottom = std::max(0, toPhysical(slices.bottom, sliceScale));
+    double sourceSum = 0.0;
+    for (const kitty_skins::RegionSpec* spec : specs)
+        sourceSum += horizontal ? spec->rect.width : spec->rect.height;
+    if (sourceSum < 1.0)
+        return;
 
-    const CBox outer = out.outerBox;
+    double cursor = start;
+    for (const kitty_skins::RegionSpec* spec : specs) {
+        const double sourceLength = horizontal ? spec->rect.width : spec->rect.height;
+        const double share        = span * (sourceLength / sourceSum);
+        const double natural      = sourceLength * step;
 
-    const TextureAsset& topLeft     = runtime.frameSlices[static_cast<size_t>(FrameSlice::topLeft)];
-    const TextureAsset& topRight    = runtime.frameSlices[static_cast<size_t>(FrameSlice::topRight)];
-    const TextureAsset& bottomRight = runtime.frameSlices[static_cast<size_t>(FrameSlice::bottomRight)];
-    const TextureAsset& bottomLeft  = runtime.frameSlices[static_cast<size_t>(FrameSlice::bottomLeft)];
-    const TextureAsset& topEdge     = runtime.frameSlices[static_cast<size_t>(FrameSlice::top)];
-    const TextureAsset& rightEdge   = runtime.frameSlices[static_cast<size_t>(FrameSlice::right)];
-    const TextureAsset& bottomEdge  = runtime.frameSlices[static_cast<size_t>(FrameSlice::bottom)];
-    const TextureAsset& leftEdge    = runtime.frameSlices[static_cast<size_t>(FrameSlice::left)];
+        const kitty_skins::RepeatAxis wanted = horizontal ? kitty_skins::RepeatAxis::horizontal : kitty_skins::RepeatAxis::vertical;
+        const bool repeat = spec->repeat == wanted;
 
-    // Corners keep their source proportions; edges fill the span between them.
-    addOp(out.operations, topLeft, CBox(outer.x, outer.y, sliceLeft, sliceTop), Vector2D(0.0, 0.0), Vector2D(1.0, 1.0), WRAP_CLAMP_TO_EDGE, WRAP_CLAMP_TO_EDGE, 0);
-    addOp(out.operations, topRight, CBox(outer.x + outer.w - sliceRight, outer.y, sliceRight, sliceTop), Vector2D(0.0, 0.0), Vector2D(1.0, 1.0), WRAP_CLAMP_TO_EDGE,
-          WRAP_CLAMP_TO_EDGE, 0);
-    addOp(out.operations, bottomRight, CBox(outer.x + outer.w - sliceRight, outer.y + outer.h - sliceBottom, sliceRight, sliceBottom), Vector2D(0.0, 0.0), Vector2D(1.0, 1.0),
-          WRAP_CLAMP_TO_EDGE, WRAP_CLAMP_TO_EDGE, 0);
-    addOp(out.operations, bottomLeft, CBox(outer.x, outer.y + outer.h - sliceBottom, sliceLeft, sliceBottom), Vector2D(0.0, 0.0), Vector2D(1.0, 1.0), WRAP_CLAMP_TO_EDGE,
-          WRAP_CLAMP_TO_EDGE, 0);
+        const CBox destination = horizontal ? CBox(cursor, crossStart, share, crossSize) : CBox(crossStart, cursor, crossSize, share);
+        if (repeat)
+            addRepeatedRegion(ops, runtime, *spec, destination, horizontal, natural);
+        else
+            addRegion(ops, runtime, *spec, destination);
 
-    const double middleWidth  = outer.w - sliceLeft - sliceRight;
-    const double middleHeight = outer.h - sliceTop - sliceBottom;
+        cursor += share;
+    }
+}
 
-    addEdge(out.operations, topEdge, CBox(outer.x + sliceLeft, outer.y, middleWidth, sliceTop), runtime.pack.frame.edges[2], true, sliceScale);
-    addEdge(out.operations, bottomEdge, CBox(outer.x + sliceLeft, outer.y + outer.h - sliceBottom, middleWidth, sliceBottom), runtime.pack.frame.edges[3], true, sliceScale);
-    addEdge(out.operations, leftEdge, CBox(outer.x, outer.y + sliceTop, sliceLeft, middleHeight), runtime.pack.frame.edges[0], false, sliceScale);
-    addEdge(out.operations, rightEdge, CBox(outer.x + outer.w - sliceRight, outer.y + sliceTop, sliceRight, middleHeight), runtime.pack.frame.edges[1], false, sliceScale);
+}
 
-    // Anchored sprites: one operation each, never repeated.
-    for (const std::string& id : tier.visibleSprites) {
-        const kitty_skins::SpriteSpec* spec = findSprite(runtime.pack, id);
-        if (spec == nullptr)
-            continue;
+LayoutGeometry resolveGeometry(const kitty_skins::SkinPack& pack, double layoutWidth, double layoutHeight) noexcept {
+    LayoutGeometry geometry;
+    geometry.layoutWidth  = layoutWidth;
+    geometry.layoutHeight = layoutHeight;
 
-        const auto assetIt = runtime.sprites.find(id);
-        if (assetIt == runtime.sprites.end())
-            continue;
+    const kitty_skins::Insets& aperture = pack.aperture;
+    const double openingW = static_cast<double>(pack.sourceWidth) - aperture.left - aperture.right;
+    const double openingH = static_cast<double>(pack.sourceHeight) - aperture.top - aperture.bottom;
 
-        const TextureAsset& asset = assetIt->second;
-        if (!asset.texture || asset.sourceSize.x <= 0.0 || asset.sourceSize.y <= 0.0)
-            continue;
+    if (openingW > 0.0 && openingH > 0.0 && layoutWidth > 0.0 && layoutHeight > 0.0) {
+        // The extents are a fixed fraction of the outer box, so the layout-assigned
+        // box IS the implied outer box: the exact-mode test is its own aspect.
+        const double aspect      = layoutWidth / layoutHeight;
+        const bool   bigEnough   = layoutWidth >= pack.exact.minWidth && layoutHeight >= pack.exact.minHeight;
+        const bool   closeEnough = std::abs(aspect - pack.exact.aspect) <= pack.exact.aspectTolerance;
 
-        const double spriteScale = spec->scale * tierScale * static_cast<double>(monitorScale);
-        const int    width       = std::max(1, toPhysical(asset.sourceSize.x, spriteScale));
-        const int    height      = std::max(1, toPhysical(asset.sourceSize.y, spriteScale));
-
-        int x = 0;
-        int y = 0;
-        switch (spec->anchor) {
-            case kitty_skins::Anchor::top_left: y = 0; break;
-            case kitty_skins::Anchor::top_center:
-                x = splitHalf(outer.w - width);
-                y = 0;
-                break;
-            case kitty_skins::Anchor::top_right:
-                x = static_cast<int>(std::lround(outer.w)) - width;
-                y = 0;
-                break;
-            case kitty_skins::Anchor::bottom_left: y = static_cast<int>(std::lround(outer.h)) - height; break;
-            case kitty_skins::Anchor::bottom_center:
-                x = splitHalf(outer.w - width);
-                y = static_cast<int>(std::lround(outer.h)) - height;
-                break;
-            case kitty_skins::Anchor::bottom_right:
-                x = static_cast<int>(std::lround(outer.w)) - width;
-                y = static_cast<int>(std::lround(outer.h)) - height;
-                break;
+        if (bigEnough && closeEnough) {
+            geometry.mode = LayoutMode::exact;
+            geometry.extents =
+                kitty_skins::Insets{aperture.left / static_cast<double>(pack.sourceWidth) * layoutWidth,
+                                    aperture.right / static_cast<double>(pack.sourceWidth) * layoutWidth,
+                                    aperture.top / static_cast<double>(pack.sourceHeight) * layoutHeight,
+                                    aperture.bottom / static_cast<double>(pack.sourceHeight) * layoutHeight};
+            return geometry;
         }
-
-        x += toPhysical(spec->offsetX, spriteScale);
-        y += toPhysical(spec->offsetY, spriteScale);
-
-        addOp(out.operations, asset, CBox(outer.x + x, outer.y + y, width, height), Vector2D(0.0, 0.0), Vector2D(1.0, 1.0), WRAP_CLAMP_TO_EDGE, WRAP_CLAMP_TO_EDGE,
-              spec->zIndex);
     }
 
-    std::stable_sort(out.operations.begin(), out.operations.end(), [](const DrawOp& a, const DrawOp& b) { return a.zIndex < b.zIndex; });
+    geometry.mode    = LayoutMode::adaptive;
+    const double s   = pack.adaptive.scale;
+    geometry.extents = kitty_skins::Insets{aperture.left * s, aperture.right * s, aperture.top * s, aperture.bottom * s};
+
+    // Adaptive frames only fit when the logical client left behind by the fixed
+    // extents still meets the manifest minimum. The prospective client is the
+    // layout-assigned box minus those extents, decided from layoutBox() alone so
+    // the choice can never oscillate. Below the minimum the frame disables: zero
+    // extents mean the positioner reserves nothing and no frame is drawn.
+    const double clientWidth  = layoutWidth - (geometry.extents.left + geometry.extents.right);
+    const double clientHeight = layoutHeight - (geometry.extents.top + geometry.extents.bottom);
+    if (clientWidth < pack.adaptive.minClientWidth || clientHeight < pack.adaptive.minClientHeight) {
+        geometry.enabled = false;
+        geometry.extents = kitty_skins::Insets{0.0, 0.0, 0.0, 0.0};
+    }
+
+    return geometry;
+}
+
+void buildLayout(const SkinRuntime& runtime, const LayoutGeometry& geometry, const Vector2D& outerSize, const Vector2D& apertureOffset,
+                 const Vector2D& apertureSize, float monitorScale, LayoutCache& out) {
+    out.enabled      = geometry.enabled;
+    out.mode         = geometry.mode;
+    out.monitorScale = monitorScale;
+    out.extents      = geometry.extents;
+    out.operations.clear();
+
+    const double scale = static_cast<double>(monitorScale);
+
+    // Both boxes arrive already rounded by the compositor's own transform, so the
+    // aperture sits exactly where the client surface is drawn: no edge is rounded
+    // on its own here and the aperture can neither overlap nor gap the client.
+    out.outerBox    = CBox(0.0, 0.0, outerSize.x, outerSize.y);
+    out.apertureBox = CBox(apertureOffset.x, apertureOffset.y, apertureSize.x, apertureSize.y);
+
+    // The clip that protects the client aperture: the whole outer frame minus the
+    // opening. Built here, once per layout rebuild, and clipped out of every draw
+    // op so no skin pixel can cover the terminal — even in exact mode where the
+    // repaired atlas springs the opening on source alpha alone.
+    // The ring shares the DrawOps' space: (0, 0) is the outer box's top-left, so
+    // a single translation to the physical origin places both correctly.
+    out.outerRing.clear();
+    out.outerRing.add(out.outerBox);
+    out.outerRing.subtract(Hyprutils::Math::CRegion(out.apertureBox));
+
+    if (geometry.mode == LayoutMode::exact) {
+        // Exactly one operation: the whole repaired source atlas over the whole
+        // outer framebuffer. Its transparent aperture reveals the Kitty blit.
+        if (runtime.exactAtlas && runtime.exactAtlas->ok())
+            out.operations.push_back(DrawOp{runtime.exactAtlas, CBox(0.0, 0.0, out.outerBox.w, out.outerBox.h), Vector2D(0.0, 0.0),
+                                            Vector2D(1.0, 1.0), WRAP_CLAMP_TO_EDGE, WRAP_CLAMP_TO_EDGE});
+        return;
+    }
+
+    RoleIndex roles;
+    indexRoles(runtime.pack, roles);
+    if (!roles.corners[0] || !roles.corners[1] || !roles.corners[2] || !roles.corners[3])
+        return;
+
+    const double step       = runtime.pack.adaptive.scale * scale;
+    const double outerW     = out.outerBox.w;
+    const double outerH     = out.outerBox.h;
+    const double bandTopH   = roles.corners[0]->rect.height * step;
+    const double bandBotH   = roles.corners[2]->rect.height * step;
+    const double bandLeftW  = roles.corners[0]->rect.width * step;
+    const double bandRightW = roles.corners[1]->rect.width * step;
+
+    // Corners: unique, placed once at their natural size.
+    const auto placeCorner = [&](const kitty_skins::RegionSpec* spec, double x, double y) {
+        addRegion(out.operations, runtime, *spec, CBox(x, y, spec->rect.width * step, spec->rect.height * step));
+    };
+    placeCorner(roles.corners[0], 0.0, 0.0);
+    placeCorner(roles.corners[1], outerW - roles.corners[1]->rect.width * step, 0.0);
+    placeCorner(roles.corners[2], 0.0, outerH - bandBotH);
+    placeCorner(roles.corners[3], outerW - roles.corners[3]->rect.width * step, outerH - bandBotH);
+
+    // Neutral rails fill only the span between the corners; anchored ornaments and
+    // architecture are drawn over them afterwards.
+    const double middleX = bandLeftW;
+    const double middleW = std::max(0.0, outerW - bandLeftW - bandRightW);
+    fillFlexibleRun(out.operations, roles.railTop, runtime, middleX, middleW, true, step, 0.0, bandTopH);
+    fillFlexibleRun(out.operations, roles.railBottom, runtime, middleX, middleW, true, step, outerH - bandBotH, bandBotH);
+
+    // Columns: a unique top cap, a stretched neutral shaft, then a unique bottom
+    // cap flush with the bottom band.
+    const double middleY = bandTopH;
+    const double middleH = std::max(0.0, outerH - bandTopH - bandBotH);
+    for (int side = 0; side < 2; ++side) {
+        const double columnX  = side == 0 ? 0.0 : outerW - bandRightW;
+        const double columnW  = side == 0 ? bandLeftW : bandRightW;
+        const double capTopH  = roles.columnTop[side] ? roles.columnTop[side]->rect.height * step : 0.0;
+        const double capBotH  = roles.columnBottom[side] ? roles.columnBottom[side]->rect.height * step : 0.0;
+        const double shaftH   = std::max(0.0, middleH - capTopH - capBotH);
+
+        if (roles.columnTop[side])
+            addRegion(out.operations, runtime, *roles.columnTop[side], CBox(columnX, middleY, columnW, capTopH));
+
+        fillFlexibleRun(out.operations, roles.columnMiddle[side], runtime, middleY + capTopH, shaftH, false, step, columnX, columnW);
+
+        if (roles.columnBottom[side])
+            addRegion(out.operations, runtime, *roles.columnBottom[side],
+                      CBox(columnX, outerH - bandBotH - capBotH, columnW, capBotH));
+    }
+
+    // Anchored one-shot ornaments and architecture: emitted exactly once, never
+    // tiled or repeated, lowest z first.
+    std::stable_sort(roles.ornaments.begin(), roles.ornaments.end(),
+                     [](const kitty_skins::RegionSpec* a, const kitty_skins::RegionSpec* b) { return a->zIndex < b->zIndex; });
+    for (const kitty_skins::RegionSpec* spec : roles.ornaments) {
+
+        const double width  = spec->rect.width * step;
+        const double height = spec->rect.height * step;
+        const double offX   = spec->offsetX * scale;
+        const double offY   = spec->offsetY * scale;
+
+        double x = 0.0;
+        double y = 0.0;
+        switch (spec->anchor) {
+            case kitty_skins::Anchor::top_left: x = 0.0; y = 0.0; break;
+            case kitty_skins::Anchor::top_center: x = (outerW - width) / 2.0; y = 0.0; break;
+            case kitty_skins::Anchor::top_right: x = outerW - width; y = 0.0; break;
+            case kitty_skins::Anchor::bottom_left: x = 0.0; y = outerH - height; break;
+            case kitty_skins::Anchor::bottom_center: x = (outerW - width) / 2.0; y = outerH - height; break;
+            case kitty_skins::Anchor::bottom_right: x = outerW - width; y = outerH - height; break;
+        }
+
+        addRegion(out.operations, runtime, *spec, CBox(x + offX, y + offY, width, height));
+    }
 }
 
 }

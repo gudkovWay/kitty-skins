@@ -14,32 +14,61 @@
 
 namespace kitty_skins::plugin {
 
-// One cached, ready-to-draw textured quad. `destination` is in monitor-local physical
-// pixels relative to the decorated window's client-box origin, so moving or animating
-// the window never invalidates the cache: the draw path only translates by the rounded
-// physical origin.
+enum class LayoutMode { exact, adaptive };
+
+// The rendering mode and the frame extents (logical) that follow from it. Solved
+// only from the layout-assigned box, which is independent of the extents this
+// decoration reserves, so the choice can never oscillate.
+//
+// `enabled` is false when the adaptive frame cannot fit: the extents are then
+// zeroed and the decoration reserves and draws nothing.
+struct LayoutGeometry {
+    LayoutMode mode    = LayoutMode::adaptive;
+    bool       enabled = true;
+    Insets     extents;
+    double     layoutWidth  = 0.0;
+    double     layoutHeight = 0.0;
+};
+
+// One ready-to-draw textured quad, in outer-box-local physical pixels: (0, 0) is
+// the top-left of the composed outer texture, so moving or animating the window
+// never invalidates the cache.
 struct DrawOp {
-    SP<Render::ITexture>       texture;
-    Hyprutils::Math::CBox      destination;
-    Hyprutils::Math::Vector2D  uvTopLeft;
-    Hyprutils::Math::Vector2D  uvBottomRight;
-    uint8_t                    wrapX  = 0;
-    uint8_t                    wrapY  = 0;
-    int                        zIndex = 0;
+    SP<Render::ITexture>      texture;
+    Hyprutils::Math::CBox     destination;
+    Hyprutils::Math::Vector2D uvTopLeft{0.0, 0.0};
+    Hyprutils::Math::Vector2D uvBottomRight{1.0, 1.0};
+    uint8_t                   wrapX = 0;
+    uint8_t                   wrapY = 0;
 };
 
-// Fully precomputed layout for one window, one tier and one monitor scale.
 struct LayoutCache {
-    const kitty_skins::TierSpec* tier           = nullptr;
-    std::vector<DrawOp>          operations;
-    Hyprutils::Math::CRegion     decorationClip; // outer box minus client aperture, physical, client-relative
-    Hyprutils::Math::CBox        outerBox;       // physical, client-relative
-    float                        monitorScale   = 1.F;
+    LayoutMode          mode    = LayoutMode::adaptive;
+    bool                enabled = true;
+    std::vector<DrawOp> operations;
+    kitty_skins::Insets extents;       // logical, as used for decoration reservation
+    // Rounded outer frame box in outer-box-local device pixels: (0, 0) is its
+    // top-left, matching the DrawOps' space.
+    Hyprutils::Math::CBox outerBox;
+    // Rounded client aperture in the same outer-box-local device pixels.
+    Hyprutils::Math::CBox apertureBox;
+    // Outer frame ring in outer-box-local device pixels: outerBox minus apertureBox.
+    // Built once per layout; a render pass translates a single copy of it to the
+    // absolute physical origin instead of rebuilding it from boxes per operation.
+    Hyprutils::Math::CRegion outerRing;
+    float                    monitorScale = 1.F;
 };
 
-// Rebuild `out` for the given tier and logical client-box size. Never fails: degenerate
-// spans and empty slices simply produce no operation.
-void buildLayout(const SkinRuntime& runtime, const kitty_skins::TierSpec& tier, double clientWidth, double clientHeight, float monitorScale,
-                 LayoutCache& out);
+// Decide exact vs adaptive from the layout-assigned outer box (logical).
+LayoutGeometry resolveGeometry(const kitty_skins::SkinPack& pack, double layoutWidth, double layoutHeight) noexcept;
+
+// Rebuild `out` for the given geometry. `outerSize` is the rounded physical outer
+// frame size and `apertureOffset`/`apertureSize` the rounded client aperture in
+// outer-box-local physical pixels; all three come from the compositor's own
+// rounded boxes, so the layout never re-rounds logical extents on its own. Never
+// fails: degenerate spans and missing regions simply produce no operation.
+void buildLayout(const SkinRuntime& runtime, const LayoutGeometry& geometry, const Hyprutils::Math::Vector2D& outerSize,
+                 const Hyprutils::Math::Vector2D& apertureOffset, const Hyprutils::Math::Vector2D& apertureSize,
+                 float monitorScale, LayoutCache& out);
 
 }
