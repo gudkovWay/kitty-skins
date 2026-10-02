@@ -5,5 +5,35 @@
   "license": "MIT",
   "width": 1536,
   "height": 1024,
-  "sha256": "4e8b2bd7c5233956747dc24c1540214996d9178714556786efb0b464bdacd0dd"
+  "sha256": "4e8b2bd7c5233956747dc24c1540214996d9178714556786efb0b464bdacd0dd",
+  "derived": {
+    "file": "assets/source/gothic_eclipse_minimal_idle_2x.png",
+    "width": 3072,
+    "height": 2048,
+    "sha256": "0f633dce9ca1442edbd52a8f46031c66c664b01d956cdd84c84a6efe5986a583",
+    "generator": "tools/upscale-gothic-eclipse.sh",
+    "method": "Real-ESRGAN RGB inference at 2x; original alpha resized with Triangle",
+    "model": "realesr-animevideov3-x2",
+    "model_param_sha256": "b88ff4f00ebf019a7fdac17fdd45a7fd3665d37509efc5baf2e4da2e24420a04",
+    "model_weights_sha256": "548a36f9c3f4ab8da56cd3b13badf23968bee207b396dad14d04b830e5f2ab2d",
+    "runtime_url": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesrgan-ncnn-vulkan-20220424-ubuntu.zip",
+    "runtime_archive_sha256": "e5aa6eb131234b87c0c51f82b89390f5e3e642b7b70f2b9bbe95b6a285a40c96",
+    "runtime_binary_sha256": "22c2296a39b40cc43ac92615c827ab6d4b60b7142e8cee59f718e3f8e2cdbda9"
+  },
+  "effect": {
+    "generator": "tools/build-gothic-eclipse.sh",
+    "input": "assets/source/gothic_eclipse_minimal_idle_2x.png",
+    "crop": [0, 1480, 680, 568],
+    "assets": ["candle-flames.png", "candle-light.png", "candle-wax-mask.png"],
+    "flame_rects": [[216, 116, 40, 64], [266, 146, 44, 64]],
+    "wicks": [[236, 178], [287, 206]],
+    "wax_mask": {
+      "channels": "alpha = source material coverage above the foreground stone; zero hides wax behind the frame",
+      "visible_polygon": [[194, 280], [368, 280], [368, 417], [359, 407], [344, 400], [339, 397], [332, 395], [220, 395], [209, 399], [194, 411]]
+    },
+    "cleaned_atlases": ["exact.png", "adaptive.png"],
+    "static_foreground": {"atlas": "exact.png", "rect": [0, 1480, 680, 568], "content": "alpha-matted candle bodies, dry wax and foreground stones at original size"},
+    "frame_base": {"atlas": "adaptive.png", "source_aperture": [280, 274, 392, 218], "target_insets": [400, 274, 392, 320]},
+    "note": "Both atlases derive from the immutable 2x master. The exact atlas carries the separated candle foreground; the adaptive frame base replaces painted flames and wax with local material before packing neutral tiles. Target frame thickness is applied during layout, while the candle foreground and animation retain their original geometry."
+  }
 }

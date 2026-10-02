@@ -2,13 +2,14 @@
   "schema": 2,
   "id": "gothic-eclipse",
   "name": "Gothic Eclipse",
-  "filter": "nearest",
+  "filter": "linear",
   "source": {
-    "width": 1536,
-    "height": 1024,
-    "sha256": "4e8b2bd7c5233956747dc24c1540214996d9178714556786efb0b464bdacd0dd"
+    "width": 3072,
+    "height": 2048,
+    "sha256": "0f633dce9ca1442edbd52a8f46031c66c664b01d956cdd84c84a6efe5986a583"
   },
-  "aperture": {"left": 140, "right": 137, "top": 196, "bottom": 109},
+  "aperture": {"left": 280, "right": 274, "top": 392, "bottom": 218},
+  "frame_insets": {"left": 400, "right": 274, "top": 392, "bottom": 320},
   "exact": {
     "atlas": "exact.png",
     "aspect": 1.5,
@@ -18,33 +19,46 @@
   },
   "adaptive": {
     "atlas": "adaptive.png",
-    "scale": 0.45,
+    "scale": 0.30,
     "min_client_width": 560,
     "min_client_height": 360
   },
+  "candle_effect": {
+    "region": "candles",
+    "flames": "candle-flames.png",
+    "light": "candle-light.png",
+    "flame_rects": [[216, 116, 40, 64], [266, 146, 44, 64]],
+    "wicks": [[236, 178], [287, 206]],
+    "wax": {
+      "mask": "candle-wax-mask.png",
+      "streams": [
+        {"x": 237, "start_y": 312, "end_y": 430, "width": 7, "period": 7.6, "phase": 0.0},
+        {"x": 268, "start_y": 356, "end_y": 430, "width": 8, "period": 9.4, "phase": 0.38},
+        {"x": 302, "start_y": 338, "end_y": 430, "width": 7, "period": 8.5, "phase": 0.71}
+      ]
+    }
+  },
   "regions": [
-    {"id": "top-left-corner", "atlas": "adaptive", "rect": [0, 0, 161, 225], "role": "corner-top-left", "anchor": "top-left", "offset": [0, 0], "repeat": "none", "z": 0},
-    {"id": "top-right-corner", "atlas": "adaptive", "rect": [1374, 0, 162, 225], "role": "corner-top-right", "anchor": "top-right", "offset": [0, 0], "repeat": "none", "z": 0},
-    {"id": "bottom-left-corner", "atlas": "adaptive", "rect": [0, 901, 161, 123], "role": "corner-bottom-left", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 0},
-    {"id": "bottom-right-corner", "atlas": "adaptive", "rect": [1374, 901, 162, 123], "role": "corner-bottom-right", "anchor": "bottom-right", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "top-left-corner", "atlas": "adaptive", "rect": [0, 0, 322, 450], "role": "corner-top-left", "anchor": "top-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "top-right-corner", "atlas": "adaptive", "rect": [2748, 0, 324, 450], "role": "corner-top-right", "anchor": "top-right", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "bottom-left-corner", "atlas": "adaptive", "rect": [0, 1802, 322, 246], "role": "corner-bottom-left", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "bottom-right-corner", "atlas": "adaptive", "rect": [2748, 1802, 324, 246], "role": "corner-bottom-right", "anchor": "bottom-right", "offset": [0, 0], "repeat": "none", "z": 0},
 
-    {"id": "top-rail-left", "atlas": "adaptive", "rect": [161, 0, 387, 225], "role": "rail-top", "anchor": "top-left", "offset": [0, 0], "repeat": "none", "z": 0},
-    {"id": "top-rail-right", "atlas": "adaptive", "rect": [988, 0, 386, 225], "role": "rail-top", "anchor": "top-left", "offset": [0, 0], "repeat": "none", "z": 0},
-    {"id": "bottom-rail-left", "atlas": "adaptive", "rect": [161, 901, 431, 123], "role": "rail-bottom", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 0},
-    {"id": "bottom-rail-right", "atlas": "adaptive", "rect": [928, 901, 372, 123], "role": "rail-bottom", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "top-rail-tile", "atlas": "adaptive", "rect": [400, 500, 1024, 450], "role": "rail-top", "anchor": "top-left", "offset": [0, 0], "repeat": "x", "z": 0},
+    {"id": "bottom-rail-tile", "atlas": "adaptive", "rect": [1500, 1000, 696, 246], "role": "rail-bottom", "anchor": "bottom-left", "offset": [0, 0], "repeat": "x", "z": 0},
 
-    {"id": "left-column-top", "atlas": "adaptive", "rect": [0, 225, 161, 120], "role": "column-left-top", "anchor": "top-left", "offset": [0, 0], "repeat": "none", "z": 0},
-    {"id": "left-column-shaft", "atlas": "adaptive", "rect": [0, 345, 161, 320], "role": "column-left-middle", "anchor": "top-left", "offset": [0, 0], "repeat": "none", "z": 0},
-    {"id": "left-column-bottom", "atlas": "adaptive", "rect": [0, 665, 161, 236], "role": "column-left-bottom", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 0},
-    {"id": "right-column-top", "atlas": "adaptive", "rect": [1374, 225, 162, 120], "role": "column-right-top", "anchor": "top-right", "offset": [0, 0], "repeat": "none", "z": 0},
-    {"id": "right-column-shaft", "atlas": "adaptive", "rect": [1374, 345, 162, 320], "role": "column-right-middle", "anchor": "top-right", "offset": [0, 0], "repeat": "none", "z": 0},
-    {"id": "right-column-bottom", "atlas": "adaptive", "rect": [1374, 665, 162, 236], "role": "column-right-bottom", "anchor": "bottom-right", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "left-column-top", "atlas": "adaptive", "rect": [0, 450, 322, 240], "role": "column-left-top", "anchor": "top-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "left-column-shaft", "atlas": "adaptive", "rect": [400, 1000, 322, 480], "role": "column-left-middle", "anchor": "top-left", "offset": [0, 0], "repeat": "y", "z": 0},
+    {"id": "left-column-bottom", "atlas": "adaptive", "rect": [0, 1330, 322, 472], "role": "column-left-bottom", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "right-column-top", "atlas": "adaptive", "rect": [2748, 450, 324, 240], "role": "column-right-top", "anchor": "top-right", "offset": [0, 0], "repeat": "none", "z": 0},
+    {"id": "right-column-shaft", "atlas": "adaptive", "rect": [800, 1000, 324, 480], "role": "column-right-middle", "anchor": "top-right", "offset": [0, 0], "repeat": "y", "z": 0},
+    {"id": "right-column-bottom", "atlas": "adaptive", "rect": [2748, 1330, 324, 472], "role": "column-right-bottom", "anchor": "bottom-right", "offset": [0, 0], "repeat": "none", "z": 0},
 
-    {"id": "bottom-architecture-centre", "atlas": "adaptive", "rect": [592, 880, 336, 144], "role": "ornament", "anchor": "bottom-center", "offset": [3.6, 0], "repeat": "none", "z": 5},
-    {"id": "bottom-architecture-right", "atlas": "adaptive", "rect": [1300, 880, 74, 144], "role": "ornament", "anchor": "bottom-right", "offset": [-72.9, 0], "repeat": "none", "z": 5},
+    {"id": "bottom-architecture-centre", "atlas": "adaptive", "rect": [1184, 1760, 672, 288], "role": "ornament", "anchor": "bottom-center", "offset": [4.8, 0], "repeat": "none", "z": 5},
+    {"id": "bottom-architecture-right", "atlas": "adaptive", "rect": [2600, 1760, 148, 288], "role": "ornament", "anchor": "bottom-right", "offset": [-97.2, 0], "repeat": "none", "z": 5},
 
-    {"id": "eclipse", "atlas": "exact", "rect": [548, 0, 440, 240], "role": "ornament", "anchor": "top-center", "offset": [0, 0], "repeat": "none", "z": 10},
-    {"id": "controls", "atlas": "exact", "rect": [1110, 20, 320, 190], "role": "ornament", "anchor": "top-right", "offset": [-47.7, 9], "repeat": "none", "z": 10},
-    {"id": "candles", "atlas": "exact", "rect": [0, 740, 340, 284], "role": "ornament", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 10}
+    {"id": "eclipse", "atlas": "adaptive", "rect": [1096, 0, 880, 480], "role": "ornament", "anchor": "top-center", "offset": [0, 0], "repeat": "none", "z": 10},
+    {"id": "controls", "atlas": "adaptive", "rect": [2220, 40, 640, 380], "role": "ornament", "anchor": "top-right", "offset": [-63.6, 12], "repeat": "none", "z": 10},
+    {"id": "candles", "atlas": "exact", "rect": [0, 1480, 680, 568], "role": "ornament", "anchor": "bottom-left", "offset": [0, 0], "repeat": "none", "z": 10}
   ]
 }
