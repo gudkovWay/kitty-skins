@@ -101,14 +101,19 @@ std::expected<std::shared_ptr<SkinRuntime>, std::string> loadRuntime(const std::
         const kitty_skins::ValidationError& error = loaded.error();
         return std::unexpected(error.path.string() + ": " + error.field + ": " + error.message);
     }
+    if (!Render::GL::g_pHyprOpenGL)
+        return std::unexpected("skin textures require the OpenGL renderer");
+    Render::GL::g_pHyprOpenGL->makeEGLCurrent();
 
     auto runtime                     = std::make_shared<SkinRuntime>();
     runtime->pack                    = std::move(*loaded);
     const kitty_skins::Filter filter = runtime->pack.filter;
 
-    // Decode and upload each atlas once. Adaptive draw operations sample their
-    // declared source rectangles directly from the shared atlas.
-    const auto loadAtlas = [&](const std::filesystem::path& file, SP<Render::ITexture>& texture) -> std::optional<std::string> {
+    // Decode and upload each image once. Adaptive draw operations sample their
+    // declared source rectangles directly from the shared atlas, while effect
+    // rasters always sample linearly regardless of the pack's atlas filter.
+    const auto loadImage = [&](const std::filesystem::path& file, SP<Render::ITexture>& texture,
+                               kitty_skins::Filter imageFilter) -> std::optional<std::string> {
         Vector2D         size;
         std::string      error;
         cairo_surface_t* surface = decodePngSurface(file, error, size);
@@ -120,14 +125,67 @@ std::expected<std::shared_ptr<SkinRuntime>, std::string> loadRuntime(const std::
         if (!texture)
             return error;
 
-        applyFilter(texture, filter);
+        applyFilter(texture, imageFilter);
         return std::nullopt;
     };
 
-    if (const auto error = loadAtlas(runtime->pack.exactAtlas, runtime->exactAtlas))
+    if (const auto error = loadImage(runtime->pack.exactAtlas, runtime->exactAtlas, filter))
         return std::unexpected(*error);
-    if (const auto error = loadAtlas(runtime->pack.adaptiveAtlas, runtime->adaptiveAtlas))
+    if (const auto error = loadImage(runtime->pack.adaptiveAtlas, runtime->adaptiveAtlas, filter))
         return std::unexpected(*error);
+
+    if (runtime->pack.candleEffect) {
+        const kitty_skins::CandleEffectSpec& effect = *runtime->pack.candleEffect;
+
+        SP<Render::ITexture> flames;
+        SP<Render::ITexture> light;
+        if (const auto error = loadImage(effect.flames, flames, kitty_skins::Filter::linear))
+            return std::unexpected(*error);
+        if (const auto error = loadImage(effect.light, light, kitty_skins::Filter::linear))
+            return std::unexpected(*error);
+
+        // The wax visibility mask is decoded only when the pack declares streams;
+        // a flame-only pack keeps its previous cost. Like the effect rasters it is
+        // an exact-region RGBA image and samples linearly.
+        SP<Render::ITexture> waxMask;
+        if (effect.wax) {
+            if (const auto error = loadImage(effect.wax->mask, waxMask, kitty_skins::Filter::linear))
+                return std::unexpected(*error);
+        }
+
+        auto        renderer = std::make_unique<CandleRenderer>();
+        std::string initError;
+        if (!renderer->initialize(effect, flames, light, waxMask, initError))
+            return std::unexpected(initError.empty() ? std::string("candle effect initialization failed") : initError);
+
+        runtime->candles = std::move(renderer);
+    }
+
+    // Accent overlays are preloaded once at pack load: localized RGBA rasters
+    // that sample linearly regardless of the pack's atlas filter, exactly like
+    // the other effect rasters. A pack without accents allocates nothing here.
+    runtime->accentTextures.reserve(runtime->pack.accentEffects.size());
+    for (const kitty_skins::AccentEffectSpec& accent : runtime->pack.accentEffects) {
+        SP<Render::ITexture> texture;
+        if (const auto error = loadImage(accent.texture, texture, kitty_skins::Filter::linear))
+            return std::unexpected(*error);
+        runtime->accentTextures.push_back(std::move(texture));
+    }
+
+    // Layered flower effects are part of the pack contract: each declared effect
+    // initializes its full region resources (background, foreground, petals and
+    // the region-sized output framebuffer) up front. A declared effect that
+    // cannot start fails the whole load transactionally — there is no transparent
+    // placeholder and no silently dropped effect. A pack without flowers
+    // allocates nothing here.
+    runtime->flowers.reserve(runtime->pack.flowerEffects.size());
+    for (const kitty_skins::FlowerEffectSpec& flower : runtime->pack.flowerEffects) {
+        auto        renderer = std::make_unique<FlowerRenderer>();
+        std::string initError;
+        if (!renderer->initialize(flower, initError))
+            return std::unexpected(initError.empty() ? std::string("flower effect initialization failed") : initError);
+        runtime->flowers.push_back(std::move(renderer));
+    }
 
     return runtime;
 }

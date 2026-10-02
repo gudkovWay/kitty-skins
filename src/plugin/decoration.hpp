@@ -1,8 +1,10 @@
 #pragma once
 
+#include <chrono>
 #include <cstdint>
 #include <string>
 
+#include <hyprland/src/config/shared/Types.hpp>
 #include <hyprland/src/desktop/DesktopTypes.hpp>
 #include <hyprland/src/helpers/math/Math.hpp>
 #include <hyprland/src/render/decorations/IHyprWindowDecoration.hpp>
@@ -49,6 +51,24 @@ class CSkinDecoration final : public IHyprWindowDecoration {
     // pack reloads.
     void invalidate();
 
+    // Damage only the animated overlay areas (candle and accents) if an effect
+    // was actually visible recently.
+    bool damageEffects(std::chrono::steady_clock::time_point now);
+
+    // The framed window gives up the native border and rounding: the frame is the
+    // visible edge, and a native border would sit between the client and the
+    // frame band. Both are written as zero into the highest-priority override
+    // slot and the window is re-evaluated, so the change takes effect in the
+    // current frame. Idempotent: the slots are captured once per ownership.
+    void applyNativeZeroing();
+
+    // Hand the native border and rounding slots back. A slot is only written
+    // when it still holds the zero this frame put there, so a value set by
+    // anything else in the meantime survives untouched. `refresh` re-evaluates
+    // the window so a restored value takes effect immediately; it is false on
+    // paths where the compositor is already rebuilding the window.
+    void restoreNativeZeroing(bool refresh);
+
   private:
     // The compositor's own outer box for this decoration: the stored reply, the
     // four-edge defined point and, for a non-pinned window, the workspace render
@@ -88,6 +108,22 @@ class CSkinDecoration final : public IHyprWindowDecoration {
     float                     m_cachedScale      = 0.F;
     uint64_t                  m_cachedGeneration = 0;
     bool                      m_cacheValid       = false;
+    PHLMONITORREF m_effectMonitor;
+    std::chrono::steady_clock::time_point m_lastEffectDraw{};
+
+    // Last eligibility decision, so update() only acts on a real change.
+    bool m_lastWanted = false;
+
+    // Native border/rounding ownership. `Owned` marks the slots this frame has
+    // written; the optional prior value is captured only when the highest slot
+    // already held one at that moment, never copied from a lower-priority rule,
+    // so giving the slot back cannot clobber a changing window rule.
+    bool            m_borderOwned      = false;
+    bool            m_borderHadPrior   = false;
+    Config::INTEGER m_borderPrior      = 0;
+    bool            m_roundingOwned    = false;
+    bool            m_roundingHadPrior = false;
+    Config::INTEGER m_roundingPrior    = 0;
 };
 
 }

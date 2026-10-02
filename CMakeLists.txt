@@ -34,6 +34,9 @@ add_library(kitty-skins SHARED
   src/plugin/texture.cpp
   src/plugin/layout.cpp
   src/plugin/decoration.cpp
+  src/plugin/candle_effect.cpp
+  src/plugin/silver_effect.cpp
+  src/plugin/flower_effect.cpp
   src/plugin/pass.cpp)
 
 target_link_libraries(kitty-skins PRIVATE
