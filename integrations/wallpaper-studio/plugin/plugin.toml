@@ -1,0 +1,40 @@
+# Wallpaper Studio: обои и генерация рамок-скинов под них.
+#
+# Три входа, роли как у остальных локальных плагинов:
+#   service — один на сессию: держит связь с бэкендом (snapshot/sync/request),
+#             пишет studio.status и выполняет заявки из studio.request.
+#   widget  — иконка в баре со счётчиком кандидатов; ничего не считает.
+#   panel   — три вкладки: обои (каталог, импорт, плеер), оформление
+#             (профиль, Kitty, варианты) и очередь задач.
+#
+# Родные компоненты и родная тема, никаких capture_keys: у панели есть
+# текстовые поля (поиск, заметки, предпочтения), и захваченные клавиши
+# не дошли бы до сфокусированного ввода — грабля tmus 18.09.
+
+id = "q/wallpaper-studio"
+name = "Wallpaper Studio"
+version = "2.0.0"
+plugin_api = 22
+author = "q"
+license = "MIT"
+dependencies = []
+tags = ["wallpaper", "theming"]
+icon = "image"
+description = "Обои и рамки в одном месте: каталог и импорт, автоматический захват кадров, разбор и генерация Kitty-вариантов, живой плеер."
+
+[[widget]]
+id = "studio-widget"
+entry = "widget.luau"
+
+[[panel]]
+id = "studio"
+entry = "panel.luau"
+# Панель прицеплена к бару (не плавающая), позицию выбирает хост.
+placement = "attached"
+position = "auto"
+width = 1040
+height = 780
+
+[[service]]
+id = "watch"
+entry = "service.luau"
