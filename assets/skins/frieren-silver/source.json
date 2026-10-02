@@ -1,0 +1,450 @@
+{
+  "kind": "frieren-silver-pack-provenance",
+  "schema_version": 1,
+  "target": "kitty-skins schema 2",
+  "source": {
+    "file": "assets/source/frieren-silver.webp",
+    "immutable": true,
+    "width": 1536,
+    "height": 1024,
+    "sha256": "bc3bfc71d83a65d72d4e5621fdd5a4b98d5db53a35d4cc4e059a5da2961e84f4",
+    "decoded_rgba_sha256": "8eb7106cdd040f1b785e65dd4c1c1a23d634509a7a3f86095eb2b7aa418e6151",
+    "format": "WebP with alpha, decoded to RGBA PNG for assembly",
+    "origin": {
+      "pipeline_content_id": "d101a3e5ba379fa8248d6c3714c6de465af33f0130b3828210e0b15e1d55de48",
+      "pipeline_frame": "225922d876dd4a91967cb5e543c36293",
+      "file": "generated.webp",
+      "note": "last transparent frame of the quality-trial generation, copied byte for byte into assets/source"
+    }
+  },
+  "geometry": {
+    "mode": "measured",
+    "aperture": {
+      "left": 136,
+      "right": 136,
+      "top": 166,
+      "bottom": 169
+    },
+    "frame_insets": null,
+    "frame_insets_note": "Deliberately omitted. The legacy exact path then draws the complete exact atlas once, so the genuine artwork survives in exact mode; the frame_insets path would instead resample an atlas as an eight-piece ring.",
+    "adaptive_scale": 0.4,
+    "rendered_band_px": {
+      "left": 54.4,
+      "right": 54.4,
+      "top": 66.4,
+      "bottom": 67.6
+    },
+    "min_client": {
+      "width": 560,
+      "height": 320
+    },
+    "exact": {
+      "aspect": 1.5,
+      "aspect_tolerance": 0.06,
+      "min_width": 900,
+      "min_height": 600
+    },
+    "note": "The ring is organic: its inner fringe intrudes a little past the measured aperture. The straight cut is intentional and the removed slivers are recorded in guard."
+  },
+  "guard": {
+    "aperture": {
+      "left": 136,
+      "right": 136,
+      "top": 166,
+      "bottom": 169
+    },
+    "inner_edges": {
+      "left": {
+        "samples": 1024,
+        "longest_run": 878,
+        "run_ratio": 0.857422,
+        "painted_px": 878
+      },
+      "right": {
+        "samples": 1024,
+        "longest_run": 877,
+        "run_ratio": 0.856445,
+        "painted_px": 877
+      },
+      "top": {
+        "samples": 1536,
+        "longest_run": 1452,
+        "run_ratio": 0.945312,
+        "painted_px": 1452
+      },
+      "bottom": {
+        "samples": 1536,
+        "longest_run": 1432,
+        "run_ratio": 0.932292,
+        "painted_px": 1432
+      }
+    },
+    "opening": {
+      "patch": 256,
+      "rect": [
+        640,
+        384,
+        256,
+        256
+      ],
+      "alpha_mean": 0.0,
+      "kind": "transparent"
+    },
+    "cleared_slivers": {
+      "pixels": 9864,
+      "alpha_floor": 32,
+      "bbox": [
+        138,
+        168,
+        1260,
+        686
+      ],
+      "note": "organic inner fringe removed by the straight aperture cut; recorded, never re-added"
+    }
+  },
+  "assembly": {
+    "tool": "ImageMagick",
+    "generator": "tools/build-frieren-silver.py",
+    "source_width": 1536,
+    "source_height": 1024,
+    "adaptive_scale": 0.4,
+    "cap": 320,
+    "atlases": {
+      "exact": "the whole decoded master with its own alpha preserved and the client aperture hard cleared",
+      "adaptive": "byte-identical copy of exact.png; every region samples this artwork at its authored source rectangle"
+    },
+    "atlases_identical": true,
+    "partition": {
+      "method": "contiguous ordered cuts of the original artwork; each region rect is the authored source span, so neighbouring bands stay adjacent and nothing is tiled, mirrored or repeated",
+      "corners": [
+        {
+          "rect": [
+            0,
+            0,
+            136,
+            166
+          ]
+        },
+        {
+          "rect": [
+            1400,
+            0,
+            136,
+            166
+          ]
+        },
+        {
+          "rect": [
+            0,
+            855,
+            136,
+            169
+          ]
+        },
+        {
+          "rect": [
+            1400,
+            855,
+            136,
+            169
+          ]
+        }
+      ],
+      "top_rail": {
+        "source_range": [
+          136,
+          1400
+        ],
+        "y": 0,
+        "height": 166,
+        "spans": [
+          {
+            "source_range": [
+              136,
+              256
+            ],
+            "rect": [
+              136,
+              0,
+              120,
+              166
+            ],
+            "natural_logical_px": 48.0,
+            "fixed": true
+          },
+          {
+            "source_range": [
+              256,
+              280
+            ],
+            "rect": [
+              256,
+              0,
+              24,
+              166
+            ],
+            "natural_logical_px": 9.6,
+            "fixed": false
+          },
+          {
+            "source_range": [
+              280,
+              312
+            ],
+            "rect": [
+              280,
+              0,
+              32,
+              166
+            ],
+            "natural_logical_px": 12.8,
+            "fixed": true
+          },
+          {
+            "source_range": [
+              312,
+              488
+            ],
+            "rect": [
+              312,
+              0,
+              176,
+              166
+            ],
+            "natural_logical_px": 70.4,
+            "fixed": false
+          },
+          {
+            "source_range": [
+              488,
+              928
+            ],
+            "rect": [
+              488,
+              0,
+              440,
+              166
+            ],
+            "natural_logical_px": 176.0,
+            "fixed": true
+          },
+          {
+            "source_range": [
+              928,
+              992
+            ],
+            "rect": [
+              928,
+              0,
+              64,
+              166
+            ],
+            "natural_logical_px": 25.6,
+            "fixed": false
+          },
+          {
+            "source_range": [
+              992,
+              1168
+            ],
+            "rect": [
+              992,
+              0,
+              176,
+              166
+            ],
+            "natural_logical_px": 70.4,
+            "fixed": true
+          },
+          {
+            "source_range": [
+              1168,
+              1304
+            ],
+            "rect": [
+              1168,
+              0,
+              136,
+              166
+            ],
+            "natural_logical_px": 54.4,
+            "fixed": false
+          },
+          {
+            "source_range": [
+              1304,
+              1400
+            ],
+            "rect": [
+              1304,
+              0,
+              96,
+              166
+            ],
+            "natural_logical_px": 38.4,
+            "fixed": true
+          }
+        ]
+      },
+      "bottom_rail": {
+        "source_range": [
+          136,
+          1400
+        ],
+        "y": 855,
+        "height": 169,
+        "spans": [
+          {
+            "source_range": [
+              136,
+              208
+            ],
+            "rect": [
+              136,
+              855,
+              72,
+              169
+            ],
+            "natural_logical_px": 28.8,
+            "fixed": true
+          },
+          {
+            "source_range": [
+              208,
+              272
+            ],
+            "rect": [
+              208,
+              855,
+              64,
+              169
+            ],
+            "natural_logical_px": 25.6,
+            "fixed": false
+          },
+          {
+            "source_range": [
+              272,
+              464
+            ],
+            "rect": [
+              272,
+              855,
+              192,
+              169
+            ],
+            "natural_logical_px": 76.8,
+            "fixed": true
+          },
+          {
+            "source_range": [
+              464,
+              560
+            ],
+            "rect": [
+              464,
+              855,
+              96,
+              169
+            ],
+            "natural_logical_px": 38.4,
+            "fixed": false
+          },
+          {
+            "source_range": [
+              560,
+              976
+            ],
+            "rect": [
+              560,
+              855,
+              416,
+              169
+            ],
+            "natural_logical_px": 166.4,
+            "fixed": true
+          },
+          {
+            "source_range": [
+              976,
+              1080
+            ],
+            "rect": [
+              976,
+              855,
+              104,
+              169
+            ],
+            "natural_logical_px": 41.6,
+            "fixed": false
+          },
+          {
+            "source_range": [
+              1080,
+              1272
+            ],
+            "rect": [
+              1080,
+              855,
+              192,
+              169
+            ],
+            "natural_logical_px": 76.8,
+            "fixed": true
+          },
+          {
+            "source_range": [
+              1272,
+              1328
+            ],
+            "rect": [
+              1272,
+              855,
+              56,
+              169
+            ],
+            "natural_logical_px": 22.4,
+            "fixed": false
+          },
+          {
+            "source_range": [
+              1328,
+              1400
+            ],
+            "rect": [
+              1328,
+              855,
+              72,
+              169
+            ],
+            "natural_logical_px": 28.8,
+            "fixed": true
+          }
+        ]
+      },
+      "columns": {
+        "top_cap": {
+          "y": 166,
+          "height": 320
+        },
+        "middle": {
+          "y": 486,
+          "height": 49,
+          "repeat": "none"
+        },
+        "bottom_cap": {
+          "y": 535,
+          "height": 320
+        }
+      }
+    },
+    "fixed_rule": "a fixed rail span keeps its natural source length (source px * adaptive scale); elastic spans share the remaining rail length proportionally; the column middle is elastic",
+    "authored_note": "the source cuts above are explicit authoring decisions, not claims of visual verification"
+  },
+  "render_notes": {
+    "exact_mode": "draws exact.png once over the whole outer box; the aperture stays transparent",
+    "adaptive_mode": "composes the declared regions at their authored spans; no region has repeat x or y",
+    "cut": "straight aperture cut through the organic inner fringe, recorded in guard.cleared_slivers",
+    "client_safe": "no pack pixel can cover the aperture: the clear is a CopyOpacity mask, not a stroke"
+  }
+}
