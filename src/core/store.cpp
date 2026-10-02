@@ -4,8 +4,11 @@
 #include <cerrno>
 #include <string>
 #include <system_error>
-#include <unistd.h>
 #include <utility>
+
+#include <fcntl.h>
+#include <sys/file.h>
+#include <unistd.h>
 
 namespace kitty_skins {
 namespace {
@@ -27,6 +30,33 @@ bool isWithin(const std::filesystem::path& root, const std::filesystem::path& ta
 }
 
 SkinStore::SkinStore(std::filesystem::path root) : root_(std::move(root)) {}
+
+StoreLock::StoreLock(const std::filesystem::path& root) {
+    std::error_code ec;
+    std::filesystem::create_directories(root, ec);
+    if (ec)
+        throw std::system_error(ec.value(), std::generic_category(), "cannot create store root " + root.string());
+
+    const int fd = ::open((root / ".lock").c_str(), O_RDWR | O_CREAT | O_CLOEXEC, 0600);
+    if (fd < 0)
+        throw std::system_error(errno, std::generic_category(), "cannot open store lock " + (root / ".lock").string());
+
+    while (::flock(fd, LOCK_EX) != 0) {
+        if (errno != EINTR) {
+            const int saved = errno;
+            ::close(fd);
+            throw std::system_error(saved, std::generic_category(), "cannot lock store " + root.string());
+        }
+    }
+    fd_ = fd;
+}
+
+StoreLock::~StoreLock() {
+    if (fd_ < 0)
+        return;
+    ::flock(fd_, LOCK_UN);
+    ::close(fd_);
+}
 
 std::vector<std::string> SkinStore::list() const {
     std::vector<std::string> ids;

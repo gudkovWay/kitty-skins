@@ -9,6 +9,19 @@
 
 namespace kitty_skins {
 
+// Exclusive per-store advisory lock (flock on `<root>/.lock`). Serializes CLI
+// use/reload/clear against each other; blocks until acquired.
+class StoreLock {
+  public:
+    explicit StoreLock(const std::filesystem::path& root);
+    ~StoreLock();
+    StoreLock(const StoreLock&)            = delete;
+    StoreLock& operator=(const StoreLock&) = delete;
+
+  private:
+    int fd_ = -1;
+};
+
 class SkinStore {
   public:
     explicit SkinStore(std::filesystem::path root);

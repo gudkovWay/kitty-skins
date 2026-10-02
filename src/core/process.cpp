@@ -6,12 +6,15 @@
 #include <cstdlib>
 #include <cstring>
 #include <filesystem>
+#include <fstream>
 #include <string>
+#include <string_view>
 #include <system_error>
 #include <vector>
 
 #include <dirent.h>
 #include <spawn.h>
+#include <sys/stat.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
@@ -112,8 +115,36 @@ ProcessResult run(std::span<const std::string> argv) {
     return result;
 }
 
-std::vector<pid_t> findKittyProcesses() {
+std::string ownCompositorSignature() {
+    const char* signature = std::getenv("HYPRLAND_INSTANCE_SIGNATURE");
+    if (signature == nullptr || *signature == '\0')
+        return {};
+    return signature;
+}
+
+// NUL-separated environment of /proc/<pid>; true when it carries the exact
+// HYPRLAND_INSTANCE_SIGNATURE entry.
+static bool environHasSignature(pid_t pid, const std::string& signature) {
+    std::ifstream environFile(std::filesystem::path("/proc") / std::to_string(pid) / "environ", std::ios::binary);
+    if (!environFile)
+        return false;
+
+    std::string entry;
+    constexpr std::string_view prefix = "HYPRLAND_INSTANCE_SIGNATURE=";
+    while (std::getline(environFile, entry, '\0')) {
+        if (entry.starts_with(prefix) && std::string_view(entry).substr(prefix.size()) == signature)
+            return true;
+    }
+    return false;
+}
+
+std::vector<pid_t> findKittyProcesses(const std::string& compositorSignature) {
     std::vector<pid_t> pids;
+    if (compositorSignature.empty())
+        return pids;
+
+    const uid_t uid = ::geteuid();
+    const pid_t self = ::getpid();
 
     DIR* proc = ::opendir("/proc");
     if (proc == nullptr)
@@ -126,16 +157,26 @@ std::vector<pid_t> findKittyProcesses() {
 
         char* end = nullptr;
         const long value = std::strtol(name, &end, 10);
-        if (end == name || *end != '\0' || value <= 0)
+        if (end == name || *end != '\0' || value <= 0 || static_cast<pid_t>(value) == self)
+            continue;
+
+        const pid_t pid = static_cast<pid_t>(value);
+
+        // Same owner only: another user's /proc entries would not expose their
+        // environment anyway, and stat is the cheap ownership gate.
+        struct stat processStatus = {};
+        if (::stat(("/proc/" + std::to_string(pid)).c_str(), &processStatus) != 0 || processStatus.st_uid != uid)
             continue;
 
         std::error_code ec;
         const std::filesystem::path executable = std::filesystem::read_symlink(std::filesystem::path("/proc") / name / "exe", ec);
-        if (ec)
+        if (ec || executable.filename() != "kitty")
             continue;
 
-        if (executable.filename() == "kitty")
-            pids.push_back(static_cast<pid_t>(value));
+        if (!environHasSignature(pid, compositorSignature))
+            continue;
+
+        pids.push_back(pid);
     }
 
     ::closedir(proc);
