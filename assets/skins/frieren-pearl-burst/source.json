@@ -1,0 +1,402 @@
+{
+  "kind": "frieren-pearl-burst-pack-provenance",
+  "schema_version": 1,
+  "target": "kitty-skins schema 2, layered_ornaments + flower_effects bubble",
+  "id": "frieren-pearl-burst",
+  "name": "Frieren Pearl Burst",
+  "generator": "tools/build-frieren-pearl.py",
+  "source": {
+    "file": "assets/source/frieren-pearl-reference.png",
+    "immutable": true,
+    "width": 1477,
+    "height": 1065,
+    "sha256": "edcb2f5aa2c935fb113069aac301ca584f754363c14bb28cd0e95e9613f37a40",
+    "expected_sha256": "edcb2f5aa2c935fb113069aac301ca584f754363c14bb28cd0e95e9613f37a40",
+    "note": "the master is never written; output is derivative art only"
+  },
+  "selection_mask": {
+    "file": "assets/source/frieren-pearl-ornaments.svg",
+    "sha256": "1404b74dc97b2b5186a97965ade63db37a7c56bf519be345bb06f9790dccf4d9",
+    "expected_sha256": "1404b74dc97b2b5186a97965ade63db37a7c56bf519be345bb06f9790dccf4d9",
+    "supersample": 4,
+    "rasterization": "the mask SVG is rasterized by ImageMagick/librsvg at 384 DPI (4x the source grid) and resized to the source grid",
+    "ownership": {
+      "window_px": {
+        "pearl-tl": 17944,
+        "pearl-tr": 17944,
+        "pearl-bl": 14241,
+        "pearl-br": 14241,
+        "star-top": 1760,
+        "star-bottom": 1908,
+        "star-left": 1303,
+        "star-right": 1270
+      },
+      "orphans": 0,
+      "double_owned": 0
+    },
+    "method": "sculpture alpha = source alpha * luminance matte * coverage / 255, pearl body footprints subtracted; the client opening is never cleared"
+  },
+  "geometry": {
+    "neutral_lip": {
+      "left": 135,
+      "right": 136,
+      "top": 175,
+      "bottom": 198
+    },
+    "neutral_lip_basis": "painted inner lip measured on neutral lines (median over three samples per side): {'top': 171.0, 'bottom': 867.0, 'left': 135.0, 'right': 1341.0}; accepted ranges {'top': (160, 180), 'bottom': (855, 875), 'left': (125, 145), 'right': (1331, 1351)}",
+    "aperture": {
+      "left": 135,
+      "right": 136,
+      "top": 175,
+      "bottom": 198
+    },
+    "frame_insets": {
+      "left": 135,
+      "right": 136,
+      "top": 175,
+      "bottom": 198
+    },
+    "frame_insets_basis": "equal to the measured source aperture; the band is rendered at physical scale 1, so the neutral structural cross-section and the original corner material share one physical profile (design intent; visual seam-free behaviour is unverified until rendered)",
+    "burst_opening_overlap_risk": {
+      "tl": {
+        "excursion": 58.0,
+        "overlap_rect": [
+          135,
+          175,
+          171.5,
+          209.0
+        ],
+        "overlap_area_px": 1241.0
+      },
+      "tr": {
+        "excursion": 58.0,
+        "overlap_rect": [
+          1302.5,
+          175,
+          1341,
+          209.0
+        ],
+        "overlap_area_px": 1309.0
+      },
+      "br": {
+        "excursion": 57.0,
+        "overlap_rect": [
+          1309.0,
+          814.0,
+          1341,
+          867
+        ],
+        "overlap_area_px": 1696.0
+      },
+      "bl": {
+        "excursion": 57.0,
+        "overlap_rect": [
+          135,
+          814.0,
+          165.0,
+          867
+        ],
+        "overlap_area_px": 1590.0
+      }
+    },
+    "burst_opening_overlap_note": "measured rectangles where the full conservative burst bound (max(radii)+spread+6 square) crosses the real client opening; the runtime keeps the full circular bound and gates the rupture rim to the outward hemisphere, so this records the residual bound-level risk only",
+    "pearls": {
+      "tl": {
+        "source_center": [
+          113.5,
+          151.0
+        ],
+        "published_radii": [
+          27.0,
+          28.0
+        ],
+        "body_ellipse": {
+          "center": [
+            113.5,
+            151.0
+          ],
+          "radii": [
+            24.5,
+            24.5
+          ],
+          "angle_deg": 0.0
+        },
+        "region_local_center": [
+          113.5,
+          151.0
+        ],
+        "canvas_rect": [
+          0,
+          0,
+          300,
+          450
+        ],
+        "outward": [
+          -1.0,
+          -1.0
+        ],
+        "phase": 0.0,
+        "validation": {
+          "inner_mean_luminance": 196.1,
+          "excursion_radius": 58.0
+        }
+      },
+      "tr": {
+        "source_center": [
+          1360.5,
+          151.0
+        ],
+        "published_radii": [
+          27.0,
+          28.0
+        ],
+        "body_ellipse": {
+          "center": [
+            1360.5,
+            151.0
+          ],
+          "radii": [
+            24.5,
+            24.5
+          ],
+          "angle_deg": 0.0
+        },
+        "region_local_center": [
+          183.5,
+          151.0
+        ],
+        "canvas_rect": [
+          1177,
+          0,
+          300,
+          450
+        ],
+        "outward": [
+          1.0,
+          -1.0
+        ],
+        "phase": 0.25,
+        "validation": {
+          "inner_mean_luminance": 193.0,
+          "excursion_radius": 58.0
+        }
+      },
+      "br": {
+        "source_center": [
+          1366.0,
+          871.0
+        ],
+        "published_radii": [
+          22.0,
+          27.0
+        ],
+        "body_ellipse": {
+          "center": [
+            1366.0,
+            871.0
+          ],
+          "radii": [
+            19.5,
+            25.5
+          ],
+          "angle_deg": 22.0
+        },
+        "region_local_center": [
+          189.0,
+          171.0
+        ],
+        "canvas_rect": [
+          1177,
+          700,
+          300,
+          365
+        ],
+        "outward": [
+          1.0,
+          1.0
+        ],
+        "phase": 0.5,
+        "validation": {
+          "inner_mean_luminance": 194.4,
+          "excursion_radius": 57.0
+        }
+      },
+      "bl": {
+        "source_center": [
+          108.0,
+          871.0
+        ],
+        "published_radii": [
+          22.0,
+          27.0
+        ],
+        "body_ellipse": {
+          "center": [
+            108.0,
+            871.0
+          ],
+          "radii": [
+            19.5,
+            25.5
+          ],
+          "angle_deg": -22.0
+        },
+        "region_local_center": [
+          108.0,
+          171.0
+        ],
+        "canvas_rect": [
+          0,
+          700,
+          300,
+          365
+        ],
+        "outward": [
+          -1.0,
+          1.0
+        ],
+        "phase": 0.75,
+        "validation": {
+          "inner_mean_luminance": 195.0,
+          "excursion_radius": 57.0
+        }
+      }
+    },
+    "structural": {
+      "profile_ranges": {
+        "top": [
+          380,
+          520
+        ],
+        "bottom": [
+          380,
+          520
+        ],
+        "left": [
+          570,
+          680
+        ],
+        "right": [
+          570,
+          680
+        ]
+      },
+      "outer_visible_edges": {
+        "left": 71,
+        "right": 72,
+        "top": 126,
+        "bottom": 150
+      },
+      "construction": "bands are extrusions of their measured median cross-sections; corners miter the two adjoining profiles on the diagonal; alpha fades in at the measured outer visible edge and out after the measured neutral lip",
+      "column_cap_px": 32
+    },
+    "exact": {
+      "aspect": 1.386854,
+      "aspect_tolerance": 0.005,
+      "min": [
+        900,
+        600
+      ]
+    },
+    "adaptive": {
+      "scale": 0.65,
+      "min_client": [
+        560.0,
+        360.0
+      ]
+    }
+  },
+  "authored": {
+    "matte": {
+      "lo": 18.0,
+      "hi": 46.0,
+      "formula": "alpha = smoothstep(lo, hi, luminance) on the near-black studio background, times the selection mask; enclosed recesses restored opaque by border flood"
+    },
+    "socket": "locally authored recessed socket (dark radial pit plus a quiet lower rim light), confined to the same tilted body ellipse; no backing strip elsewhere",
+    "foreground": "parent-owned source-space setting paths clipped to the body ellipse (TL silver leaf over the lower-left edge, TR its mirror about x=737); BL/BR stay transparent because their settings sit outside the pearl body",
+    "bubble": "complete tilted body-ellipse alpha (no leaf notch); original pearl pixels, crossfaded to the reflection across the body center x wherever the fixed foreground covers the body",
+    "mask_ownership": "every nonzero mask pixel is owned exactly once by one disjoint ornament window; validated, never assumed",
+    "policy": "every recognisable form (corner clusters, chains, midpoint stars, side stars) is one-shot in the exact atlas through its own anchor; only profile-constant neutral rails stretch"
+  },
+  "motion": {
+    "period_s": 8.0,
+    "phases": {
+      "tl": 0.0,
+      "tr": 0.25,
+      "br": 0.5,
+      "bl": 0.75
+    },
+    "contract": "native runtime: growth 0..0.72, rupture rim .72...78 gated to the outward hemisphere, ten outward droplets .72...95, brief empty socket .95..1; no petal rocking; region envelope keeps the full circular conservative bound max(radii)+spread+6, validated to fit each region",
+    "spread": 24.0
+  },
+  "assembly": {
+    "tool": "ImageMagick",
+    "atlases": {
+      "exact": "full source canvas carrying only the selection-mask sculpture, pearl body footprints subtracted",
+      "adaptive": "full source canvas carrying only the reconstructed neutral structural silver"
+    }
+  },
+  "acceptance": {
+    "authored": true,
+    "contract_validated": false,
+    "rendered": "unverified",
+    "visually_accepted": "unverified",
+    "note": "no runtime, screenshot or acceptance claim is made by this pack; source-aligned profiles and masks are authoring intent, not visual proof"
+  },
+  "artifacts": {
+    "adaptive.png": {
+      "sha256": "b7a1855b27018eb4c49f5cd11cf585e44322788a7f95a71cae6614171982468b"
+    },
+    "exact.png": {
+      "sha256": "5cc8e08283bae0b19783badcbc552203a0b7f3635a16057d2cc41f87016afd23"
+    },
+    "frieren-pearl-ornaments.svg": {
+      "sha256": "1404b74dc97b2b5186a97965ade63db37a7c56bf519be345bb06f9790dccf4d9"
+    },
+    "kitty.conf": {
+      "sha256": "5398876007d233f5d82280e05c952a45771be5c4a35cbd6e8b59a096aec6d4df"
+    },
+    "pearl-bl-background.png": {
+      "sha256": "1b751167a15c02e92dfe26293b5c21c6b35ed26b9c2bb6a61702988503437e0a"
+    },
+    "pearl-bl-bubble.png": {
+      "sha256": "628d7a6022d53bd7ac22f4f3bc3f4380c8f0f7fdf740748cd82c1769399f1386"
+    },
+    "pearl-bl-foreground.png": {
+      "sha256": "8368d9c1bb0a5292391749cc6a5b2390dd2adaa18e82eed04cdd3b2b47c9463b"
+    },
+    "pearl-br-background.png": {
+      "sha256": "8995bcd18428c29473c454488c1093253ed96aa6ed8fe4b1fa234cc5c4bf9d53"
+    },
+    "pearl-br-bubble.png": {
+      "sha256": "21cb22b91486e09343266be83f610642e0e410e0677f2362b6511a9404384b08"
+    },
+    "pearl-br-foreground.png": {
+      "sha256": "8368d9c1bb0a5292391749cc6a5b2390dd2adaa18e82eed04cdd3b2b47c9463b"
+    },
+    "pearl-tl-background.png": {
+      "sha256": "c88497be8ac72fa1740cc856e86ce7a39511a9844ab521b29b94f7f070f998cf"
+    },
+    "pearl-tl-bubble.png": {
+      "sha256": "2a73ebec55cbc664c061fdb99143a6984f1b089e16c5368a4f60dae0516d6e46"
+    },
+    "pearl-tl-foreground.png": {
+      "sha256": "fdbcbec29717b5fbeaf477d71011ac656a3e11e4b85df1c22b2bd9f9b6c8d2b9"
+    },
+    "pearl-tr-background.png": {
+      "sha256": "8432197c5981b2cde80958157b185e7f9d25ec7a813a3ddc53331010f6d814a2"
+    },
+    "pearl-tr-bubble.png": {
+      "sha256": "677f93c033f7114ff6ce74b9c0a202806b4f948af82a7af8c16afca7608e7ff5"
+    },
+    "pearl-tr-foreground.png": {
+      "sha256": "ccfd2421ffc987d54a192aebe01ed2896791e6b35cc1cf8fd0c62ad42212f471"
+    },
+    "skin.json": {
+      "sha256": "71d57cbe1a6ddae13ecbe78c95a775cfc11fb4daa431659e7bc415347fdaf139"
+    },
+    "source.png": {
+      "sha256": "edcb2f5aa2c935fb113069aac301ca584f754363c14bb28cd0e95e9613f37a40"
+    }
+  }
+}

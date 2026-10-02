@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1477" height="1065" viewBox="0 0 1477 1065">
+  <title>Frieren pearl master — moving foliate group selections</title>
+  <desc>Authored polygons subdividing the frieren-pearl-ornaments.svg sculpture
+    selection into coherent articulated leaf groups per corner (at most six).
+    Each polygon is a generous ENVELOPE that tiles its corner canvas: the
+    effective group coverage is the intersection with the ornament selection
+    minus the fixed set (pearl body, sockets, red gems, corner setting ball,
+    bead-pendant chain corridors, fixed root leaf and pivot collars), so the
+    exact outer silhouette comes from the ornament mask and no leaf pixel can
+    fall between envelopes. Groups share divider edges exactly, so the
+    partition has no gaps and no double owners. Right-hand corners mirror the
+    left about x=737 (x' = 1474 - x) and still sample each side's own source
+    pixels. data-pivot is the attachment root in SOURCE coordinates;
+    data-desc documents the group.</desc>
+  <rect width="1477" height="1065" fill="black" stroke="none"/>
+  <g id="corner-tl">
+    <g id="tl-0" data-desc="crown and right-hand frond mass above the pearl, one articulated cluster" data-pivot="118,132">
+      <polygon points="36,88 300,88 300,192 158,192 158,146 116,146 70,142 36,140"/>
+    </g>
+    <g id="tl-1" data-desc="upper vertical leaves beside the column lip" data-pivot="102,188">
+      <polygon points="36,140 70,142 116,146 158,146 158,192 300,192 300,224 130,224 112,220 94,222 74,214 60,196 54,168 36,164"/>
+    </g>
+    <g id="tl-2" data-desc="lower vertical leaf sweep down the column" data-pivot="96,216">
+      <polygon points="36,164 54,168 60,196 74,214 94,222 112,220 130,224 300,224 300,340 36,340"/>
+    </g>
+  </g>
+  <g id="corner-tr">
+    <g id="tr-0" data-desc="crown and left-hand frond mass above the pearl, one articulated cluster (mirror of tl-0)" data-pivot="1356,132">
+      <polygon points="1438,88 1177,88 1177,192 1316,192 1316,146 1358,146 1404,142 1438,140"/>
+    </g>
+    <g id="tr-1" data-desc="upper vertical leaves beside the column lip (mirror of tl-1)" data-pivot="1372,188">
+      <polygon points="1438,140 1404,142 1358,146 1316,146 1316,192 1177,192 1177,224 1344,224 1362,220 1380,222 1400,214 1414,196 1420,168 1438,164"/>
+    </g>
+    <g id="tr-2" data-desc="lower vertical leaf sweep down the column (mirror of tl-2)" data-pivot="1378,216">
+      <polygon points="1438,164 1420,168 1414,196 1400,214 1380,222 1362,220 1344,224 1177,224 1177,340 1438,340"/>
+    </g>
+  </g>
+  <g id="corner-bl">
+    <g id="bl-0" data-desc="rising leaf spikes left of the pearl" data-pivot="92,852">
+      <polygon points="36,726 300,726 300,862 122,860 116,848 96,852 78,846 68,828 36,830"/>
+    </g>
+    <g id="bl-1" data-desc="lower-left sweeping leaf mass with its upper tail" data-pivot="104,904">
+      <polygon points="36,830 68,828 78,846 96,852 116,848 122,860 122,1065 36,1065"/>
+    </g>
+    <g id="bl-2" data-desc="horizontal leaf cluster along the bottom rail" data-pivot="142,893">
+      <polygon points="122,860 300,862 300,1065 122,1065"/>
+    </g>
+  </g>
+  <g id="corner-br">
+    <g id="br-0" data-desc="rising leaf spikes right of the pearl (mirror of bl-0)" data-pivot="1382,852">
+      <polygon points="1438,726 1177,726 1177,862 1352,860 1358,848 1378,852 1396,846 1406,828 1438,830"/>
+    </g>
+    <g id="br-1" data-desc="lower-right sweeping leaf mass with its upper tail (mirror of bl-1)" data-pivot="1370,904">
+      <polygon points="1438,830 1406,828 1396,846 1378,852 1358,848 1352,860 1352,1065 1438,1065"/>
+    </g>
+    <g id="br-2" data-desc="horizontal leaf cluster along the bottom rail (mirror of bl-2)" data-pivot="1332,893">
+      <polygon points="1352,860 1177,862 1177,1065 1352,1065"/>
+    </g>
+  </g>
+</svg>

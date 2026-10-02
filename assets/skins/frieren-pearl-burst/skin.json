@@ -1,0 +1,497 @@
+{
+  "schema": 2,
+  "id": "frieren-pearl-burst",
+  "name": "Frieren Pearl Burst",
+  "filter": "linear",
+  "source": {
+    "width": 1477,
+    "height": 1065,
+    "sha256": "edcb2f5aa2c935fb113069aac301ca584f754363c14bb28cd0e95e9613f37a40"
+  },
+  "aperture": {
+    "left": 135,
+    "right": 136,
+    "top": 175,
+    "bottom": 198
+  },
+  "frame_insets": {
+    "left": 135,
+    "right": 136,
+    "top": 175,
+    "bottom": 198
+  },
+  "layered_ornaments": true,
+  "exact": {
+    "atlas": "exact.png",
+    "aspect": 1.386854,
+    "aspect_tolerance": 0.005,
+    "min_width": 900,
+    "min_height": 600
+  },
+  "adaptive": {
+    "atlas": "adaptive.png",
+    "scale": 0.65,
+    "min_client_width": 560.0,
+    "min_client_height": 360.0
+  },
+  "flower_effects": [
+    {
+      "region": "pearl-tl",
+      "background": "pearl-tl-background.png",
+      "foreground": "pearl-tl-foreground.png",
+      "period": 8.0,
+      "phase": 0.0,
+      "petals": [],
+      "bubble": {
+        "texture": "pearl-tl-bubble.png",
+        "center": [
+          113.5,
+          151.0
+        ],
+        "radii": [
+          27.0,
+          28.0
+        ],
+        "outward": [
+          -1.0,
+          -1.0
+        ],
+        "spread": 24.0
+      }
+    },
+    {
+      "region": "pearl-tr",
+      "background": "pearl-tr-background.png",
+      "foreground": "pearl-tr-foreground.png",
+      "period": 8.0,
+      "phase": 0.25,
+      "petals": [],
+      "bubble": {
+        "texture": "pearl-tr-bubble.png",
+        "center": [
+          183.5,
+          151.0
+        ],
+        "radii": [
+          27.0,
+          28.0
+        ],
+        "outward": [
+          1.0,
+          -1.0
+        ],
+        "spread": 24.0
+      }
+    },
+    {
+      "region": "pearl-br",
+      "background": "pearl-br-background.png",
+      "foreground": "pearl-br-foreground.png",
+      "period": 8.0,
+      "phase": 0.5,
+      "petals": [],
+      "bubble": {
+        "texture": "pearl-br-bubble.png",
+        "center": [
+          189.0,
+          171.0
+        ],
+        "radii": [
+          22.0,
+          27.0
+        ],
+        "outward": [
+          1.0,
+          1.0
+        ],
+        "spread": 24.0
+      }
+    },
+    {
+      "region": "pearl-bl",
+      "background": "pearl-bl-background.png",
+      "foreground": "pearl-bl-foreground.png",
+      "period": 8.0,
+      "phase": 0.75,
+      "petals": [],
+      "bubble": {
+        "texture": "pearl-bl-bubble.png",
+        "center": [
+          108.0,
+          171.0
+        ],
+        "radii": [
+          22.0,
+          27.0
+        ],
+        "outward": [
+          -1.0,
+          1.0
+        ],
+        "spread": 24.0
+      }
+    }
+  ],
+  "regions": [
+    {
+      "id": "corner-top-left",
+      "atlas": "adaptive",
+      "rect": [
+        0,
+        0,
+        135,
+        175
+      ],
+      "role": "corner-top-left",
+      "anchor": "top-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "corner-top-right",
+      "atlas": "adaptive",
+      "rect": [
+        1341,
+        0,
+        136,
+        175
+      ],
+      "role": "corner-top-right",
+      "anchor": "top-right",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "corner-bottom-left",
+      "atlas": "adaptive",
+      "rect": [
+        0,
+        867,
+        135,
+        198
+      ],
+      "role": "corner-bottom-left",
+      "anchor": "bottom-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "corner-bottom-right",
+      "atlas": "adaptive",
+      "rect": [
+        1341,
+        867,
+        136,
+        198
+      ],
+      "role": "corner-bottom-right",
+      "anchor": "bottom-right",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "rail-top",
+      "atlas": "adaptive",
+      "rect": [
+        135,
+        0,
+        1206,
+        175
+      ],
+      "role": "rail-top",
+      "anchor": "top-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "rail-bottom",
+      "atlas": "adaptive",
+      "rect": [
+        135,
+        867,
+        1206,
+        198
+      ],
+      "role": "rail-bottom",
+      "anchor": "top-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "column-left-top",
+      "atlas": "adaptive",
+      "rect": [
+        0,
+        175,
+        135,
+        32
+      ],
+      "role": "column-left-top",
+      "anchor": "top-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "column-left-middle",
+      "atlas": "adaptive",
+      "rect": [
+        0,
+        207,
+        135,
+        628
+      ],
+      "role": "column-left-middle",
+      "anchor": "top-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "y",
+      "z": 0
+    },
+    {
+      "id": "column-left-bottom",
+      "atlas": "adaptive",
+      "rect": [
+        0,
+        835,
+        135,
+        32
+      ],
+      "role": "column-left-bottom",
+      "anchor": "bottom-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "column-right-top",
+      "atlas": "adaptive",
+      "rect": [
+        1341,
+        175,
+        136,
+        32
+      ],
+      "role": "column-right-top",
+      "anchor": "top-right",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "column-right-middle",
+      "atlas": "adaptive",
+      "rect": [
+        1341,
+        207,
+        136,
+        628
+      ],
+      "role": "column-right-middle",
+      "anchor": "top-right",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "y",
+      "z": 0
+    },
+    {
+      "id": "column-right-bottom",
+      "atlas": "adaptive",
+      "rect": [
+        1341,
+        835,
+        136,
+        32
+      ],
+      "role": "column-right-bottom",
+      "anchor": "bottom-right",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "pearl-tl",
+      "atlas": "exact",
+      "rect": [
+        0,
+        0,
+        300,
+        450
+      ],
+      "role": "ornament",
+      "anchor": "top-left",
+      "offset": [
+        -5,
+        -8
+      ],
+      "repeat": "none",
+      "z": 10
+    },
+    {
+      "id": "pearl-tr",
+      "atlas": "exact",
+      "rect": [
+        1177,
+        0,
+        300,
+        450
+      ],
+      "role": "ornament",
+      "anchor": "top-right",
+      "offset": [
+        5,
+        -8
+      ],
+      "repeat": "none",
+      "z": 10
+    },
+    {
+      "id": "pearl-bl",
+      "atlas": "exact",
+      "rect": [
+        0,
+        700,
+        300,
+        365
+      ],
+      "role": "ornament",
+      "anchor": "bottom-left",
+      "offset": [
+        -5,
+        10
+      ],
+      "repeat": "none",
+      "z": 10
+    },
+    {
+      "id": "pearl-br",
+      "atlas": "exact",
+      "rect": [
+        1177,
+        700,
+        300,
+        365
+      ],
+      "role": "ornament",
+      "anchor": "bottom-right",
+      "offset": [
+        5,
+        10
+      ],
+      "repeat": "none",
+      "z": 10
+    },
+    {
+      "id": "star-top",
+      "atlas": "exact",
+      "rect": [
+        668,
+        100,
+        141,
+        80
+      ],
+      "role": "ornament",
+      "anchor": "top-center",
+      "offset": [
+        0,
+        97
+      ],
+      "repeat": "none",
+      "z": 10
+    },
+    {
+      "id": "star-bottom",
+      "atlas": "exact",
+      "rect": [
+        668,
+        848,
+        141,
+        82
+      ],
+      "role": "ornament",
+      "anchor": "bottom-center",
+      "offset": [
+        0,
+        -125
+      ],
+      "repeat": "none",
+      "z": 10
+    },
+    {
+      "id": "star-left",
+      "atlas": "exact",
+      "rect": [
+        72,
+        460,
+        64,
+        128
+      ],
+      "role": "ornament",
+      "anchor": "center-left",
+      "offset": [
+        72,
+        -8.5
+      ],
+      "repeat": "none",
+      "z": 10
+    },
+    {
+      "id": "star-right",
+      "atlas": "exact",
+      "rect": [
+        1341,
+        460,
+        64,
+        128
+      ],
+      "role": "ornament",
+      "anchor": "center-right",
+      "offset": [
+        -72,
+        -8.5
+      ],
+      "repeat": "none",
+      "z": 10
+    }
+  ]
+}

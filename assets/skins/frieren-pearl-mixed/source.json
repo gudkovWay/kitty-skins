@@ -1,0 +1,1561 @@
+{
+  "kind": "frieren-pearl-mixed-pack-provenance",
+  "schema_version": 2,
+  "target": "kitty-skins schema 2, layered_ornaments + flower_effects mixed bubble and petals",
+  "id": "frieren-pearl-mixed",
+  "name": "Frieren Pearl Mixed",
+  "generator": "tools/build-frieren-pearl.py",
+  "source": {
+    "file": "assets/source/frieren-pearl-reference.png",
+    "immutable": true,
+    "width": 1477,
+    "height": 1065,
+    "sha256": "edcb2f5aa2c935fb113069aac301ca584f754363c14bb28cd0e95e9613f37a40",
+    "expected_sha256": "edcb2f5aa2c935fb113069aac301ca584f754363c14bb28cd0e95e9613f37a40",
+    "note": "the master is never written; output is derivative art only; source RGB is preserved -- no recolor, no desaturation, no generated imagery"
+  },
+  "selection_mask": {
+    "file": "assets/source/frieren-pearl-ornaments.svg",
+    "sha256": "1404b74dc97b2b5186a97965ade63db37a7c56bf519be345bb06f9790dccf4d9",
+    "expected_sha256": "1404b74dc97b2b5186a97965ade63db37a7c56bf519be345bb06f9790dccf4d9",
+    "supersample": 4,
+    "rasterization": "the mask SVG is rasterized by ImageMagick/librsvg at 384 DPI (4x the source grid) and resized to the source grid",
+    "ownership": {
+      "window_px": {
+        "pearl-tl": 17944,
+        "pearl-tr": 17944,
+        "pearl-bl": 14241,
+        "pearl-br": 14241,
+        "star-top": 1760,
+        "star-bottom": 1908,
+        "star-left": 1303,
+        "star-right": 1270
+      },
+      "orphans": 0,
+      "double_owned": 0
+    },
+    "method": "sculpture alpha = source alpha * luminance matte * coverage / 255, pearl body footprints subtracted; dark internal recesses stay opaque via the border flood; the client opening is never cleared"
+  },
+  "petal_mask": {
+    "file": "assets/source/frieren-pearl-petals.svg",
+    "sha256": "6cd49108a1ece54d8d093760b4964acc0c9b84f99293512aeff5620937eb3f24",
+    "expected_sha256": "6cd49108a1ece54d8d093760b4964acc0c9b84f99293512aeff5620937eb3f24",
+    "groups_per_corner": {
+      "tl": 3,
+      "tr": 3,
+      "br": 3,
+      "bl": 3
+    },
+    "partition": {
+      "tl": {
+        "moving_px": 9875,
+        "bubble_body_px": 1882,
+        "group_px": [
+          4746,
+          2621,
+          2509
+        ]
+      },
+      "tr": {
+        "moving_px": 9900,
+        "bubble_body_px": 1882,
+        "group_px": [
+          4743,
+          2649,
+          2509
+        ]
+      },
+      "br": {
+        "moving_px": 8910,
+        "bubble_body_px": 1557,
+        "group_px": [
+          1904,
+          3582,
+          3419
+        ]
+      },
+      "bl": {
+        "moving_px": 8894,
+        "bubble_body_px": 1557,
+        "group_px": [
+          1894,
+          3606,
+          3388
+        ]
+      }
+    },
+    "fixed_set": {
+      "chain_corridors": {
+        "tl": [
+          [
+            40,
+            96,
+            64,
+            240
+          ],
+          [
+            40,
+            240,
+            68,
+            350
+          ],
+          [
+            40,
+            350,
+            68,
+            412
+          ]
+        ],
+        "bl": [
+          [
+            50,
+            730,
+            76,
+            800
+          ]
+        ],
+        "tr": [
+          [
+            1410,
+            96,
+            1434,
+            240
+          ],
+          [
+            1406,
+            240,
+            1434,
+            350
+          ],
+          [
+            1406,
+            350,
+            1434,
+            412
+          ]
+        ],
+        "br": [
+          [
+            1398,
+            730,
+            1424,
+            800
+          ]
+        ]
+      },
+      "root_rects": {
+        "tl": [
+          [
+            78,
+            144,
+            124,
+            190
+          ]
+        ],
+        "bl": [],
+        "tr": [
+          [
+            1350,
+            144,
+            1396,
+            190
+          ]
+        ],
+        "br": []
+      },
+      "discs": {
+        "tl": [
+          [
+            152,
+            133,
+            12
+          ]
+        ],
+        "bl": [
+          [
+            88,
+            829,
+            12
+          ],
+          [
+            152,
+            875,
+            12
+          ],
+          [
+            135,
+            895,
+            11
+          ],
+          [
+            166,
+            936,
+            16
+          ]
+        ],
+        "tr": [
+          [
+            1322,
+            133,
+            12
+          ]
+        ],
+        "br": [
+          [
+            1386,
+            829,
+            12
+          ],
+          [
+            1322,
+            875,
+            12
+          ],
+          [
+            1339,
+            895,
+            11
+          ],
+          [
+            1308,
+            936,
+            16
+          ]
+        ]
+      },
+      "collar_radius_px": 12.0,
+      "note": "hanging bead wire, beads, star pendant, red gems (including the lower gems beside the bottom rails), the BL/BR corner setting ball, the pendant pearl and the fixed root leaf never move; the corridors keep a few raster-inseparable leaf-fringe pixels fixed beside the wire -- recorded, not silently deleted"
+    },
+    "foliage_groups": {
+      "tl": [
+        {
+          "id": "tl-0",
+          "description": "crown and right-hand frond mass above the pearl, one articulated cluster",
+          "source_polygon": [
+            [
+              36,
+              88
+            ],
+            [
+              300,
+              88
+            ],
+            [
+              300,
+              192
+            ],
+            [
+              158,
+              192
+            ],
+            [
+              158,
+              146
+            ],
+            [
+              116,
+              146
+            ],
+            [
+              70,
+              142
+            ],
+            [
+              36,
+              140
+            ]
+          ],
+          "source_pivot": [
+            118.0,
+            132.0
+          ],
+          "region_pivot": [
+            113.0,
+            124.0
+          ],
+          "texture": "pearl-tl-petal-0.png",
+          "signed_angle_deg": -5.0,
+          "phase": 0.0,
+          "sweep": {
+            "amplitude_deg": 5.0,
+            "signed_angle": -5.0,
+            "max_radius_px": 139.4
+          }
+        },
+        {
+          "id": "tl-1",
+          "description": "upper vertical leaves beside the column lip",
+          "source_polygon": [
+            [
+              36,
+              140
+            ],
+            [
+              70,
+              142
+            ],
+            [
+              116,
+              146
+            ],
+            [
+              158,
+              146
+            ],
+            [
+              158,
+              192
+            ],
+            [
+              300,
+              192
+            ],
+            [
+              300,
+              224
+            ],
+            [
+              130,
+              224
+            ],
+            [
+              112,
+              220
+            ],
+            [
+              94,
+              222
+            ],
+            [
+              74,
+              214
+            ],
+            [
+              60,
+              196
+            ],
+            [
+              54,
+              168
+            ],
+            [
+              36,
+              164
+            ]
+          ],
+          "source_pivot": [
+            102.0,
+            188.0
+          ],
+          "region_pivot": [
+            97.0,
+            180.0
+          ],
+          "texture": "pearl-tl-petal-1.png",
+          "signed_angle_deg": -4.0,
+          "phase": 0.333,
+          "sweep": {
+            "amplitude_deg": 4.0,
+            "signed_angle": -4.0,
+            "max_radius_px": 67.6
+          }
+        },
+        {
+          "id": "tl-2",
+          "description": "lower vertical leaf sweep down the column",
+          "source_polygon": [
+            [
+              36,
+              164
+            ],
+            [
+              54,
+              168
+            ],
+            [
+              60,
+              196
+            ],
+            [
+              74,
+              214
+            ],
+            [
+              94,
+              222
+            ],
+            [
+              112,
+              220
+            ],
+            [
+              130,
+              224
+            ],
+            [
+              300,
+              224
+            ],
+            [
+              300,
+              340
+            ],
+            [
+              36,
+              340
+            ]
+          ],
+          "source_pivot": [
+            96.0,
+            216.0
+          ],
+          "region_pivot": [
+            91.0,
+            208.0
+          ],
+          "texture": "pearl-tl-petal-2.png",
+          "signed_angle_deg": 6.0,
+          "phase": 0.667,
+          "sweep": {
+            "amplitude_deg": 6.0,
+            "signed_angle": 6.0,
+            "max_radius_px": 71.8
+          }
+        }
+      ],
+      "tr": [
+        {
+          "id": "tr-0",
+          "description": "crown and left-hand frond mass above the pearl, one articulated cluster (mirror of tl-0)",
+          "source_polygon": [
+            [
+              1438,
+              88
+            ],
+            [
+              1177,
+              88
+            ],
+            [
+              1177,
+              192
+            ],
+            [
+              1316,
+              192
+            ],
+            [
+              1316,
+              146
+            ],
+            [
+              1358,
+              146
+            ],
+            [
+              1404,
+              142
+            ],
+            [
+              1438,
+              140
+            ]
+          ],
+          "source_pivot": [
+            1356.0,
+            132.0
+          ],
+          "region_pivot": [
+            184.0,
+            124.0
+          ],
+          "texture": "pearl-tr-petal-0.png",
+          "signed_angle_deg": 5.0,
+          "phase": 0.25,
+          "sweep": {
+            "amplitude_deg": 5.0,
+            "signed_angle": 5.0,
+            "max_radius_px": 140.4
+          }
+        },
+        {
+          "id": "tr-1",
+          "description": "upper vertical leaves beside the column lip (mirror of tl-1)",
+          "source_polygon": [
+            [
+              1438,
+              140
+            ],
+            [
+              1404,
+              142
+            ],
+            [
+              1358,
+              146
+            ],
+            [
+              1316,
+              146
+            ],
+            [
+              1316,
+              192
+            ],
+            [
+              1177,
+              192
+            ],
+            [
+              1177,
+              224
+            ],
+            [
+              1344,
+              224
+            ],
+            [
+              1362,
+              220
+            ],
+            [
+              1380,
+              222
+            ],
+            [
+              1400,
+              214
+            ],
+            [
+              1414,
+              196
+            ],
+            [
+              1420,
+              168
+            ],
+            [
+              1438,
+              164
+            ]
+          ],
+          "source_pivot": [
+            1372.0,
+            188.0
+          ],
+          "region_pivot": [
+            200.0,
+            180.0
+          ],
+          "texture": "pearl-tr-petal-1.png",
+          "signed_angle_deg": 4.0,
+          "phase": 0.583,
+          "sweep": {
+            "amplitude_deg": 4.0,
+            "signed_angle": 4.0,
+            "max_radius_px": 68.4
+          }
+        },
+        {
+          "id": "tr-2",
+          "description": "lower vertical leaf sweep down the column (mirror of tl-2)",
+          "source_polygon": [
+            [
+              1438,
+              164
+            ],
+            [
+              1420,
+              168
+            ],
+            [
+              1414,
+              196
+            ],
+            [
+              1400,
+              214
+            ],
+            [
+              1380,
+              222
+            ],
+            [
+              1362,
+              220
+            ],
+            [
+              1344,
+              224
+            ],
+            [
+              1177,
+              224
+            ],
+            [
+              1177,
+              340
+            ],
+            [
+              1438,
+              340
+            ]
+          ],
+          "source_pivot": [
+            1378.0,
+            216.0
+          ],
+          "region_pivot": [
+            206.0,
+            208.0
+          ],
+          "texture": "pearl-tr-petal-2.png",
+          "signed_angle_deg": -6.0,
+          "phase": 0.917,
+          "sweep": {
+            "amplitude_deg": 6.0,
+            "signed_angle": -6.0,
+            "max_radius_px": 71.7
+          }
+        }
+      ],
+      "br": [
+        {
+          "id": "br-0",
+          "description": "rising leaf spikes right of the pearl (mirror of bl-0)",
+          "source_polygon": [
+            [
+              1438,
+              726
+            ],
+            [
+              1177,
+              726
+            ],
+            [
+              1177,
+              862
+            ],
+            [
+              1352,
+              860
+            ],
+            [
+              1358,
+              848
+            ],
+            [
+              1378,
+              852
+            ],
+            [
+              1396,
+              846
+            ],
+            [
+              1406,
+              828
+            ],
+            [
+              1438,
+              830
+            ]
+          ],
+          "source_pivot": [
+            1382.0,
+            852.0
+          ],
+          "region_pivot": [
+            210.0,
+            162.0
+          ],
+          "texture": "pearl-br-petal-0.png",
+          "signed_angle_deg": 5.0,
+          "phase": 0.5,
+          "sweep": {
+            "amplitude_deg": 5.0,
+            "signed_angle": 5.0,
+            "max_radius_px": 63.8
+          }
+        },
+        {
+          "id": "br-1",
+          "description": "lower-right sweeping leaf mass with its upper tail (mirror of bl-1)",
+          "source_polygon": [
+            [
+              1438,
+              830
+            ],
+            [
+              1406,
+              828
+            ],
+            [
+              1396,
+              846
+            ],
+            [
+              1378,
+              852
+            ],
+            [
+              1358,
+              848
+            ],
+            [
+              1352,
+              860
+            ],
+            [
+              1352,
+              1065
+            ],
+            [
+              1438,
+              1065
+            ]
+          ],
+          "source_pivot": [
+            1370.0,
+            904.0
+          ],
+          "region_pivot": [
+            198.0,
+            214.0
+          ],
+          "texture": "pearl-br-petal-1.png",
+          "signed_angle_deg": 4.0,
+          "phase": 0.833,
+          "sweep": {
+            "amplitude_deg": 4.0,
+            "signed_angle": 4.0,
+            "max_radius_px": 91.8
+          }
+        },
+        {
+          "id": "br-2",
+          "description": "horizontal leaf cluster along the bottom rail (mirror of bl-2)",
+          "source_polygon": [
+            [
+              1352,
+              860
+            ],
+            [
+              1177,
+              862
+            ],
+            [
+              1177,
+              1065
+            ],
+            [
+              1352,
+              1065
+            ]
+          ],
+          "source_pivot": [
+            1332.0,
+            893.0
+          ],
+          "region_pivot": [
+            160.0,
+            203.0
+          ],
+          "texture": "pearl-br-petal-2.png",
+          "signed_angle_deg": -6.0,
+          "phase": 0.167,
+          "sweep": {
+            "amplitude_deg": 6.0,
+            "signed_angle": -6.0,
+            "max_radius_px": 93.1
+          }
+        }
+      ],
+      "bl": [
+        {
+          "id": "bl-0",
+          "description": "rising leaf spikes left of the pearl",
+          "source_polygon": [
+            [
+              36,
+              726
+            ],
+            [
+              300,
+              726
+            ],
+            [
+              300,
+              862
+            ],
+            [
+              122,
+              860
+            ],
+            [
+              116,
+              848
+            ],
+            [
+              96,
+              852
+            ],
+            [
+              78,
+              846
+            ],
+            [
+              68,
+              828
+            ],
+            [
+              36,
+              830
+            ]
+          ],
+          "source_pivot": [
+            92.0,
+            852.0
+          ],
+          "region_pivot": [
+            87.0,
+            162.0
+          ],
+          "texture": "pearl-bl-petal-0.png",
+          "signed_angle_deg": -5.0,
+          "phase": 0.75,
+          "sweep": {
+            "amplitude_deg": 5.0,
+            "signed_angle": -5.0,
+            "max_radius_px": 64.4
+          }
+        },
+        {
+          "id": "bl-1",
+          "description": "lower-left sweeping leaf mass with its upper tail",
+          "source_polygon": [
+            [
+              36,
+              830
+            ],
+            [
+              68,
+              828
+            ],
+            [
+              78,
+              846
+            ],
+            [
+              96,
+              852
+            ],
+            [
+              116,
+              848
+            ],
+            [
+              122,
+              860
+            ],
+            [
+              122,
+              1065
+            ],
+            [
+              36,
+              1065
+            ]
+          ],
+          "source_pivot": [
+            104.0,
+            904.0
+          ],
+          "region_pivot": [
+            99.0,
+            214.0
+          ],
+          "texture": "pearl-bl-petal-1.png",
+          "signed_angle_deg": -4.0,
+          "phase": 0.083,
+          "sweep": {
+            "amplitude_deg": 4.0,
+            "signed_angle": -4.0,
+            "max_radius_px": 92.4
+          }
+        },
+        {
+          "id": "bl-2",
+          "description": "horizontal leaf cluster along the bottom rail",
+          "source_polygon": [
+            [
+              122,
+              860
+            ],
+            [
+              300,
+              862
+            ],
+            [
+              300,
+              1065
+            ],
+            [
+              122,
+              1065
+            ]
+          ],
+          "source_pivot": [
+            142.0,
+            893.0
+          ],
+          "region_pivot": [
+            137.0,
+            203.0
+          ],
+          "texture": "pearl-bl-petal-2.png",
+          "signed_angle_deg": 6.0,
+          "phase": 0.417,
+          "sweep": {
+            "amplitude_deg": 6.0,
+            "signed_angle": 6.0,
+            "max_radius_px": 92.2
+          }
+        }
+      ]
+    }
+  },
+  "offset_repair": {
+    "problem": "RegionSpec.offset was logical px while the builder placed source px; a midpoint star landed inside the protected client and was clipped",
+    "fix": "every ornament region now declares offset [0,0]; the small outward seats are baked into the canvases, pivots and published centers so art and placement scale together",
+    "corner_seats": {
+      "tl": [
+        -5,
+        -8
+      ],
+      "tr": [
+        5,
+        -8
+      ],
+      "bl": [
+        -5,
+        10
+      ],
+      "br": [
+        5,
+        10
+      ]
+    },
+    "stars": {
+      "star-top": {
+        "source_window": [
+          668,
+          100,
+          141,
+          80
+        ],
+        "canvas_rect": [
+          668,
+          0,
+          141,
+          175
+        ],
+        "seat": [
+          0,
+          -4
+        ],
+        "content_px": 1477
+      },
+      "star-bottom": {
+        "source_window": [
+          668,
+          848,
+          141,
+          82
+        ],
+        "canvas_rect": [
+          668,
+          867,
+          141,
+          198
+        ],
+        "seat": [
+          0,
+          10
+        ],
+        "content_px": 1584
+      },
+      "star-left": {
+        "source_window": [
+          72,
+          460,
+          64,
+          128
+        ],
+        "canvas_rect": [
+          0,
+          460,
+          135,
+          128
+        ],
+        "seat": [
+          0,
+          6
+        ],
+        "content_px": 1079
+      },
+      "star-right": {
+        "source_window": [
+          1341,
+          460,
+          64,
+          128
+        ],
+        "canvas_rect": [
+          1341,
+          460,
+          136,
+          128
+        ],
+        "seat": [
+          0,
+          6
+        ],
+        "content_px": 1052
+      }
+    },
+    "corner_atlas_bakes": {
+      "tl": {
+        "canvas_rect": [
+          0,
+          0,
+          300,
+          450
+        ],
+        "seat": [
+          -5,
+          -8
+        ]
+      },
+      "tr": {
+        "canvas_rect": [
+          1177,
+          0,
+          300,
+          450
+        ],
+        "seat": [
+          5,
+          -8
+        ]
+      },
+      "br": {
+        "canvas_rect": [
+          1177,
+          700,
+          300,
+          365
+        ],
+        "seat": [
+          5,
+          10
+        ]
+      },
+      "bl": {
+        "canvas_rect": [
+          0,
+          700,
+          300,
+          365
+        ],
+        "seat": [
+          -5,
+          10
+        ]
+      }
+    }
+  },
+  "geometry": {
+    "neutral_lip": {
+      "left": 135,
+      "right": 136,
+      "top": 175,
+      "bottom": 198
+    },
+    "neutral_lip_basis": "painted inner lip measured on neutral lines (median over three samples per side): {'top': 171.0, 'bottom': 867.0, 'left': 135.0, 'right': 1341.0}; accepted ranges {'top': (160, 180), 'bottom': (855, 875), 'left': (125, 145), 'right': (1331, 1351)}",
+    "aperture": {
+      "left": 135,
+      "right": 136,
+      "top": 175,
+      "bottom": 198
+    },
+    "frame_insets": {
+      "left": 135,
+      "right": 136,
+      "top": 175,
+      "bottom": 198
+    },
+    "frame_insets_basis": "equal to the measured source aperture; the band is rendered at physical scale 1, so the neutral structural cross-section and the original corner material share one physical profile (design intent; visual seam-free behaviour is unverified until rendered)",
+    "burst_opening_overlap_risk": {
+      "tl": {
+        "excursion": 58.0,
+        "overlap_rect": [
+          135,
+          175,
+          171.5,
+          209.0
+        ],
+        "overlap_area_px": 1241.0
+      },
+      "tr": {
+        "excursion": 58.0,
+        "overlap_rect": [
+          1302.5,
+          175,
+          1341,
+          209.0
+        ],
+        "overlap_area_px": 1309.0
+      },
+      "br": {
+        "excursion": 57.0,
+        "overlap_rect": [
+          1309.0,
+          814.0,
+          1341,
+          867
+        ],
+        "overlap_area_px": 1696.0
+      },
+      "bl": {
+        "excursion": 57.0,
+        "overlap_rect": [
+          135,
+          814.0,
+          165.0,
+          867
+        ],
+        "overlap_area_px": 1590.0
+      }
+    },
+    "burst_opening_overlap_note": "measured rectangles where the full conservative burst bound (max(radii)+spread+6 square) crosses the real client opening; the runtime keeps the full circular bound and gates the rupture rim to the outward hemisphere, so this records the residual bound-level risk only",
+    "pearls": {
+      "tl": {
+        "source_center": [
+          113.5,
+          151.0
+        ],
+        "published_radii": [
+          27.0,
+          28.0
+        ],
+        "body_ellipse": {
+          "center": [
+            113.5,
+            151.0
+          ],
+          "radii": [
+            24.5,
+            24.5
+          ],
+          "angle_deg": 0.0
+        },
+        "region_local_center": [
+          108.5,
+          143.0
+        ],
+        "canvas_rect": [
+          0,
+          0,
+          300,
+          450
+        ],
+        "baked_seat": [
+          -5,
+          -8
+        ],
+        "outward": [
+          -1.0,
+          -1.0
+        ],
+        "phase": 0.0,
+        "validation": {
+          "inner_mean_luminance": 196.1,
+          "excursion_radius": 58.0
+        }
+      },
+      "tr": {
+        "source_center": [
+          1360.5,
+          151.0
+        ],
+        "published_radii": [
+          27.0,
+          28.0
+        ],
+        "body_ellipse": {
+          "center": [
+            1360.5,
+            151.0
+          ],
+          "radii": [
+            24.5,
+            24.5
+          ],
+          "angle_deg": 0.0
+        },
+        "region_local_center": [
+          188.5,
+          143.0
+        ],
+        "canvas_rect": [
+          1177,
+          0,
+          300,
+          450
+        ],
+        "baked_seat": [
+          5,
+          -8
+        ],
+        "outward": [
+          1.0,
+          -1.0
+        ],
+        "phase": 0.25,
+        "validation": {
+          "inner_mean_luminance": 193.0,
+          "excursion_radius": 58.0
+        }
+      },
+      "br": {
+        "source_center": [
+          1366.0,
+          871.0
+        ],
+        "published_radii": [
+          22.0,
+          27.0
+        ],
+        "body_ellipse": {
+          "center": [
+            1366.0,
+            871.0
+          ],
+          "radii": [
+            19.5,
+            25.5
+          ],
+          "angle_deg": 22.0
+        },
+        "region_local_center": [
+          194.0,
+          181.0
+        ],
+        "canvas_rect": [
+          1177,
+          700,
+          300,
+          365
+        ],
+        "baked_seat": [
+          5,
+          10
+        ],
+        "outward": [
+          1.0,
+          1.0
+        ],
+        "phase": 0.5,
+        "validation": {
+          "inner_mean_luminance": 194.4,
+          "excursion_radius": 57.0
+        }
+      },
+      "bl": {
+        "source_center": [
+          108.0,
+          871.0
+        ],
+        "published_radii": [
+          22.0,
+          27.0
+        ],
+        "body_ellipse": {
+          "center": [
+            108.0,
+            871.0
+          ],
+          "radii": [
+            19.5,
+            25.5
+          ],
+          "angle_deg": -22.0
+        },
+        "region_local_center": [
+          103.0,
+          181.0
+        ],
+        "canvas_rect": [
+          0,
+          700,
+          300,
+          365
+        ],
+        "baked_seat": [
+          -5,
+          10
+        ],
+        "outward": [
+          -1.0,
+          1.0
+        ],
+        "phase": 0.75,
+        "validation": {
+          "inner_mean_luminance": 195.0,
+          "excursion_radius": 57.0
+        }
+      }
+    },
+    "structural": {
+      "profile_ranges": {
+        "top": [
+          380,
+          520
+        ],
+        "bottom": [
+          380,
+          520
+        ],
+        "left": [
+          570,
+          680
+        ],
+        "right": [
+          570,
+          680
+        ]
+      },
+      "outer_visible_edges": {
+        "left": 71,
+        "right": 72,
+        "top": 126,
+        "bottom": 150
+      },
+      "construction": "bands are extrusions of their measured median cross-sections; corners miter the two adjoining profiles on the diagonal; alpha fades in at the measured outer visible edge and out after the measured neutral lip",
+      "column_cap_px": 32
+    },
+    "exact": {
+      "aspect": 1.386854,
+      "aspect_tolerance": 0.005,
+      "min": [
+        900,
+        600
+      ]
+    },
+    "adaptive": {
+      "scale": 0.65,
+      "min_client": [
+        560.0,
+        360.0
+      ]
+    }
+  },
+  "authored": {
+    "matte": {
+      "lo": 18.0,
+      "hi": 46.0,
+      "formula": "alpha = smoothstep(lo, hi, luminance) on the near-black studio background, times the selection mask; enclosed recesses restored opaque by border flood"
+    },
+    "socket": "locally authored recessed socket (dark radial pit plus a quiet lower rim light), confined to the same tilted body ellipse; no backing strip elsewhere; accepted burst socket settings unchanged",
+    "foreground": "parent-owned source-space setting paths clipped to the body ellipse (TL silver leaf over the lower-left edge, TR its mirror about x=737), plus a fixed original-source collar disc around every petal pivot; collars occlude the root joints so a rocking leaf never floats off its stem",
+    "bubble": "complete tilted body-ellipse alpha (no leaf notch); original pearl pixels, crossfaded to the reflection across the body center x wherever the fixed foreground covers the body; accepted burst extraction unchanged, only re-seated by the baked corner seat",
+    "petals": "one full corner-sized RGBA texture per authored foliate group: source RGB under alpha = polygon x ornament selection x extracted sculpture matte, with the fixed set (gems, ball, pendant, chain corridors, root leaf, collars) and the pearl body subtracted; the stationary background carries no moving pixel and no duplicate silhouette",
+    "mask_ownership": "every nonzero mask pixel is owned exactly once by one disjoint ornament window; validated, never assumed",
+    "policy": "every recognisable form (corner clusters, chains, midpoint stars, side stars) is one-shot in the exact atlas through its own anchor; only profile-constant neutral rails stretch"
+  },
+  "motion": {
+    "period_s": 32.0,
+    "period_note": "owner-accepted pearl growth/rupture/droplet behaviour slowed 8 -> 32 s by the shared spec.period; the runtime math is unchanged",
+    "phases": {
+      "tl": 0.0,
+      "tr": 0.25,
+      "br": 0.5,
+      "bl": 0.75
+    },
+    "petals": "all foliate groups rock concurrently: signed 4-6 degree cosine sway about the attachment-root pivot, phases staggered across the groups on top of the corner's pearl phase; the sway sign biases the initial deflection outward (derived from each group's coverage centroid and the corner outward vector)",
+    "sweep_guard": {
+      "tl-0": {
+        "amplitude_deg": 5.0,
+        "signed_angle": -5.0,
+        "max_radius_px": 139.4
+      },
+      "tl-1": {
+        "amplitude_deg": 4.0,
+        "signed_angle": -4.0,
+        "max_radius_px": 67.6
+      },
+      "tl-2": {
+        "amplitude_deg": 6.0,
+        "signed_angle": 6.0,
+        "max_radius_px": 71.8
+      },
+      "tr-0": {
+        "amplitude_deg": 5.0,
+        "signed_angle": 5.0,
+        "max_radius_px": 140.4
+      },
+      "tr-1": {
+        "amplitude_deg": 4.0,
+        "signed_angle": 4.0,
+        "max_radius_px": 68.4
+      },
+      "tr-2": {
+        "amplitude_deg": 6.0,
+        "signed_angle": -6.0,
+        "max_radius_px": 71.7
+      },
+      "br-0": {
+        "amplitude_deg": 5.0,
+        "signed_angle": 5.0,
+        "max_radius_px": 63.8
+      },
+      "br-1": {
+        "amplitude_deg": 4.0,
+        "signed_angle": 4.0,
+        "max_radius_px": 91.8
+      },
+      "br-2": {
+        "amplitude_deg": 6.0,
+        "signed_angle": -6.0,
+        "max_radius_px": 93.1
+      },
+      "bl-0": {
+        "amplitude_deg": 5.0,
+        "signed_angle": -5.0,
+        "max_radius_px": 64.4
+      },
+      "bl-1": {
+        "amplitude_deg": 4.0,
+        "signed_angle": -4.0,
+        "max_radius_px": 92.4
+      },
+      "bl-2": {
+        "amplitude_deg": 6.0,
+        "signed_angle": 6.0,
+        "max_radius_px": 92.2
+      }
+    },
+    "bubble_contract": "native runtime: growth 0..0.72, rupture rim .72...78 gated to the outward hemisphere, ten outward droplets .72...95, brief empty socket .95..1; the region envelope keeps the full circular conservative bound max(radii)+spread+6, validated to fit each region",
+    "spread": 24.0
+  },
+  "assembly": {
+    "tool": "ImageMagick",
+    "atlases": {
+      "exact": "full source canvas carrying the selection-mask sculpture with pearl bodies subtracted, midpoint stars re-seated into the padded band canvases, corner windows seated and moving foliage removed",
+      "adaptive": "full source canvas carrying only the reconstructed neutral structural silver"
+    }
+  },
+  "acceptance": {
+    "authored": true,
+    "contract_validated": false,
+    "rendered": "unverified",
+    "visually_accepted": "unverified",
+    "note": "no runtime, screenshot or acceptance claim is made by this pack; source-aligned profiles and masks are authoring intent, not visual proof"
+  },
+  "artifacts": {
+    "adaptive.png": {
+      "sha256": "fe89feb566da09f6ef37cdcf9d5805b07c875af24f62318b2f7ce5238e6d8c44"
+    },
+    "exact.png": {
+      "sha256": "ca52abe10ca51a9320dd6147dcbd749d5c0ef2b1637cfd4eb0db699931e5388d"
+    },
+    "frieren-pearl-ornaments.svg": {
+      "sha256": "1404b74dc97b2b5186a97965ade63db37a7c56bf519be345bb06f9790dccf4d9"
+    },
+    "frieren-pearl-petals.svg": {
+      "sha256": "6cd49108a1ece54d8d093760b4964acc0c9b84f99293512aeff5620937eb3f24"
+    },
+    "kitty.conf": {
+      "sha256": "7fd0f7a37fde467a834bd14086744f7bfed0356f75103046cb9e0036cc6d7842"
+    },
+    "pearl-bl-background.png": {
+      "sha256": "62ecd3c687d9656ecefef4a80a243bd435f2e67c7ec0ecb451298defd18631b2"
+    },
+    "pearl-bl-bubble.png": {
+      "sha256": "a536a1c5a9bd2351315c3ff6cdd35320e1f37ef5094a76e216a6d67cfb5b0828"
+    },
+    "pearl-bl-foreground.png": {
+      "sha256": "98a68ba22a716823d020a080988e672361efc0b820d06d19ff12a33b9ac936a1"
+    },
+    "pearl-bl-petal-0.png": {
+      "sha256": "0ac321fbb62dc83be9e8bb1cc7f2ce6766903537eb3937e9f5bc960465b8a635"
+    },
+    "pearl-bl-petal-1.png": {
+      "sha256": "7503e0aba77cf4f0663c65857d1f681fd9c9dd1eb5a9537b7bc5dc6f5bcb9771"
+    },
+    "pearl-bl-petal-2.png": {
+      "sha256": "caa6826e48ab65ab72930efeea2f5a7e12af17bfc75cdc0db8594c8ecdb5812e"
+    },
+    "pearl-br-background.png": {
+      "sha256": "ff21a7f885511339267641498aa087c40b0f2ace2d4c6885412d8b9aa005be1a"
+    },
+    "pearl-br-bubble.png": {
+      "sha256": "7ba982e00012a30e05aa75296293e4c9a4ff5697889519dbe57f72d2dcd003fd"
+    },
+    "pearl-br-foreground.png": {
+      "sha256": "c4edf8418c8472dcffd45bae447e4ee450a9eb4abc38f4608646c0fcd8604fe9"
+    },
+    "pearl-br-petal-0.png": {
+      "sha256": "81c6dc24a83bbdcdf7326dce43fbd6e07dfdbe6c5e0fc703cf1781f1d9525c9d"
+    },
+    "pearl-br-petal-1.png": {
+      "sha256": "1c8d2563951e21c34619958a6877abcabe943aba9a2d46f02313cf340aa67a26"
+    },
+    "pearl-br-petal-2.png": {
+      "sha256": "38a20489a18e25244c7a162671ee9d347bc44cdff041924a03adfbce95e5f1a3"
+    },
+    "pearl-tl-background.png": {
+      "sha256": "d61eb5296b3d6d224566e2cd5803299389a0f98b1b7630d2d3e0a48df26c98bb"
+    },
+    "pearl-tl-bubble.png": {
+      "sha256": "939ca20fce13b222e78e6e6b51aef8d5f544945acc08035c331367ca4c99b5ab"
+    },
+    "pearl-tl-foreground.png": {
+      "sha256": "8b97c2e72106c69e740284433f538b8d68830dd51a1c80986f58fa3d6f4c6437"
+    },
+    "pearl-tl-petal-0.png": {
+      "sha256": "7c49931e654c14aa3582163214139f38369ca30a502c30b5e6ae8feddcd7633c"
+    },
+    "pearl-tl-petal-1.png": {
+      "sha256": "63daff7919f7c058ce49345d1765d254a5babc170fd0361b52a5166dd2287931"
+    },
+    "pearl-tl-petal-2.png": {
+      "sha256": "0634e5a482a0d82b01cdf48659b7fda6db9a15fa5a7b32ec15a9e46f5f7a7298"
+    },
+    "pearl-tr-background.png": {
+      "sha256": "c4ff082512a1f1c4333e5a803d9708146c2fa2fc646ba78e7c8c8b86257e1913"
+    },
+    "pearl-tr-bubble.png": {
+      "sha256": "a39f9ea9414199f3d2d3842de2dbffd1a5500954f8ebfbd5f15933068d127ac5"
+    },
+    "pearl-tr-foreground.png": {
+      "sha256": "53a6ed50dd4f72e8180f8fc77fc01f90a43e36f486345ea7d79352bbec7c0e11"
+    },
+    "pearl-tr-petal-0.png": {
+      "sha256": "85f6ad321de8c3aa4a5d18700156f80b43a61a662bcc3020d7b186121e605ef9"
+    },
+    "pearl-tr-petal-1.png": {
+      "sha256": "b0167cbfef3bc9bb8cbef5b9ebf063d771c8d66c08e697f94ba1ae95ce21966c"
+    },
+    "pearl-tr-petal-2.png": {
+      "sha256": "6f70100bdd9c7210bedf9faf37644790da852de9e423c917a3922274633a89d3"
+    },
+    "skin.json": {
+      "sha256": "fe804f12a9d98bafb3b2d6e80b4252a075682dd70cf1b46848151d4f81186de3"
+    },
+    "source.png": {
+      "sha256": "edcb2f5aa2c935fb113069aac301ca584f754363c14bb28cd0e95e9613f37a40"
+    }
+  }
+}

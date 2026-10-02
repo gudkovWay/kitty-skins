@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1477" height="1065" viewBox="0 0 1477 1065">
+  <title>Frieren pearl master — sculpture selection</title>
+  <desc>White retains original sculpture pixels. Black excludes neutral rails and studio background. Shapes follow the supplied master; the mirrored selections still sample each side's own source pixels. Pearl separation is authored by the builder.</desc>
+  <rect width="1477" height="1065" fill="black"/>
+  <defs>
+    <g id="upper" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M55 107 C68 106 80 112 88 120 C96 108 111 101 137 102 L143 103 C138 104 132 108 127 111 C142 107 149 110 157 104 L162 103 L158 111 L151 115 C174 112 193 128 216 118 L216 124 L211 128 C231 130 241 116 258 122 C243 125 239 139 226 138 L244 133 C230 153 214 156 193 149 C176 145 164 137 154 131 C158 148 155 160 146 167 L155 170 L150 177 L137 177 L127 183 L119 182 C121 191 130 201 128 216 C126 224 121 230 114 235 C111 255 100 272 89 283 L86 288 L82 279 L78 267 L68 259 L63 247 C51 231 47 215 52 199 L57 179 C47 165 46 147 52 132 L60 118 Z"/>
+      <!-- The thin exterior wire and pendant strand are distinct source objects. -->
+      <path d="M65 118 C44 126 45 151 55 168 C60 182 57 206 54 230 L55 388" fill="none" stroke-width="2.5"/>
+      <ellipse cx="55" cy="256" rx="7.8" ry="8.5"/>
+      <ellipse cx="55" cy="282" rx="7.8" ry="8.5"/>
+      <ellipse cx="55" cy="310" rx="4" ry="5"/>
+      <ellipse cx="55" cy="338" rx="5" ry="6"/>
+      <path d="M55 382 Q57 391 63 394 Q57 397 55 405 Q52 397 47 394 Q53 391 55 382 Z"/>
+    </g>
+    <g id="lower" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M60 743 C59 760 66 773 74 793" fill="none" stroke-width="2"/>
+      <ellipse cx="60" cy="740" rx="5.5" ry="6"/>
+      <ellipse cx="61" cy="760" rx="5.3" ry="6"/>
+      <path d="M55 781 C72 784 81 797 78 810 L94 790 L93 810 C108 816 117 820 112 833 L112 846 C126 834 133 839 132 847 L122 858 C135 866 143 858 151 863 C160 867 158 878 151 883 C170 875 187 884 198 889 C213 899 212 909 232 917 C214 920 205 915 194 910 L202 925 C187 930 181 921 174 918 C180 927 174 932 167 925 L160 927 C151 924 140 917 131 916 L145 932 C131 932 123 925 115 922 C103 923 93 932 83 934 L70 937 L49 951 C59 932 61 916 60 901 L56 887 L62 891 C71 880 63 866 56 858 L62 859 L73 869 C73 849 62 840 57 847 C48 832 49 822 58 809 L54 801 L58 802 L64 808 C65 797 63 790 55 781 Z"/>
+      <path d="M164 922 L166 938" fill="none" stroke-width="2"/>
+      <ellipse cx="166" cy="938" rx="6.5" ry="7"/>
+    </g>
+  </defs>
+  <use href="#upper"/>
+  <use href="#upper" transform="translate(1474 0) scale(-1 1)"/>
+  <use href="#lower"/>
+  <use href="#lower" transform="translate(1474 0) scale(-1 1)"/>
+  <g fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M738 119 Q744 138 764 149 Q744 155 739 178 Q731 157 710 150 Q730 142 738 119 Z"/>
+    <circle cx="687" cy="150" r="4.5"/><circle cx="699" cy="149" r="3.5"/>
+    <circle cx="779" cy="150" r="4.5"/><circle cx="791" cy="149" r="3.5"/>
+    <path d="M739 858 Q746 881 766 892 Q746 899 739 920 Q732 900 710 892 Q732 881 739 858 Z"/>
+    <circle cx="687" cy="891" r="4.5"/><circle cx="699" cy="891" r="3.5"/>
+    <circle cx="779" cy="891" r="4.5"/><circle cx="791" cy="891" r="3.5"/>
+    <path d="M104 499 Q110 519 128 524 Q110 530 104 548 Q98 530 78 524 Q98 519 104 499 Z"/>
+    <ellipse cx="104" cy="489" rx="3.5" ry="5"/><ellipse cx="104" cy="474" rx="2.3" ry="3.5"/>
+    <ellipse cx="104" cy="559" rx="3" ry="5"/>
+    <path d="M1373 499 Q1379 519 1399 524 Q1379 530 1373 548 Q1367 530 1351 524 Q1367 519 1373 499 Z"/>
+    <ellipse cx="1373" cy="489" rx="3.5" ry="5"/><ellipse cx="1373" cy="474" rx="2.3" ry="3.5"/>
+    <ellipse cx="1373" cy="559" rx="3" ry="5"/>
+  </g>
+</svg>
