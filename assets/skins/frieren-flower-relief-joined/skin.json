@@ -1,0 +1,383 @@
+{
+  "schema": 2,
+  "id": "frieren-flower-relief-joined",
+  "name": "Frieren Flower Relief Joined",
+  "filter": "linear",
+  "source": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "2fa7f55394b067208ec72bb10dfbe6e050a433bb90a952774176685d04bfe3c1"
+  },
+  "aperture": {
+    "left": 117,
+    "right": 108,
+    "top": 121,
+    "bottom": 140
+  },
+  "frame_insets": {
+    "left": 240,
+    "right": 220,
+    "top": 210,
+    "bottom": 210
+  },
+  "layered_ornaments": true,
+  "exact": {
+    "atlas": "exact.png",
+    "aspect": 1.5,
+    "aspect_tolerance": 0.06,
+    "min_width": 900,
+    "min_height": 600
+  },
+  "adaptive": {
+    "atlas": "adaptive.png",
+    "scale": 0.4,
+    "min_client_width": 560.0,
+    "min_client_height": 360.0
+  },
+  "flower_effects": [
+    {
+      "region": "flower-tl",
+      "background": "flower-tl-background.png",
+      "foreground": "flower-tl-foreground.png",
+      "period": 8.0,
+      "phase": 0.0,
+      "petals": [
+        {
+          "texture": "flower-tl-petal-0.png",
+          "pivot": [
+            88.0,
+            74.0
+          ],
+          "angle": -10.0,
+          "phase": 0.0
+        },
+        {
+          "texture": "flower-tl-petal-1.png",
+          "pivot": [
+            145.0,
+            190.0
+          ],
+          "angle": -10.0,
+          "phase": 0.18
+        }
+      ]
+    },
+    {
+      "region": "flower-br",
+      "background": "flower-br-background.png",
+      "foreground": "flower-br-foreground.png",
+      "period": 8.0,
+      "phase": 0.5,
+      "petals": [
+        {
+          "texture": "flower-br-petal-0.png",
+          "pivot": [
+            270.0,
+            386.0
+          ],
+          "angle": 6.0,
+          "phase": 0.0
+        },
+        {
+          "texture": "flower-br-petal-1.png",
+          "pivot": [
+            370.0,
+            340.0
+          ],
+          "angle": -9.0,
+          "phase": 0.18
+        }
+      ]
+    }
+  ],
+  "regions": [
+    {
+      "id": "corner-top-left",
+      "atlas": "adaptive",
+      "rect": [
+        0,
+        0,
+        117,
+        121
+      ],
+      "role": "corner-top-left",
+      "anchor": "top-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "corner-top-right",
+      "atlas": "adaptive",
+      "rect": [
+        1428,
+        0,
+        108,
+        121
+      ],
+      "role": "corner-top-right",
+      "anchor": "top-right",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "corner-bottom-left",
+      "atlas": "adaptive",
+      "rect": [
+        0,
+        884,
+        117,
+        140
+      ],
+      "role": "corner-bottom-left",
+      "anchor": "bottom-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "corner-bottom-right",
+      "atlas": "adaptive",
+      "rect": [
+        1428,
+        884,
+        108,
+        140
+      ],
+      "role": "corner-bottom-right",
+      "anchor": "bottom-right",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "rail-top",
+      "atlas": "adaptive",
+      "rect": [
+        117,
+        0,
+        1311,
+        121
+      ],
+      "role": "rail-top",
+      "anchor": "top-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "rail-bottom",
+      "atlas": "adaptive",
+      "rect": [
+        117,
+        884,
+        1311,
+        140
+      ],
+      "role": "rail-bottom",
+      "anchor": "top-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "column-left-top",
+      "atlas": "adaptive",
+      "rect": [
+        0,
+        121,
+        117,
+        32
+      ],
+      "role": "column-left-top",
+      "anchor": "top-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "column-left-middle",
+      "atlas": "adaptive",
+      "rect": [
+        0,
+        153,
+        117,
+        699
+      ],
+      "role": "column-left-middle",
+      "anchor": "top-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "y",
+      "z": 0
+    },
+    {
+      "id": "column-left-bottom",
+      "atlas": "adaptive",
+      "rect": [
+        0,
+        852,
+        117,
+        32
+      ],
+      "role": "column-left-bottom",
+      "anchor": "bottom-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "column-right-top",
+      "atlas": "adaptive",
+      "rect": [
+        1428,
+        121,
+        108,
+        32
+      ],
+      "role": "column-right-top",
+      "anchor": "top-right",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "column-right-middle",
+      "atlas": "adaptive",
+      "rect": [
+        1428,
+        153,
+        108,
+        699
+      ],
+      "role": "column-right-middle",
+      "anchor": "top-right",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "y",
+      "z": 0
+    },
+    {
+      "id": "column-right-bottom",
+      "atlas": "adaptive",
+      "rect": [
+        1428,
+        852,
+        108,
+        32
+      ],
+      "role": "column-right-bottom",
+      "anchor": "bottom-right",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 0
+    },
+    {
+      "id": "flower-tl",
+      "atlas": "exact",
+      "rect": [
+        0,
+        0,
+        500,
+        480
+      ],
+      "role": "ornament",
+      "anchor": "top-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 10
+    },
+    {
+      "id": "ornament-tr",
+      "atlas": "exact",
+      "rect": [
+        1200,
+        0,
+        336,
+        430
+      ],
+      "role": "ornament",
+      "anchor": "top-right",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 10
+    },
+    {
+      "id": "flower-bl",
+      "atlas": "exact",
+      "rect": [
+        0,
+        650,
+        360,
+        374
+      ],
+      "role": "ornament",
+      "anchor": "bottom-left",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 10
+    },
+    {
+      "id": "flower-br",
+      "atlas": "exact",
+      "rect": [
+        1100,
+        580,
+        436,
+        444
+      ],
+      "role": "ornament",
+      "anchor": "bottom-right",
+      "offset": [
+        0,
+        0
+      ],
+      "repeat": "none",
+      "z": 10
+    }
+  ]
+}

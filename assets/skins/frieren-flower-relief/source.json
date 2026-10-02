@@ -1,0 +1,1355 @@
+{
+  "kind": "frieren-flower-relief-pack-provenance",
+  "schema_version": 1,
+  "target": "kitty-skins schema 2, layered_ornaments + flower_effects",
+  "id": "frieren-flower-relief",
+  "name": "Frieren Flower Relief",
+  "generator": "tools/build-frieren-flower.py",
+  "source": {
+    "file": "/home/q/.local/share/wallpaper-context/frames/d101a3e5ba379fa8248d6c3714c6de465af33f0130b3828210e0b15e1d55de48/01c2d3a506a2400094edee5b9d15defa/generated.webp",
+    "immutable": true,
+    "width": 1536,
+    "height": 1024,
+    "sha256": "2fa7f55394b067208ec72bb10dfbe6e050a433bb90a952774176685d04bfe3c1",
+    "expected_sha256": "2fa7f55394b067208ec72bb10dfbe6e050a433bb90a952774176685d04bfe3c1",
+    "normalized_sha256": "1de808f95dfd377ebae51d9b66f56478aad3c67cacbbbd7604fc5afaedcdb489",
+    "note": "The two atlases are authored independently: exact.png carries only the ornament mattes, adaptive.png only the reconstructed structural silver. The master file itself is never written."
+  },
+  "matte": {
+    "reference": [
+      125,
+      125,
+      125
+    ],
+    "dist_lo": 0.06,
+    "dist_hi": 0.2,
+    "pocket_reach_px": 6,
+    "centre_seeded_px": 289,
+    "removed_px": 1217865,
+    "feathered_px": 10044,
+    "formula": "background seeds = normalized Euclidean color distance to the measured centre reference <= 0.06; removal = seeds reachable from the raster border (border flood) UNION the explicitly seeded enclosed centre opening (so the whole client opening clears, not only the exterior), plus seeds within a geodesic reach of 6 px of the removed region. Material alpha is preserved; pixels within the LO..HI distance band adjacent to removed background get alpha * smoothstep(LO, HI, distance) as an anti-alias feather."
+  },
+  "geometry": {
+    "aperture": {
+      "left": 117,
+      "right": 108,
+      "top": 121,
+      "bottom": 140
+    },
+    "aperture_basis": "measured directly from the neutral centreline profiles (x=768 for top/bottom, y=512 for left/right): the first/last painted run, recorded as-is; the aperture is measurement, not a design choice",
+    "frame_insets": {
+      "left": 240,
+      "right": 220,
+      "top": 210,
+      "bottom": 210
+    },
+    "frame_insets_candidates": {
+      "left": 240,
+      "right": 220,
+      "top": 210,
+      "bottom": 210
+    },
+    "frame_insets_basis": "owner-approved candidates kept when the real ornament content and the petal sweep fit, otherwise the offending side grown minimally until the protected opening is disjoint; no aspect-drift padding",
+    "frame_insets_log": [
+      {
+        "stage": "candidates-and-measured-bands",
+        "insets": {
+          "left": 240,
+          "right": 220,
+          "top": 210,
+          "bottom": 210
+        }
+      }
+    ],
+    "reserved_opening_source": {
+      "width": 1076,
+      "height": 604
+    },
+    "adaptive_scale": 0.4,
+    "rendered_band_px_at_scale": {
+      "left": 46.8,
+      "right": 43.2,
+      "top": 48.4,
+      "bottom": 56.0
+    },
+    "rendered_inset_px_at_scale": {
+      "left": 96.0,
+      "right": 88.0,
+      "top": 84.0,
+      "bottom": 84.0
+    },
+    "min_client": {
+      "width": 560.0,
+      "height": 360.0
+    },
+    "exact": {
+      "aspect": 1.5,
+      "aspect_tolerance": 0.06,
+      "min_width": 900,
+      "min_height": 600
+    },
+    "ornament_envelopes": {
+      "flower-tl": [
+        0,
+        0,
+        500,
+        480
+      ],
+      "ornament-tr": [
+        1200,
+        0,
+        336,
+        430
+      ],
+      "flower-bl": [
+        0,
+        650,
+        360,
+        374
+      ],
+      "flower-br": [
+        1100,
+        580,
+        436,
+        444
+      ]
+    },
+    "ornament_content": {
+      "flower-tl": {
+        "bbox": [
+          6,
+          1,
+          499,
+          477
+        ],
+        "px": 97809
+      },
+      "ornament-tr": {
+        "bbox": [
+          1200,
+          0,
+          1529,
+          429
+        ],
+        "px": 41219
+      },
+      "flower-bl": {
+        "bbox": [
+          5,
+          650,
+          340,
+          1018
+        ],
+        "px": 47353
+      },
+      "flower-br": {
+        "bbox": [
+          1100,
+          580,
+          1531,
+          1023
+        ],
+        "px": 71078
+      }
+    },
+    "petal_sweeps_source": {
+      "flower-tl": [
+        [
+          24,
+          2,
+          98,
+          88
+        ],
+        [
+          129,
+          178,
+          218,
+          273
+        ]
+      ],
+      "flower-br": [
+        [
+          1159,
+          914,
+          1390,
+          982
+        ],
+        [
+          1459,
+          817,
+          1520,
+          923
+        ]
+      ]
+    }
+  },
+  "authored": {
+    "structural_base": {
+      "canvas": "adaptive.png (full source size, centre transparent)",
+      "sides": {
+        "left": {
+          "source_band_px": 117,
+          "outer_visible_origin_px": 64,
+          "target_inset_px": 240,
+          "profile_samples": 53
+        },
+        "right": {
+          "source_band_px": 108,
+          "outer_visible_origin_px": 55,
+          "target_inset_px": 220,
+          "profile_samples": 53
+        },
+        "top": {
+          "source_band_px": 121,
+          "outer_visible_origin_px": 72,
+          "target_inset_px": 210,
+          "profile_samples": 49
+        },
+        "bottom": {
+          "source_band_px": 140,
+          "outer_visible_origin_px": 88,
+          "target_inset_px": 210,
+          "profile_samples": 52
+        }
+      },
+      "construction": "each side is a longitudinally constant extrusion of its measured real profile; atlas coordinate i lands at physical distance i*T/b once the renderer stretches the measured band b to the reserved thickness T. Below the original outer visible coordinate o the base is transparent; at or above it the original painted bevel cross-section is sampled over [o, b) and normalized opaque, so the exterior edge stays put while the painted inner edge physically reaches T",
+      "corners": "ordinary miter: a corner pixel takes the profile of the side with the smaller normalized thickness parameter, matching both side profiles at the adjoining edges",
+      "column_cap_px": 32,
+      "regions": [
+        "corner-top-left",
+        "corner-top-right",
+        "corner-bottom-left",
+        "corner-bottom-right",
+        "rail-top",
+        "rail-bottom",
+        "column-left-top",
+        "column-left-middle",
+        "column-left-bottom",
+        "column-right-top",
+        "column-right-middle",
+        "column-right-bottom"
+      ]
+    },
+    "rail_removal": {
+      "flower-tl": {
+        "rects": [
+          [
+            117,
+            0,
+            383,
+            121
+          ],
+          [
+            0,
+            121,
+            117,
+            359
+          ]
+        ],
+        "protected_sculpture_contours": [
+          [
+            [
+              0,
+              0
+            ],
+            [
+              280,
+              0
+            ],
+            [
+              290,
+              165
+            ],
+            [
+              275,
+              205
+            ],
+            [
+              225,
+              215
+            ],
+            [
+              225,
+              280
+            ],
+            [
+              155,
+              303
+            ],
+            [
+              130,
+              350
+            ],
+            [
+              95,
+              403
+            ],
+            [
+              110,
+              460
+            ],
+            [
+              60,
+              480
+            ],
+            [
+              15,
+              436
+            ],
+            [
+              10,
+              325
+            ],
+            [
+              0,
+              280
+            ]
+          ],
+          [
+            [
+              235,
+              0
+            ],
+            [
+              480,
+              0
+            ],
+            [
+              490,
+              65
+            ],
+            [
+              500,
+              87
+            ],
+            [
+              472,
+              108
+            ],
+            [
+              425,
+              128
+            ],
+            [
+              373,
+              139
+            ],
+            [
+              310,
+              121
+            ],
+            [
+              260,
+              100
+            ]
+          ]
+        ],
+        "local_reference": [
+          [
+            170,
+            161,
+            158
+          ],
+          [
+            192,
+            181,
+            177
+          ]
+        ],
+        "structure_tolerance": 36,
+        "anchor_tolerance": 24,
+        "removed_px": 2741
+      },
+      "ornament-tr": {
+        "rects": [
+          [
+            1200,
+            0,
+            228,
+            121
+          ],
+          [
+            1428,
+            121,
+            108,
+            309
+          ]
+        ],
+        "protected_sculpture_contours": [
+          [
+            [
+              1200,
+              48
+            ],
+            [
+              1260,
+              0
+            ],
+            [
+              1536,
+              0
+            ],
+            [
+              1536,
+              356
+            ],
+            [
+              1490,
+              391
+            ],
+            [
+              1442,
+              357
+            ],
+            [
+              1410,
+              281
+            ],
+            [
+              1380,
+              225
+            ],
+            [
+              1380,
+              155
+            ],
+            [
+              1340,
+              136
+            ],
+            [
+              1260,
+              124
+            ],
+            [
+              1200,
+              104
+            ]
+          ]
+        ],
+        "local_reference": [
+          [
+            171,
+            162,
+            157
+          ],
+          [
+            188,
+            179,
+            174
+          ]
+        ],
+        "structure_tolerance": 36,
+        "anchor_tolerance": 24,
+        "removed_px": 3963
+      },
+      "flower-bl": {
+        "rects": [
+          [
+            0,
+            650,
+            117,
+            234
+          ],
+          [
+            117,
+            884,
+            243,
+            140
+          ]
+        ],
+        "protected_sculpture_contours": [
+          [
+            [
+              0,
+              650
+            ],
+            [
+              108,
+              650
+            ],
+            [
+              112,
+              751
+            ],
+            [
+              160,
+              765
+            ],
+            [
+              183,
+              805
+            ],
+            [
+              265,
+              828
+            ],
+            [
+              285,
+              879
+            ],
+            [
+              341,
+              936
+            ],
+            [
+              270,
+              964
+            ],
+            [
+              238,
+              1000
+            ],
+            [
+              105,
+              1024
+            ],
+            [
+              0,
+              1024
+            ]
+          ]
+        ],
+        "local_reference": [
+          [
+            181,
+            172,
+            168
+          ],
+          [
+            181,
+            173,
+            169
+          ]
+        ],
+        "structure_tolerance": 36,
+        "anchor_tolerance": 24,
+        "removed_px": 2971
+      },
+      "flower-br": {
+        "rects": [
+          [
+            1428,
+            580,
+            108,
+            304
+          ],
+          [
+            1100,
+            884,
+            328,
+            140
+          ]
+        ],
+        "protected_sculpture_contours": [
+          [
+            [
+              1472,
+              580
+            ],
+            [
+              1520,
+              580
+            ],
+            [
+              1536,
+              650
+            ],
+            [
+              1536,
+              1024
+            ],
+            [
+              1265,
+              1024
+            ],
+            [
+              1110,
+              999
+            ],
+            [
+              1100,
+              933
+            ],
+            [
+              1126,
+              895
+            ],
+            [
+              1210,
+              856
+            ],
+            [
+              1285,
+              835
+            ],
+            [
+              1308,
+              774
+            ],
+            [
+              1380,
+              730
+            ],
+            [
+              1396,
+              655
+            ],
+            [
+              1464,
+              630
+            ]
+          ]
+        ],
+        "local_reference": [
+          [
+            186,
+            178,
+            176
+          ],
+          [
+            189,
+            179,
+            174
+          ]
+        ],
+        "structure_tolerance": 36,
+        "anchor_tolerance": 24,
+        "removed_px": 3147
+      }
+    },
+    "petals": {
+      "flower-tl": {
+        "region_rect": [
+          0,
+          0,
+          500,
+          480
+        ],
+        "petals": [
+          {
+            "name": "top-left exposed leaf",
+            "polygon_region": [
+              [
+                28,
+                2
+              ],
+              [
+                52,
+                9
+              ],
+              [
+                80,
+                23
+              ],
+              [
+                96,
+                47
+              ],
+              [
+                98,
+                63
+              ],
+              [
+                86,
+                81
+              ],
+              [
+                73,
+                87
+              ],
+              [
+                57,
+                62
+              ],
+              [
+                45,
+                37
+              ]
+            ],
+            "pivot_region": [
+              88.0,
+              74.0
+            ],
+            "angle_deg": -3.0,
+            "phase": 0.0,
+            "mask_px": 2526,
+            "occluder_subtracted_px": 249,
+            "sweep_bbox_region": [
+              24,
+              2,
+              98,
+              88
+            ],
+            "sweep_bbox_source": [
+              24,
+              2,
+              98,
+              88
+            ],
+            "max_abs_angle_authored": 4.0
+          },
+          {
+            "name": "lower descending leaf",
+            "polygon_region": [
+              [
+                130,
+                178
+              ],
+              [
+                157,
+                180
+              ],
+              [
+                190,
+                196
+              ],
+              [
+                214,
+                220
+              ],
+              [
+                215,
+                244
+              ],
+              [
+                200,
+                273
+              ],
+              [
+                187,
+                256
+              ],
+              [
+                171,
+                235
+              ],
+              [
+                139,
+                216
+              ]
+            ],
+            "pivot_region": [
+              145.0,
+              190.0
+            ],
+            "angle_deg": -3.0,
+            "phase": 0.18,
+            "mask_px": 3498,
+            "occluder_subtracted_px": 462,
+            "sweep_bbox_region": [
+              129,
+              178,
+              218,
+              273
+            ],
+            "sweep_bbox_source": [
+              129,
+              178,
+              218,
+              273
+            ],
+            "max_abs_angle_authored": 4.0
+          }
+        ],
+        "occluders": [
+          {
+            "name": "central pearl opal",
+            "kind": "disc",
+            "center_region": [
+              142,
+              118
+            ],
+            "px": 12281
+          },
+          {
+            "name": "stem bead pearl",
+            "kind": "disc",
+            "center_region": [
+              295,
+              143
+            ],
+            "px": 421
+          }
+        ],
+        "root_collars": [
+          {
+            "center_region": [
+              88.0,
+              74.0
+            ],
+            "radius": 12.0,
+            "px": 441
+          },
+          {
+            "center_region": [
+              145.0,
+              190.0
+            ],
+            "radius": 12.0,
+            "px": 441
+          }
+        ],
+        "root_repair": {
+          "zone_px": 882,
+          "hole_in_zone_px": 0,
+          "filled_px": 0
+        },
+        "policy": "background = ornament matte minus the moving blades, with only a small disc around each pivot locally repaired; foreground = fixed opals/jewels plus a small original-source root collar per pivot; petal masks are the authored polygon intersected with source material alpha and with every occluder/collar subtracted, so no moving copy of a fixed opal exists and the masks are disjoint"
+      },
+      "flower-br": {
+        "region_rect": [
+          1100,
+          580,
+          436,
+          444
+        ],
+        "petals": [
+          {
+            "name": "lower-left exposed blade",
+            "polygon_region": [
+              [
+                60,
+                402
+              ],
+              [
+                81,
+                364
+              ],
+              [
+                120,
+                342
+              ],
+              [
+                152,
+                342
+              ],
+              [
+                204,
+                351
+              ],
+              [
+                260,
+                376
+              ],
+              [
+                290,
+                387
+              ],
+              [
+                234,
+                385
+              ],
+              [
+                177,
+                372
+              ],
+              [
+                130,
+                374
+              ],
+              [
+                84,
+                386
+              ]
+            ],
+            "pivot_region": [
+              270.0,
+              386.0
+            ],
+            "angle_deg": 3.0,
+            "phase": 0.0,
+            "mask_px": 4805,
+            "occluder_subtracted_px": 135,
+            "sweep_bbox_region": [
+              59,
+              334,
+              290,
+              402
+            ],
+            "sweep_bbox_source": [
+              1159,
+              914,
+              1390,
+              982
+            ],
+            "max_abs_angle_authored": 4.0
+          },
+          {
+            "name": "right exposed leaf",
+            "polygon_region": [
+              [
+                365,
+                342
+              ],
+              [
+                361,
+                297
+              ],
+              [
+                380,
+                262
+              ],
+              [
+                420,
+                240
+              ],
+              [
+                404,
+                278
+              ],
+              [
+                410,
+                308
+              ],
+              [
+                390,
+                339
+              ]
+            ],
+            "pivot_region": [
+              370.0,
+              340.0
+            ],
+            "angle_deg": -2.6,
+            "phase": 0.18,
+            "mask_px": 2411,
+            "occluder_subtracted_px": 208,
+            "sweep_bbox_region": [
+              359,
+              237,
+              420,
+              343
+            ],
+            "sweep_bbox_source": [
+              1459,
+              817,
+              1520,
+              923
+            ],
+            "max_abs_angle_authored": 4.0
+          }
+        ],
+        "occluders": [
+          {
+            "name": "teardrop pearl opal",
+            "kind": "ellipse",
+            "center_region": [
+              308,
+              288
+            ],
+            "px": 11603
+          },
+          {
+            "name": "upper stem bead",
+            "kind": "disc",
+            "center_region": [
+              292,
+              172
+            ],
+            "px": 421
+          },
+          {
+            "name": "left stem bead",
+            "kind": "disc",
+            "center_region": [
+              182,
+              277
+            ],
+            "px": 349
+          },
+          {
+            "name": "red inlay jewel",
+            "kind": "disc",
+            "center_region": [
+              257,
+              330
+            ],
+            "px": 665
+          }
+        ],
+        "root_collars": [
+          {
+            "center_region": [
+              270.0,
+              386.0
+            ],
+            "radius": 12.0,
+            "px": 441
+          },
+          {
+            "center_region": [
+              370.0,
+              340.0
+            ],
+            "radius": 12.0,
+            "px": 441
+          }
+        ],
+        "root_repair": {
+          "zone_px": 882,
+          "hole_in_zone_px": 0,
+          "filled_px": 0
+        },
+        "policy": "background = ornament matte minus the moving blades, with only a small disc around each pivot locally repaired; foreground = fixed opals/jewels plus a small original-source root collar per pivot; petal masks are the authored polygon intersected with source material alpha and with every occluder/collar subtracted, so no moving copy of a fixed opal exists and the masks are disjoint"
+      }
+    },
+    "motion": {
+      "period_s": 10.0,
+      "flower_phases": {
+        "flower-tl": 0.0,
+        "flower-br": 0.5
+      },
+      "max_abs_angle_deg": 4.0,
+      "sweep_step_deg": 0.25,
+      "rationale": "depicted object: silver flower blossoms; behaviour: the authored exposed blades unfold slightly and return (kinematic cosine, no opacity modulation); moving part: complete exposed leaf blades only; stationary anchor: the pivot at the blossom root, reinforced by a fixed original-source collar; occluding foreground: the pearl opals, beads and red inlay"
+    },
+    "artistic_choices": "the two petal selections per flower are the parent's explicit art selections from the master (TL top-left exposed leaf and lower descending leaf; BR lower-left exposed blade and right exposed leaf); the ornamental envelopes, occluders and rail-structure removal are the shared plan's authored selections. Pixels outside the selected blades remain stationary."
+  },
+  "assembly": {
+    "tool": "ImageMagick",
+    "atlases": {
+      "exact": "full source canvas carrying only the four ornament mattes at their original envelope coordinates; studio background and straight rail continuations removed, never the whole artwork",
+      "adaptive": "full source canvas carrying only the reconstructed structural silver: four constant profiles plus four mitered corners; no leaves, pearls or jewels"
+    },
+    "regions": [
+      {
+        "id": "corner-top-left",
+        "atlas": "adaptive",
+        "rect": [
+          0,
+          0,
+          117,
+          121
+        ],
+        "role": "corner-top-left",
+        "anchor": "top-left",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 0
+      },
+      {
+        "id": "corner-top-right",
+        "atlas": "adaptive",
+        "rect": [
+          1428,
+          0,
+          108,
+          121
+        ],
+        "role": "corner-top-right",
+        "anchor": "top-right",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 0
+      },
+      {
+        "id": "corner-bottom-left",
+        "atlas": "adaptive",
+        "rect": [
+          0,
+          884,
+          117,
+          140
+        ],
+        "role": "corner-bottom-left",
+        "anchor": "bottom-left",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 0
+      },
+      {
+        "id": "corner-bottom-right",
+        "atlas": "adaptive",
+        "rect": [
+          1428,
+          884,
+          108,
+          140
+        ],
+        "role": "corner-bottom-right",
+        "anchor": "bottom-right",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 0
+      },
+      {
+        "id": "rail-top",
+        "atlas": "adaptive",
+        "rect": [
+          117,
+          0,
+          1311,
+          121
+        ],
+        "role": "rail-top",
+        "anchor": "top-left",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 0
+      },
+      {
+        "id": "rail-bottom",
+        "atlas": "adaptive",
+        "rect": [
+          117,
+          884,
+          1311,
+          140
+        ],
+        "role": "rail-bottom",
+        "anchor": "top-left",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 0
+      },
+      {
+        "id": "column-left-top",
+        "atlas": "adaptive",
+        "rect": [
+          0,
+          121,
+          117,
+          32
+        ],
+        "role": "column-left-top",
+        "anchor": "top-left",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 0
+      },
+      {
+        "id": "column-left-middle",
+        "atlas": "adaptive",
+        "rect": [
+          0,
+          153,
+          117,
+          699
+        ],
+        "role": "column-left-middle",
+        "anchor": "top-left",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "y",
+        "z": 0
+      },
+      {
+        "id": "column-left-bottom",
+        "atlas": "adaptive",
+        "rect": [
+          0,
+          852,
+          117,
+          32
+        ],
+        "role": "column-left-bottom",
+        "anchor": "bottom-left",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 0
+      },
+      {
+        "id": "column-right-top",
+        "atlas": "adaptive",
+        "rect": [
+          1428,
+          121,
+          108,
+          32
+        ],
+        "role": "column-right-top",
+        "anchor": "top-right",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 0
+      },
+      {
+        "id": "column-right-middle",
+        "atlas": "adaptive",
+        "rect": [
+          1428,
+          153,
+          108,
+          699
+        ],
+        "role": "column-right-middle",
+        "anchor": "top-right",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "y",
+        "z": 0
+      },
+      {
+        "id": "column-right-bottom",
+        "atlas": "adaptive",
+        "rect": [
+          1428,
+          852,
+          108,
+          32
+        ],
+        "role": "column-right-bottom",
+        "anchor": "bottom-right",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 0
+      },
+      {
+        "id": "flower-tl",
+        "atlas": "exact",
+        "rect": [
+          0,
+          0,
+          500,
+          480
+        ],
+        "role": "ornament",
+        "anchor": "top-left",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 10
+      },
+      {
+        "id": "ornament-tr",
+        "atlas": "exact",
+        "rect": [
+          1200,
+          0,
+          336,
+          430
+        ],
+        "role": "ornament",
+        "anchor": "top-right",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 10
+      },
+      {
+        "id": "flower-bl",
+        "atlas": "exact",
+        "rect": [
+          0,
+          650,
+          360,
+          374
+        ],
+        "role": "ornament",
+        "anchor": "bottom-left",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 10
+      },
+      {
+        "id": "flower-br",
+        "atlas": "exact",
+        "rect": [
+          1100,
+          580,
+          436,
+          444
+        ],
+        "role": "ornament",
+        "anchor": "bottom-right",
+        "offset": [
+          0,
+          0
+        ],
+        "repeat": "none",
+        "z": 10
+      }
+    ]
+  },
+  "artifacts": {
+    "exact.png": {
+      "kind": "ornament-only exact atlas",
+      "sha256": "3eb735e35978d233a81101a6901c48a415a3481b5f29de5602945cff3e53a4b4"
+    },
+    "adaptive.png": {
+      "kind": "reconstructed structural silver atlas",
+      "sha256": "c7f1f96db01cb4711e5c8ed97709510cd2b8039d43e80f4a56a9b375296fbefa"
+    },
+    "flower-tl-petal-0.png": {
+      "kind": "flower effect raster",
+      "sha256": "5d16f3a6e49768dd78cb9de7018a7f1b8b9ecc84b23068e54a28f227e79ba052"
+    },
+    "flower-tl-petal-1.png": {
+      "kind": "flower effect raster",
+      "sha256": "3f057798625796132afa06b61a3ad0bda2a6fd9de02fe8088b4dc0a24b6fb045"
+    },
+    "flower-tl-background.png": {
+      "kind": "flower effect raster",
+      "sha256": "7daac2d2b44da6bbc65fd6be15b96abbbab1d9bb78e6f37db2ee94a839bd0a8a"
+    },
+    "flower-tl-foreground.png": {
+      "kind": "flower effect raster",
+      "sha256": "5178dc46ba06c396c4a652d4860127b8d49fb3fde2bd6833e44513c7d157e444"
+    },
+    "flower-br-petal-0.png": {
+      "kind": "flower effect raster",
+      "sha256": "826fb0f7debdd95d51b45bf90b2fe4ddca09a5a9182938707ab9e444b6d40078"
+    },
+    "flower-br-petal-1.png": {
+      "kind": "flower effect raster",
+      "sha256": "e9ee2ea57aa5b59d63a31c79e2efeba27820b7654701d1f71d95ff8777ae29a1"
+    },
+    "flower-br-background.png": {
+      "kind": "flower effect raster",
+      "sha256": "4f1b12a85b724d84c944f12d6b432c0a4dfc8688edde4c4741cb474502126b31"
+    },
+    "flower-br-foreground.png": {
+      "kind": "flower effect raster",
+      "sha256": "02174ebedcc74b1813660c6b02147edf545ea0b8ed84facc6248d403eee4f46c"
+    }
+  },
+  "acceptance": {
+    "authored": true,
+    "contract_validated": false,
+    "rendered": "unverified",
+    "visually_accepted": "unverified",
+    "note": "no runtime, screenshot or acceptance claim is made by this pack"
+  }
+}
