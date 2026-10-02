@@ -59,6 +59,70 @@ struct JsonRegion {
     std::array<double, 2> offset{};
     std::string          repeat;
     int                  z{};
+    bool                 fixed = false;
+};
+
+struct JsonWaxStream {
+    double x{};
+    double start_y{};
+    double end_y{};
+    double width{};
+    double period{};
+    double phase{};
+};
+
+struct JsonWax {
+    std::string                     mask;
+    std::vector<JsonWaxStream>      streams;
+};
+
+struct JsonCandleEffect {
+    std::string                          region;
+    std::string                          flames;
+    std::string                          light;
+    std::array<std::array<int, 4>, 2>    flame_rects{};
+    std::array<std::array<double, 2>, 2> wicks{};
+    std::optional<JsonWax>               wax;
+};
+
+struct JsonAccentEffect {
+    std::string region;
+    std::string texture;
+    double      period{};
+    double      phase{};
+    double      min_opacity{};
+    double      max_opacity{};
+};
+
+struct JsonSilverEffect {
+    std::string mask;
+    double      period{};
+    double      strength{};
+};
+
+struct JsonFlowerPetal {
+    std::string           texture;
+    std::array<double, 2> pivot{};
+    double                angle{};
+    double                phase{};
+};
+
+struct JsonBubble {
+    std::string           texture;
+    std::array<double, 2> center{};
+    std::array<double, 2> radii{};
+    std::array<double, 2> outward{};
+    double                spread{};
+};
+
+struct JsonFlowerEffect {
+    std::string                  region;
+    std::string                  background;
+    std::string                  foreground;
+    double                       period{};
+    double                       phase{};
+    std::vector<JsonFlowerPetal> petals;
+    std::optional<JsonBubble>    bubble;
 };
 
 struct JsonManifest {
@@ -68,9 +132,15 @@ struct JsonManifest {
     std::string            filter;
     JsonSource             source;
     JsonInsets             aperture;
+    std::optional<JsonInsets> frame_insets;
     JsonExact              exact;
     JsonAdaptive           adaptive;
     std::vector<JsonRegion> regions;
+    std::optional<JsonCandleEffect> candle_effect;
+    std::vector<JsonAccentEffect>   accent_effects;
+    std::optional<JsonSilverEffect> silver_effect;
+    bool                            layered_ornaments = false;
+    std::vector<JsonFlowerEffect>   flower_effects;
 };
 
 // Schema 1 carries keys schema 2 no longer has (frame, tiers, sprites), so a
@@ -143,6 +213,14 @@ bool decodeAnchor(const std::string& value, Anchor& out) {
     }
     if (value == "bottom-right") {
         out = Anchor::bottom_right;
+        return true;
+    }
+    if (value == "center-left") {
+        out = Anchor::center_left;
+        return true;
+    }
+    if (value == "center-right") {
+        out = Anchor::center_right;
         return true;
     }
     return false;
@@ -377,6 +455,48 @@ Result<SkinPack> loadAndValidatePack(const std::filesystem::path& root) {
     pack.aperture = Insets{manifest.aperture.left, manifest.aperture.right, manifest.aperture.top,
                            manifest.aperture.bottom};
 
+    // Optional physical frame thickness. The aperture keeps its meaning as the
+    // measured source bands; frame_insets only says how far the stone should
+    // reach, in the same source-pixel units. A side with no source band carries no
+    // material to scale, so it can never be grown.
+    if (manifest.frame_insets) {
+        const JsonInsets& insets = *manifest.frame_insets;
+        const std::array<std::pair<const char*, double>, 4> targets{{{"left", insets.left},
+                                                                    {"right", insets.right},
+                                                                    {"top", insets.top},
+                                                                    {"bottom", insets.bottom}}};
+        for (const auto& [name, value] : targets) {
+            if (!finite(value) || value < 0.0)
+                return std::unexpected(
+                    fail(skinJson, std::string("frame_insets.") + name, "must be finite and non-negative"));
+        }
+        if (insets.left + insets.right >= static_cast<double>(manifest.source.width))
+            return std::unexpected(fail(skinJson, "frame_insets", "left and right insets leave no aperture opening"));
+        if (insets.top + insets.bottom >= static_cast<double>(manifest.source.height))
+            return std::unexpected(fail(skinJson, "frame_insets", "top and bottom insets leave no aperture opening"));
+
+        const std::array<std::pair<const char*, std::pair<double, double>>, 4> growable{{
+            {"left", {manifest.aperture.left, insets.left}},
+            {"right", {manifest.aperture.right, insets.right}},
+            {"top", {manifest.aperture.top, insets.top}},
+            {"bottom", {manifest.aperture.bottom, insets.bottom}},
+        }};
+        for (const auto& [name, side] : growable) {
+            if (side.first == 0.0 && side.second != 0.0)
+                return std::unexpected(fail(skinJson, std::string("frame_insets.") + name,
+                                            "cannot grow a side with no source band to scale"));
+        }
+
+        pack.frameInsets = Insets{insets.left, insets.right, insets.top, insets.bottom};
+    }
+
+    // The layered ornament path is an exact-mode behaviour of the physical frame:
+    // without frame_insets the legacy whole-atlas path already contains every
+    // ornament, so the flag would silently do nothing. Reject it instead.
+    if (manifest.layered_ornaments && !pack.frameInsets)
+        return std::unexpected(fail(skinJson, "layered_ornaments", "requires frame_insets"));
+    pack.layeredOrnaments = manifest.layered_ornaments;
+
     if (!finite(manifest.exact.aspect) || manifest.exact.aspect <= 0.0)
         return std::unexpected(fail(skinJson, "exact.aspect", "must be finite and greater than zero"));
     if (!finite(manifest.exact.aspect_tolerance) || manifest.exact.aspect_tolerance < 0.0)
@@ -497,6 +617,11 @@ Result<SkinPack> loadAndValidatePack(const std::filesystem::path& root) {
         if (repeat != RepeatAxis::none && !isFlexible(role))
             return std::unexpected(fail(skinJson, prefix + ".repeat", "only rail and column shaft regions may repeat"));
 
+        // A fixed segment is a contiguous, non-tiled piece of artwork: it needs
+        // a flexible run to live in and must never repeat.
+        if (json.fixed && (!isFlexible(role) || repeat != RepeatAxis::none))
+            return std::unexpected(fail(skinJson, prefix + ".fixed", "only rail and column shaft regions with repeat none may be fixed"));
+
         if (!finite(json.offset[0]) || !finite(json.offset[1]))
             return std::unexpected(fail(skinJson, prefix + ".offset", "offsets must be finite"));
 
@@ -514,7 +639,7 @@ Result<SkinPack> loadAndValidatePack(const std::filesystem::path& root) {
             ++roleCounts[roleIndex(role)];
 
         pack.regions.push_back(RegionSpec{json.id, exactAtlas, rect, role, anchor, json.offset[0], json.offset[1],
-                                          repeat, json.z});
+                                          repeat, json.z, json.fixed});
     }
 
     const std::array<std::pair<RegionRole, const char*>, 10> required{{
@@ -536,6 +661,511 @@ Result<SkinPack> loadAndValidatePack(const std::filesystem::path& root) {
     if (roleCounts[roleIndex(RegionRole::column_left_middle)] < 1 ||
         roleCounts[roleIndex(RegionRole::column_right_middle)] < 1)
         return std::unexpected(fail(skinJson, "regions", "each column needs at least one middle shaft region"));
+
+    // Optional candle effect. Absence is the normal static case: nothing below
+    // runs, so a pack without one pays neither validation nor allocation.
+    if (manifest.candle_effect) {
+        const JsonCandleEffect& effect = *manifest.candle_effect;
+
+        if (effect.region.empty())
+            return std::unexpected(fail(skinJson, "candle_effect.region", "must not be empty"));
+
+        // The effect is authored against exactly one existing ornament region;
+        // region ids are already unique, so a plain lookup is exact.
+        const RegionSpec* region = nullptr;
+        for (const RegionSpec& candidate : pack.regions) {
+            if (candidate.id == effect.region) {
+                region = &candidate;
+                break;
+            }
+        }
+        if (region == nullptr)
+            return std::unexpected(fail(skinJson, "candle_effect.region",
+                                        "references unknown region " + effect.region));
+        if (region->role != RegionRole::ornament)
+            return std::unexpected(fail(skinJson, "candle_effect.region", "region role must be ornament"));
+        if (region->repeat != RepeatAxis::none)
+            return std::unexpected(fail(skinJson, "candle_effect.region", "region must not repeat"));
+
+        // Effect rasters follow the ornament's source rectangle; bound them so the
+        // offscreen effect framebuffer stays small.
+        const int effectWidth  = region->rect.width;
+        const int effectHeight = region->rect.height;
+        if (effectWidth > 2048 || effectHeight > 2048)
+            return std::unexpected(
+                fail(skinJson, "candle_effect.region", "referenced region is larger than 2048 pixels on a side"));
+
+        std::array<SourceRect, 2> flameRects{};
+        for (size_t index = 0; index < flameRects.size(); ++index) {
+            const std::array<int, 4>& raw   = effect.flame_rects[index];
+            const std::string         field = "candle_effect.flame_rects[" + std::to_string(index) + "]";
+            const SourceRect          rect{raw[0], raw[1], raw[2], raw[3]};
+            if (rect.width <= 0 || rect.height <= 0)
+                return std::unexpected(fail(skinJson, field, "width and height must be positive"));
+            if (rect.x < 0 || rect.y < 0 || rect.x > effectWidth || rect.y > effectHeight ||
+                rect.width > effectWidth - rect.x || rect.height > effectHeight - rect.y)
+                return std::unexpected(fail(skinJson, field, "rectangle is not inside the effect region"));
+            flameRects[index] = rect;
+        }
+
+        const SourceRect& firstFlame  = flameRects[0];
+        const SourceRect& secondFlame = flameRects[1];
+        if (firstFlame.x < secondFlame.x + secondFlame.width && secondFlame.x < firstFlame.x + firstFlame.width &&
+            firstFlame.y < secondFlame.y + secondFlame.height && secondFlame.y < firstFlame.y + firstFlame.height)
+            return std::unexpected(fail(skinJson, "candle_effect.flame_rects", "flame rectangles must not overlap"));
+
+        std::array<std::array<double, 2>, 2> wicks{};
+        for (size_t index = 0; index < wicks.size(); ++index) {
+            const std::array<double, 2>& wick  = effect.wicks[index];
+            const std::string            field = "candle_effect.wicks[" + std::to_string(index) + "]";
+            if (!finite(wick[0]) || !finite(wick[1]))
+                return std::unexpected(fail(skinJson, field, "coordinates must be finite"));
+
+            const SourceRect& rect = flameRects[index];
+            if (wick[0] < static_cast<double>(rect.x) || wick[0] > static_cast<double>(rect.x + rect.width) ||
+                wick[1] < static_cast<double>(rect.y) || wick[1] > static_cast<double>(rect.y + rect.height))
+                return std::unexpected(fail(skinJson, field, "wick must lie inside its flame rectangle"));
+            wicks[index] = wick;
+        }
+
+        if (effect.flames.empty())
+            return std::unexpected(fail(skinJson, "candle_effect.flames", "must not be empty"));
+        if (effect.light.empty())
+            return std::unexpected(fail(skinJson, "candle_effect.light", "must not be empty"));
+
+        CandleEffectSpec spec{};
+        spec.regionId   = region->id;
+        spec.width      = effectWidth;
+        spec.height     = effectHeight;
+        spec.flameRects = flameRects;
+        spec.wicks      = wicks;
+
+        if (const auto error = resolveAsset(effect.flames, "candle_effect.flames", spec.flames))
+            return std::unexpected(*error);
+        if (const auto error = resolveAsset(effect.light, "candle_effect.light", spec.light))
+            return std::unexpected(*error);
+
+        // Effect rasters are exact rasterisations of the referenced region: RGBA
+        // and matching its pixel dimensions, like the atlases against the source.
+        const auto checkEffectImage = [&](const std::filesystem::path& asset, const std::string& field)
+            -> std::optional<ValidationError> {
+            std::error_code fileEc;
+            if (!std::filesystem::is_regular_file(asset, fileEc))
+                return fail(asset, field, "PNG image does not exist");
+
+            bool rgba      = false;
+            int  imageWide = 0;
+            int  imageTall = 0;
+            switch (probePngRgba(asset, rgba, imageWide, imageTall)) {
+            case PngProbe::ok:
+                break;
+            case PngProbe::notPng:
+                return fail(asset, field, "image is not a PNG");
+            case PngProbe::readError:
+                return fail(asset, field, "cannot decode PNG header");
+            }
+            if (!rgba)
+                return fail(asset, field, "PNG color type must be RGBA");
+            if (imageWide != effectWidth || imageTall != effectHeight)
+                return fail(asset, field, "image is " + std::to_string(imageWide) + "x" + std::to_string(imageTall) +
+                                              ", expected " + std::to_string(effectWidth) + "x" +
+                                              std::to_string(effectHeight));
+            return std::nullopt;
+        };
+
+        if (const auto error = checkEffectImage(spec.flames, "candle_effect.flames"))
+            return std::unexpected(*error);
+        if (const auto error = checkEffectImage(spec.light, "candle_effect.light"))
+            return std::unexpected(*error);
+
+        // Optional flowing wax. Declaring it requires a mask plus one to four
+        // streams; a pack without wax skips this and keeps legacy flame behavior.
+        if (effect.wax) {
+            const JsonWax& json = *effect.wax;
+
+            if (json.streams.empty() || json.streams.size() > 4)
+                return std::unexpected(
+                    fail(skinJson, "candle_effect.wax.streams", "must declare between 1 and 4 streams"));
+            if (json.mask.empty())
+                return std::unexpected(fail(skinJson, "candle_effect.wax.mask", "must not be empty"));
+
+            std::vector<WaxStream> streams;
+            streams.reserve(json.streams.size());
+            for (size_t index = 0; index < json.streams.size(); ++index) {
+                const JsonWaxStream& raw   = json.streams[index];
+                const std::string    field = "candle_effect.wax.streams[" + std::to_string(index) + "]";
+
+                if (!finite(raw.x) || !finite(raw.start_y) || !finite(raw.end_y) || !finite(raw.width) ||
+                    !finite(raw.period) || !finite(raw.phase))
+                    return std::unexpected(fail(skinJson, field, "all stream numbers must be finite"));
+
+                if (raw.width <= 0.0 || raw.width > static_cast<double>(effectWidth))
+                    return std::unexpected(
+                        fail(skinJson, field + ".width", "must be positive and no wider than the effect"));
+
+                // The bead body is width wide and centred on x; keep it inside the
+                // effect region so no sample falls off the mask.
+                if (raw.x - raw.width / 2.0 < 0.0 || raw.x + raw.width / 2.0 > static_cast<double>(effectWidth))
+                    return std::unexpected(
+                        fail(skinJson, field + ".x", "stream body must stay inside the effect region"));
+
+                if (raw.start_y < 0.0 || raw.start_y >= raw.end_y || raw.end_y >= static_cast<double>(effectHeight))
+                    return std::unexpected(
+                        fail(skinJson, field, "require 0 <= start_y < end_y < effect height"));
+
+                if (raw.period < 1.0)
+                    return std::unexpected(fail(skinJson, field + ".period", "must be at least one second"));
+
+                if (raw.phase < 0.0 || raw.phase >= 1.0)
+                    return std::unexpected(fail(skinJson, field + ".phase", "must be within [0, 1)"));
+
+                streams.push_back(WaxStream{raw.x, raw.start_y, raw.end_y, raw.width, raw.period, raw.phase});
+            }
+
+            CandleWaxSpec waxSpec;
+            waxSpec.streams = std::move(streams);
+            if (const auto error = resolveAsset(json.mask, "candle_effect.wax.mask", waxSpec.mask))
+                return std::unexpected(*error);
+            if (const auto error = checkEffectImage(waxSpec.mask, "candle_effect.wax.mask"))
+                return std::unexpected(*error);
+            spec.wax = std::move(waxSpec);
+        }
+
+        pack.candleEffect = std::move(spec);
+    }
+
+    // Optional pulsing accents. Absence is the normal static case; at most eight
+    // are accepted so a pathological manifest cannot balloon runtime resources.
+    if (manifest.accent_effects.size() > 8)
+        return std::unexpected(fail(skinJson, "accent_effects", "must declare at most 8 accent effects"));
+
+    if (!manifest.accent_effects.empty()) {
+        pack.accentEffects.reserve(manifest.accent_effects.size());
+
+        for (size_t index = 0; index < manifest.accent_effects.size(); ++index) {
+            const JsonAccentEffect& json  = manifest.accent_effects[index];
+            const std::string       field = "accent_effects[" + std::to_string(index) + "]";
+
+            if (json.region.empty())
+                return std::unexpected(fail(skinJson, field + ".region", "must not be empty"));
+
+            // The accent is authored against exactly one existing one-shot
+            // ornament region; region ids are already unique, so a plain lookup
+            // is exact.
+            const RegionSpec* region = nullptr;
+            for (const RegionSpec& candidate : pack.regions) {
+                if (candidate.id == json.region) {
+                    region = &candidate;
+                    break;
+                }
+            }
+            if (region == nullptr)
+                return std::unexpected(fail(skinJson, field + ".region", "references unknown region " + json.region));
+            if (region->role != RegionRole::ornament)
+                return std::unexpected(fail(skinJson, field + ".region", "region role must be ornament"));
+            if (region->repeat != RepeatAxis::none)
+                return std::unexpected(fail(skinJson, field + ".region", "region must not repeat"));
+
+            if (!finite(json.period) || json.period < 2.0 || json.period > 60.0)
+                return std::unexpected(fail(skinJson, field + ".period", "must be finite and within [2, 60] seconds"));
+            if (!finite(json.phase) || json.phase < 0.0 || json.phase >= 1.0)
+                return std::unexpected(fail(skinJson, field + ".phase", "must be finite and within [0, 1)"));
+            if (!finite(json.min_opacity) || json.min_opacity < 0.0 || json.min_opacity > 1.0)
+                return std::unexpected(fail(skinJson, field + ".min_opacity", "must be finite and within [0, 1]"));
+            if (!finite(json.max_opacity) || json.max_opacity < 0.0 || json.max_opacity > 1.0)
+                return std::unexpected(fail(skinJson, field + ".max_opacity", "must be finite and within [0, 1]"));
+            if (json.min_opacity > json.max_opacity)
+                return std::unexpected(fail(skinJson, field, "min_opacity must not exceed max_opacity"));
+            if (json.texture.empty())
+                return std::unexpected(fail(skinJson, field + ".texture", "must not be empty"));
+
+            AccentEffectSpec spec{};
+            spec.regionId   = region->id;
+            spec.period     = json.period;
+            spec.phase      = json.phase;
+            spec.minOpacity = json.min_opacity;
+            spec.maxOpacity = json.max_opacity;
+
+            if (const auto error = resolveAsset(json.texture, field + ".texture", spec.texture))
+                return std::unexpected(*error);
+
+            // The accent texture is a localized highlight, never a replacement of
+            // the base: it must be an RGBA raster confined to the referenced
+            // region's exact pixel dimensions.
+            const auto checkAccentImage = [&](const std::filesystem::path& asset) -> std::optional<ValidationError> {
+                std::error_code fileEc;
+                if (!std::filesystem::is_regular_file(asset, fileEc))
+                    return fail(asset, field + ".texture", "PNG image does not exist");
+
+                bool rgba      = false;
+                int  imageWide = 0;
+                int  imageTall = 0;
+                switch (probePngRgba(asset, rgba, imageWide, imageTall)) {
+                case PngProbe::ok:
+                    break;
+                case PngProbe::notPng:
+                    return fail(asset, field + ".texture", "image is not a PNG");
+                case PngProbe::readError:
+                    return fail(asset, field + ".texture", "cannot decode PNG header");
+                }
+                if (!rgba)
+                    return fail(asset, field + ".texture", "PNG color type must be RGBA");
+                if (imageWide != region->rect.width || imageTall != region->rect.height)
+                    return fail(asset, field + ".texture",
+                                "image is " + std::to_string(imageWide) + "x" + std::to_string(imageTall) +
+                                    ", expected the region's " + std::to_string(region->rect.width) + "x" +
+                                    std::to_string(region->rect.height));
+                return std::nullopt;
+            };
+            if (const auto error = checkAccentImage(spec.texture))
+                return std::unexpected(*error);
+
+            pack.accentEffects.push_back(std::move(spec));
+        }
+    }
+
+    // Optional layered flower motions. Declaring any requires the opt-in layered
+    // frame with physical insets: the runtime composites each full region itself,
+    // so the ordinary ornament draw must be suppressed for that region.
+    if (manifest.flower_effects.size() > 4)
+        return std::unexpected(fail(skinJson, "flower_effects", "must declare at most 4 flower effects"));
+
+    if (!manifest.flower_effects.empty()) {
+        if (!manifest.layered_ornaments)
+            return std::unexpected(fail(skinJson, "flower_effects", "requires layered_ornaments"));
+        if (!pack.frameInsets)
+            return std::unexpected(fail(skinJson, "flower_effects", "requires frame_insets"));
+
+        pack.flowerEffects.reserve(manifest.flower_effects.size());
+        std::unordered_set<std::string> flowerRegions;
+
+        for (size_t index = 0; index < manifest.flower_effects.size(); ++index) {
+            const JsonFlowerEffect& json  = manifest.flower_effects[index];
+            const std::string       field = "flower_effects[" + std::to_string(index) + "]";
+
+            if (json.region.empty())
+                return std::unexpected(fail(skinJson, field + ".region", "must not be empty"));
+
+            // The effect is authored against exactly one existing one-shot
+            // ornament region; region ids are already unique, so a plain lookup
+            // is exact.
+            const RegionSpec* region = nullptr;
+            for (const RegionSpec& candidate : pack.regions) {
+                if (candidate.id == json.region) {
+                    region = &candidate;
+                    break;
+                }
+            }
+            if (region == nullptr)
+                return std::unexpected(fail(skinJson, field + ".region", "references unknown region " + json.region));
+            if (region->role != RegionRole::ornament)
+                return std::unexpected(fail(skinJson, field + ".region", "region role must be ornament"));
+            if (region->repeat != RepeatAxis::none)
+                return std::unexpected(fail(skinJson, field + ".region", "region must not repeat"));
+            if (!flowerRegions.insert(region->id).second)
+                return std::unexpected(fail(skinJson, field + ".region", "each flower effect needs a unique region"));
+
+            // The compositor emits the whole region, so no other effect may share
+            // it: a second owner would double-draw the stationary ornament.
+            if (pack.candleEffect && pack.candleEffect->regionId == region->id)
+                return std::unexpected(fail(skinJson, field + ".region", "region is already used by the candle effect"));
+            for (const AccentEffectSpec& accent : pack.accentEffects)
+                if (accent.regionId == region->id)
+                    return std::unexpected(fail(skinJson, field + ".region", "region is already used by an accent effect"));
+
+            if (!finite(json.period) || json.period < 2.0 || json.period > 60.0)
+                return std::unexpected(fail(skinJson, field + ".period", "must be finite and within [2, 60] seconds"));
+            if (!finite(json.phase) || json.phase < 0.0 || json.phase >= 1.0)
+                return std::unexpected(fail(skinJson, field + ".phase", "must be finite and within [0, 1)"));
+
+            // Petals and bubble are independent: a bubble may carry zero to six
+            // petals, a petal-only effect needs 1..6, and the six-petal cap holds
+            // whether or not a bubble is declared.
+            if (json.petals.size() > 6)
+                return std::unexpected(fail(skinJson, field + ".petals", "must declare at most 6 petals"));
+            if (!json.bubble && json.petals.empty())
+                return std::unexpected(fail(skinJson, field, "must declare a bubble or between 1 and 6 petals"));
+
+            const int effectWidth  = region->rect.width;
+            const int effectHeight = region->rect.height;
+            if (effectWidth > 2048 || effectHeight > 2048)
+                return std::unexpected(
+                    fail(skinJson, field + ".region", "referenced region is larger than 2048 pixels on a side"));
+
+            if (json.background.empty())
+                return std::unexpected(fail(skinJson, field + ".background", "must not be empty"));
+            if (json.foreground.empty())
+                return std::unexpected(fail(skinJson, field + ".foreground", "must not be empty"));
+
+            FlowerEffectSpec spec{};
+            spec.regionId = region->id;
+            spec.period   = json.period;
+            spec.phase    = json.phase;
+            spec.width    = effectWidth;
+            spec.height   = effectHeight;
+
+            if (const auto error = resolveAsset(json.background, field + ".background", spec.background))
+                return std::unexpected(*error);
+            if (const auto error = resolveAsset(json.foreground, field + ".foreground", spec.foreground))
+                return std::unexpected(*error);
+
+            // Every effect raster is a rasterisation of the referenced region:
+            // RGBA and matching its exact pixel dimensions, like the candle and
+            // accent rasters. Petal textures share that canvas so the declared
+            // pivot is directly a region-pixel coordinate.
+            const auto checkRegionImage = [&](const std::filesystem::path& asset, const std::string& name)
+                -> std::optional<ValidationError> {
+                std::error_code fileEc;
+                if (!std::filesystem::is_regular_file(asset, fileEc))
+                    return fail(asset, name, "PNG image does not exist");
+
+                bool rgba      = false;
+                int  imageWide = 0;
+                int  imageTall = 0;
+                switch (probePngRgba(asset, rgba, imageWide, imageTall)) {
+                case PngProbe::ok:
+                    break;
+                case PngProbe::notPng:
+                    return fail(asset, name, "image is not a PNG");
+                case PngProbe::readError:
+                    return fail(asset, name, "cannot decode PNG header");
+                }
+                if (!rgba)
+                    return fail(asset, name, "PNG color type must be RGBA");
+                if (imageWide != effectWidth || imageTall != effectHeight)
+                    return fail(asset, name, "image is " + std::to_string(imageWide) + "x" + std::to_string(imageTall) +
+                                                  ", expected " + std::to_string(effectWidth) + "x" +
+                                                  std::to_string(effectHeight));
+                return std::nullopt;
+            };
+
+            if (const auto error = checkRegionImage(spec.background, field + ".background"))
+                return std::unexpected(*error);
+            if (const auto error = checkRegionImage(spec.foreground, field + ".foreground"))
+                return std::unexpected(*error);
+
+            if (json.bubble) {
+                const JsonBubble& raw = *json.bubble;
+                const std::string  bfield = field + ".bubble";
+
+                if (raw.texture.empty())
+                    return std::unexpected(fail(skinJson, bfield + ".texture", "must not be empty"));
+                if (!finite(raw.center[0]) || !finite(raw.center[1]))
+                    return std::unexpected(fail(skinJson, bfield + ".center", "coordinates must be finite"));
+                if (!finite(raw.radii[0]) || !finite(raw.radii[1]))
+                    return std::unexpected(fail(skinJson, bfield + ".radii", "radii must be finite"));
+                if (raw.radii[0] <= 0.0 || raw.radii[1] <= 0.0)
+                    return std::unexpected(fail(skinJson, bfield + ".radii", "radii must be positive"));
+                if (!finite(raw.outward[0]) || !finite(raw.outward[1]))
+                    return std::unexpected(fail(skinJson, bfield + ".outward", "direction must be finite"));
+                const double outwardNorm = std::hypot(raw.outward[0], raw.outward[1]);
+                if (!finite(outwardNorm) || outwardNorm <= 0.0)
+                    return std::unexpected(fail(skinJson, bfield + ".outward", "direction norm must be finite and non-zero"));
+                if (!finite(raw.spread) || raw.spread <= 0.0 || raw.spread > 128.0)
+                    return std::unexpected(fail(skinJson, bfield + ".spread", "must be finite and within (0, 128]"));
+
+                // The runtime keeps every drop inside a conservative circular
+                // bound; the whole excursion must fit the referenced region, so a
+                // valid pack never needs clamping at the canvas edge.
+                const double excursion = std::max(raw.radii[0], raw.radii[1]) + raw.spread + 6.0;
+                if (raw.center[0] < excursion || raw.center[0] > static_cast<double>(effectWidth) - excursion ||
+                    raw.center[1] < excursion || raw.center[1] > static_cast<double>(effectHeight) - excursion)
+                    return std::unexpected(
+                        fail(skinJson, bfield + ".center", "bubble excursion does not fit inside the region"));
+
+                BubbleSpec bubble{};
+                bubble.center  = {raw.center[0], raw.center[1]};
+                bubble.radii   = {raw.radii[0], raw.radii[1]};
+                bubble.outward = {raw.outward[0], raw.outward[1]};
+                bubble.spread  = raw.spread;
+                if (const auto error = resolveAsset(raw.texture, bfield + ".texture", bubble.texture))
+                    return std::unexpected(*error);
+                if (const auto error = checkRegionImage(bubble.texture, bfield + ".texture"))
+                    return std::unexpected(*error);
+
+                spec.bubble = std::move(bubble);
+            }
+
+            spec.petals.reserve(json.petals.size());
+            for (size_t petalIndex = 0; petalIndex < json.petals.size(); ++petalIndex) {
+                const JsonFlowerPetal& raw    = json.petals[petalIndex];
+                const std::string      pfield = field + ".petals[" + std::to_string(petalIndex) + "]";
+
+                if (!finite(raw.pivot[0]) || !finite(raw.pivot[1]))
+                    return std::unexpected(fail(skinJson, pfield + ".pivot", "coordinates must be finite"));
+                if (raw.pivot[0] < 0.0 || raw.pivot[0] >= static_cast<double>(effectWidth) || raw.pivot[1] < 0.0 ||
+                    raw.pivot[1] >= static_cast<double>(effectHeight))
+                    return std::unexpected(fail(skinJson, pfield + ".pivot", "pivot must lie inside the effect region"));
+                if (!finite(raw.angle) || raw.angle == 0.0 || std::abs(raw.angle) > 12.0)
+                    return std::unexpected(
+                        fail(skinJson, pfield + ".angle", "must be finite, non-zero and at most 12 degrees"));
+                if (!finite(raw.phase) || raw.phase < 0.0 || raw.phase >= 1.0)
+                    return std::unexpected(fail(skinJson, pfield + ".phase", "must be finite and within [0, 1)"));
+                if (raw.texture.empty())
+                    return std::unexpected(fail(skinJson, pfield + ".texture", "must not be empty"));
+
+                FlowerPetalSpec petal{};
+                petal.pivot = {raw.pivot[0], raw.pivot[1]};
+                petal.angle = raw.angle;
+                petal.phase = raw.phase;
+                if (const auto error = resolveAsset(raw.texture, pfield + ".texture", petal.texture))
+                    return std::unexpected(*error);
+                if (const auto error = checkRegionImage(petal.texture, pfield + ".texture"))
+                    return std::unexpected(*error);
+
+                spec.petals.push_back(std::move(petal));
+            }
+
+            pack.flowerEffects.push_back(std::move(spec));
+        }
+    }
+
+    // Optional silver material motion. Absence is the normal static case: a pack
+    // without one pays neither validation nor runtime resources.
+    if (manifest.silver_effect) {
+        const JsonSilverEffect& json = *manifest.silver_effect;
+
+        if (json.mask.empty())
+            return std::unexpected(fail(skinJson, "silver_effect.mask", "must not be empty"));
+        if (!finite(json.period) || json.period <= 0.0)
+            return std::unexpected(fail(skinJson, "silver_effect.period", "must be finite and greater than zero"));
+        if (!finite(json.strength) || json.strength < 0.0 || json.strength > 1.0)
+            return std::unexpected(fail(skinJson, "silver_effect.strength", "must be finite and within [0, 1]"));
+
+        SilverEffectSpec spec{};
+        spec.period   = json.period;
+        spec.strength = json.strength;
+
+        if (const auto error = resolveAsset(json.mask, "silver_effect.mask", spec.mask))
+            return std::unexpected(*error);
+
+        // The mask is a full-atlas raster, exactly like the atlases themselves:
+        // RGBA and matching the declared source pixel dimensions, so the shader
+        // can sample both with the same UVs without any coordinate mapping.
+        std::error_code fileEc;
+        if (!std::filesystem::is_regular_file(spec.mask, fileEc))
+            return std::unexpected(fail(spec.mask, "silver_effect.mask", "PNG mask does not exist"));
+        bool rgba      = false;
+        int  maskWide  = 0;
+        int  maskTall  = 0;
+        switch (probePngRgba(spec.mask, rgba, maskWide, maskTall)) {
+        case PngProbe::ok:
+            break;
+        case PngProbe::notPng:
+            return std::unexpected(fail(spec.mask, "silver_effect.mask", "mask is not a PNG image"));
+        case PngProbe::readError:
+            return std::unexpected(fail(spec.mask, "silver_effect.mask", "cannot decode PNG header"));
+        }
+        if (!rgba)
+            return std::unexpected(fail(spec.mask, "silver_effect.mask", "PNG color type must be RGBA"));
+        if (maskWide != manifest.source.width || maskTall != manifest.source.height)
+            return std::unexpected(fail(spec.mask, "silver_effect.mask",
+                                        "mask is " + std::to_string(maskWide) + "x" + std::to_string(maskTall) +
+                                            ", expected " + std::to_string(manifest.source.width) + "x" +
+                                            std::to_string(manifest.source.height)));
+
+        pack.silverEffect = std::move(spec);
+    }
 
     const std::filesystem::path kittyConf = canonicalRoot / "kitty.conf";
     std::error_code kittyEc;
