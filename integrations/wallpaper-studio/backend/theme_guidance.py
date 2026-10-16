@@ -14,7 +14,8 @@ TARGETS = {
     'kitty': ('design-rules/frame/frame-rules.md', 'design-rules/animation/animation-rules.md', 'design-rules/kitty/animation-rules.md'),
     'zen-browser': ('design-rules/frame/frame-rules.md', 'design-rules/zen-browser/frame-rules.md'),
     'ayugram': ('design-rules/ayugram/theme-rules.md',),
-    'noctalia': ('design-rules/noctalia/shell-rules.md', 'design-rules/noctalia/music-rules.md', 'design-rules/noctalia/ai-rules.md'),
+    'noctalia': ('design-rules/noctalia/shell-rules.md', 'design-rules/noctalia/music-rules.md', 'design-rules/noctalia/ai-rules.md',
+                 'design-rules/noctalia/audio-visualizers.json', 'design-rules/noctalia/audio-visualizers.md'),
     'discord': ('design-rules/discord/theme-rules.md',),
     'element': ('design-rules/frame/frame-rules.md', 'helpers/layer-authoring.md'),
 }
