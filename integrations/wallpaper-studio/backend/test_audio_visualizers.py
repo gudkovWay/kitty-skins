@@ -14,6 +14,7 @@ RESOURCES = Path(__file__).resolve().parent.parent / "resources/theme-library"
 AUDIO_JSON = "design-rules/noctalia/audio-visualizers.json"
 AUDIO_DOC = "design-rules/noctalia/audio-visualizers.md"
 MODES = {"ribbons", "contour", "bars", "wave", "mist", "ornament"}
+WIDGET_TYPES = {"audio_ribbons", "audio_contour", "audio_radial_bars", "audio_wave_ring", "audio_mist", "audio_ornament"}
 
 
 class AudioReferencesTest(unittest.TestCase):
@@ -53,10 +54,9 @@ class AudioReferencesTest(unittest.TestCase):
         text = (self.base / AUDIO_JSON).read_text()
         catalog = json.loads(text)
         self.assertEqual({p["mode"] for p in catalog["presets"]}, MODES)
+        self.assertEqual({p["widget_type"] for p in catalog["presets"]}, WIDGET_TYPES)
         for preset in catalog["presets"]:
-            self.assertEqual(preset["settings"]["visualization_mode"], preset["mode"])
-            self.assertGreater(preset["box_width"], 0)
-            self.assertGreater(preset["box_height"], 0)
+            self.assertNotIn("visualization_mode", preset["settings"])
         self.assertIn(text, subject)
         self.assertIn((self.base / AUDIO_DOC).read_text(), subject)
         self.assertIn(hashlib.sha256(text.encode()).hexdigest(), subject)

@@ -1,14 +1,14 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "surface": "noctalia.desktop.widget",
-  "widget_type": "fancy_audio_visualizer",
-  "purpose": "Reusable desktop companions for a shared wallpaper-driven identity. These are real native render modes, not illustrations to paint into a window frame or bar.",
+  "legacy_widget_type": "fancy_audio_visualizer",
+  "purpose": "Six separately selectable native desktop visualizer widgets for wallpaper-driven skins, each with its own form immediately after creation. Existing Fancy Audio Visualizer customization stays unchanged.",
   "palette_roles": {"primary_color": "primary", "secondary_color": "secondary"},
   "constraints": [
-    "Choose one mode per widget instance; multiple independent instances may use the same shared PipeWire spectrum.",
+    "Choose a preset's widget_type as a separate desktop widget; independent instances share the existing PipeWire spectrum.",
     "Adapt rhythm, negative space, palette and light from the wallpaper. Never copy a depicted face, character, furniture or the conceptual preview background into the widget.",
     "Keep desktop widgets out of work areas, icons, windows and reserved controls. Placement/output remains an explicit desktop-editor choice, never inferred from this catalogue.",
-    "Native desktop mode selection is visualization_mode. Preserve legacy rings, bars_rings, wave_rings and all settings outside these six references.",
+    "Each new widget_type fixes its own visual form. Do not add visualization_mode to its settings or migrate existing fancy_audio_visualizer instances; their custom modes and settings remain unchanged.",
     "Spectrum means frequency bands, not PCM waveform. Mist uses chronological RMS energy history; no invented peaks in silence.",
     "Motion-disabled policy stops autonomous rotation; new modes react to audio only. fade_when_idle=true hides idle widgets; false retains a stationary baseline or ornament.",
     "Validate that the installed native shell offers the selected mode before applying a skin. This reference pack is not an installer or permission to change desktop configuration."
@@ -22,7 +22,7 @@
   },
   "presets": [
     {
-      "mode": "ribbons", "name": "Ленты / Ribbons",
+      "mode": "ribbons", "widget_type": "audio_ribbons", "name": "Ленты / Ribbons",
       "signal": "32 smoothed current frequency bands",
       "structure": "Three crossing interpolated ribbons plus one thin highlight; amplitude tapers to fixed endpoints.",
       "placement": "Wide, quiet horizontal negative space; do not span a wallpaper focal subject.",
@@ -30,10 +30,10 @@
       "idle": "Stationary central line when fade_when_idle is false.",
       "skin_translation": "Flowing, fabric, water, aurora or calligraphic rhythm; colors follow primary and secondary roles, not compulsory cyan/pink.",
       "box_width": 480, "box_height": 160,
-      "settings": {"visualization_mode": "ribbons", "sensitivity": 1.3, "wave_thickness": 1.2, "bloom_intensity": 0.25, "rotation_speed": 0.0, "fade_when_idle": false, "primary_color": "primary", "secondary_color": "secondary"}
+      "settings": {"sensitivity": 1.3, "wave_thickness": 1.2, "bloom_intensity": 0.25, "fade_when_idle": false, "primary_color": "primary", "secondary_color": "secondary"}
     },
     {
-      "mode": "contour", "name": "Спектральный контур / Spectral Contour",
+      "mode": "contour", "widget_type": "audio_contour", "name": "Спектральный контур / Spectral Contour",
       "signal": "32 smoothed current frequency bands, low to high from left to right; NOT PCM",
       "structure": "One thin interpolated spectral ridge, restrained local glow, no layered ribbons.",
       "placement": "Narrow horizontal ledge or margin with strong contrast and generous empty space.",
@@ -41,10 +41,10 @@
       "idle": "Stationary lower baseline when retained.",
       "skin_translation": "Fine engraving, technical outline, horizon or luminous thread; avoid giant solid filled graphs.",
       "box_width": 480, "box_height": 150,
-      "settings": {"visualization_mode": "contour", "sensitivity": 1.4, "wave_thickness": 0.8, "bloom_intensity": 0.2, "rotation_speed": 0.0, "fade_when_idle": false, "primary_color": "primary", "secondary_color": "secondary"}
+      "settings": {"sensitivity": 1.4, "wave_thickness": 0.8, "bloom_intensity": 0.2, "fade_when_idle": false, "primary_color": "primary", "secondary_color": "secondary"}
     },
     {
-      "mode": "bars", "name": "Радиальные полосы / Radial Bars",
+      "mode": "bars", "widget_type": "audio_radial_bars", "name": "Радиальные полосы / Radial Bars",
       "signal": "32 smoothed current frequency bands mirrored around a circle",
       "structure": "Separated radial bars surrounding clear negative space. Fits the smaller box dimension without stretching into an ellipse.",
       "placement": "Isolated circular emblem zone, not over a face or an interactive desktop element.",
@@ -52,10 +52,10 @@
       "idle": "Stationary short radial crown when retained.",
       "skin_translation": "Instrument, seal, halo or mechanical rhythm; do not imply a play button or click action.",
       "box_width": 300, "box_height": 300,
-      "settings": {"visualization_mode": "bars", "sensitivity": 1.4, "bar_width": 0.6, "inner_diameter": 0.7, "bloom_intensity": 0.25, "rotation_speed": 0.0, "fade_when_idle": false, "primary_color": "primary", "secondary_color": "secondary"}
+      "settings": {"sensitivity": 1.4, "bar_width": 0.6, "inner_diameter": 0.7, "bloom_intensity": 0.25, "rotation_speed": 0.0, "fade_when_idle": false, "primary_color": "primary", "secondary_color": "secondary"}
     },
     {
-      "mode": "wave", "name": "Кольцо-волна / Wave Ring",
+      "mode": "wave", "widget_type": "audio_wave_ring", "name": "Кольцо-волна / Wave Ring",
       "signal": "Interpolated frequency bands wrapped and mirrored around a circle; NOT an oscilloscope",
       "structure": "Continuous spectral annulus with a bright outer edge and transparent center; aspect-safe in a rectangular widget.",
       "placement": "Calm circular halo zone with sufficient empty space around its loudest radius.",
@@ -63,10 +63,10 @@
       "idle": "Stationary circular band when retained.",
       "skin_translation": "Soft halo, portal, eclipse or liquid rim; never require the wallpaper to contain a literal circle.",
       "box_width": 300, "box_height": 300,
-      "settings": {"visualization_mode": "wave", "sensitivity": 1.3, "wave_thickness": 0.7, "inner_diameter": 0.7, "bloom_intensity": 0.3, "rotation_speed": 0.0, "fade_when_idle": false, "primary_color": "primary", "secondary_color": "secondary"}
+      "settings": {"sensitivity": 1.3, "wave_thickness": 0.7, "inner_diameter": 0.7, "bloom_intensity": 0.3, "rotation_speed": 0.0, "fade_when_idle": false, "primary_color": "primary", "secondary_color": "secondary"}
     },
     {
-      "mode": "mist", "name": "Туманные гряды / Mist Ridges",
+      "mode": "mist", "widget_type": "audio_mist", "name": "Туманные гряды / Mist Ridges",
       "signal": "128 chronological RMS-energy samples at 50ms (6.4 seconds), oldest left, newest right",
       "structure": "Three translucent layered ridges from the SAME real energy history, not three arbitrary noise mountains.",
       "placement": "Wide shallow landscape-like lower negative space; taper edges rather than covering screen width indiscriminately.",
@@ -74,10 +74,10 @@
       "idle": "Flat stationary ridges when retained; no phantom mountains.",
       "skin_translation": "Mist, dunes, ink wash or translucent strata. Palette roles determine depth and light; an invented landscape is not mandatory.",
       "box_width": 540, "box_height": 180,
-      "settings": {"visualization_mode": "mist", "sensitivity": 1.2, "wave_thickness": 0.7, "bloom_intensity": 0.0, "rotation_speed": 0.0, "fade_when_idle": false, "primary_color": "primary", "secondary_color": "secondary"}
+      "settings": {"sensitivity": 1.2, "wave_thickness": 0.7, "fade_when_idle": false, "primary_color": "primary", "secondary_color": "secondary"}
     },
     {
-      "mode": "ornament", "name": "Реактивный орнамент / Reactive Ornament",
+      "mode": "ornament", "widget_type": "audio_ornament", "name": "Реактивный орнамент / Reactive Ornament",
       "signal": "Low/mid/high frequency energy derived from the shared spectrum",
       "structure": "Three fixed anchors with hanging lines, two diamond pendants and one circular pendant, bounded rays and glow.",
       "placement": "Tall or square decorative margin with room below anchors; no fake controls, no wallpaper furniture dependency.",
@@ -85,7 +85,7 @@
       "idle": "Fixed quiet ornament when retained.",
       "skin_translation": "Jewelry, wind-chime rhythm, etched sigils or sparse hanging geometry. Transfer material and spacing, not literal objects from the GIF.",
       "box_width": 300, "box_height": 340,
-      "settings": {"visualization_mode": "ornament", "sensitivity": 1.2, "wave_thickness": 0.8, "bloom_intensity": 0.25, "rotation_speed": 0.0, "fade_when_idle": false, "primary_color": "primary", "secondary_color": "secondary"}
+      "settings": {"sensitivity": 1.2, "wave_thickness": 0.8, "bloom_intensity": 0.25, "fade_when_idle": false, "primary_color": "primary", "secondary_color": "secondary"}
     }
   ]
 }
