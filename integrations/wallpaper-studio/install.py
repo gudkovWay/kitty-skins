@@ -73,7 +73,7 @@ BACKEND_FILES = [
     "theme_store.py", "theme_guidance.py", "theme_primary.py",
     "theme_workflow.py", "theme_release.py",
 ]
-RESOURCE_DIR = SRC.parent.parent / "assets" / "skins" / "gothic-eclipse"
+RESOURCE_DIR = SRC / "resources" / "gothic-eclipse"
 RESOURCE_FILES = [
     "exact.png", "candle-flames.png", "candle-light.png",
     "candle-wax-mask.png", "source.json", "skin.json",
