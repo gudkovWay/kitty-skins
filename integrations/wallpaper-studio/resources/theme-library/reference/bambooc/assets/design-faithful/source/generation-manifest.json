@@ -1,0 +1,65 @@
+{
+  "approved_master": "/home/q/dev/qol/.worktrees/ShojiWM/DEV-capitalism-slave-shojiwm-noctalia-trial/packages/config/assets/rainlit-frames/02/master.webp",
+  "master_sha256": "a58cb8ed7f7f26365ee9a9a3e5e13cc95e44bba5ebff783a0b454df6f21ba58e",
+  "guidance_sha256": "e2e41baff22757e363ff390ed363c336ac3389b50beeca1fc80d96ae53d1c84f",
+  "provider": "openai-codex",
+  "requested_model": "openai-codex/gpt-image-2",
+  "actual_model": "gpt-image-2-codex",
+  "generated": [
+    {
+      "kind": "wood",
+      "file": "/home/q/dev/qol/.worktrees/ShojiWM/DEV-capitalism-slave-shojiwm-noctalia-trial/.superpowers/assets/frame02-design-faithful/wood-gpt-image-2.webp",
+      "sha256": "e1a0e2380a778b48f20cbd31109ac841de57eed941193de4ed9a830fe2f4722d",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "request": "/home/q/dev/qol/.worktrees/ShojiWM/DEV-capitalism-slave-shojiwm-noctalia-trial/.superpowers/assets/frame02-design-faithful/wood-request.json"
+    },
+    {
+      "kind": "crane",
+      "file": "/home/q/dev/qol/.worktrees/ShojiWM/DEV-capitalism-slave-shojiwm-noctalia-trial/.superpowers/assets/frame02-design-faithful/crane-gpt-image-2.webp",
+      "sha256": "6ef8bfa0a22a3bf488efc82e8aaa8a4d2e4d61c864426d6772c559d673dbf37f",
+      "size": [
+        1349,
+        1166
+      ],
+      "mode": "RGBA",
+      "request": "/home/q/dev/qol/.worktrees/ShojiWM/DEV-capitalism-slave-shojiwm-noctalia-trial/.superpowers/assets/frame02-design-faithful/crane-request.json"
+    },
+    {
+      "kind": "lamp",
+      "file": "/home/q/dev/qol/.worktrees/ShojiWM/DEV-capitalism-slave-shojiwm-noctalia-trial/.superpowers/assets/frame02-design-faithful/lamp-gpt-image-2.webp",
+      "sha256": "eca788dc71325565b192726ac951bff5290b4786f78d5e111b1c7096977940bb",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "request": "/home/q/dev/qol/.worktrees/ShojiWM/DEV-capitalism-slave-shojiwm-noctalia-trial/.superpowers/assets/frame02-design-faithful/lamp-request.json"
+    },
+    {
+      "kind": "brass",
+      "file": "/home/q/dev/qol/.worktrees/ShojiWM/DEV-capitalism-slave-shojiwm-noctalia-trial/.superpowers/assets/frame02-design-faithful/brass-gpt-image-2.webp",
+      "sha256": "539eac87e9e091958bdbe537eefccb4619d2ed258d6c3b3d363c1fc12e49f8a5",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "request": "/home/q/dev/qol/.worktrees/ShojiWM/DEV-capitalism-slave-shojiwm-noctalia-trial/.superpowers/assets/frame02-design-faithful/brass-request.json"
+    },
+    {
+      "kind": "corners",
+      "file": "/home/q/dev/qol/.worktrees/ShojiWM/DEV-capitalism-slave-shojiwm-noctalia-trial/.superpowers/assets/frame02-design-faithful/corners-gpt-image-2.webp",
+      "sha256": "decbf63d62e8423c86347c0a70de60d797992251fbacfef288372a10ed4efe70",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "request": "/home/q/dev/qol/.worktrees/ShojiWM/DEV-capitalism-slave-shojiwm-noctalia-trial/.superpowers/assets/frame02-design-faithful/corners-request.json"
+    }
+  ]
+}

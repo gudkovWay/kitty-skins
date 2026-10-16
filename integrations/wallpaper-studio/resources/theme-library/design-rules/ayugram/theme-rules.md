@@ -1,0 +1,2 @@
+# AyuGram
+Use native Telegram Desktop theme/palette artifacts, never rewrite account data or tdata. Preserve message readability, links, selection, service messages, dialogs, outgoing/incoming distinction and native controls. Shared material is restrained behind chrome, not tiled behind message text unless explicitly approved and tested. Exporting a .tdesktop-theme is not confirmation that the running application imported it. Activation requires explicit user import/receipt.

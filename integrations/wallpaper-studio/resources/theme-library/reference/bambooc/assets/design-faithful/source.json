@@ -1,0 +1,2196 @@
+{
+  "pack": "02",
+  "variant": "design-faithful-approved-four-corner-fasteners",
+  "title": "Bamboo roll, paper crane, paper lamp",
+  "builder": "assemble-approved-frame.py",
+  "deterministic": true,
+  "supersedes": "the legacy 26 px ring pack in ../source.json, which stays frozen and is not rebuilt",
+  "frozen_master": {
+    "path": "../master.webp",
+    "sha256": "a58cb8ed7f7f26365ee9a9a3e5e13cc95e44bba5ebff783a0b454df6f21ba58e",
+    "note": "the owner-approved 02 painterly concept is immutable and untouched by this builder"
+  },
+  "ring": {
+    "inset_logical": 52,
+    "corner_canvas_logical": [
+      104,
+      104
+    ],
+    "corner_arm_logical": [
+      52,
+      52
+    ],
+    "rail_period_logical": {
+      "horizontal": 256,
+      "vertical": 256
+    },
+    "minimum_root": [
+      480,
+      320
+    ],
+    "outsets": {
+      "left": 0,
+      "right": 112,
+      "top": 24,
+      "bottom": 0
+    }
+  },
+  "crane": {
+    "design": "compact warm washi crane, rigid cotton cord, fixed brass support",
+    "joint_tr": [
+      33.5,
+      48.0
+    ],
+    "parts": {
+      "crane": {
+        "source": "source/crane-washi-gpt-image-2.webp",
+        "sha256": "1a268ac4f7ae4a8dd8302f70b7e9e3d53a7b7b7b146d20fb5834e02482672e9a",
+        "source_size": [
+          1406,
+          1119
+        ],
+        "source_rect": [
+          100,
+          211,
+          1311,
+          1079
+        ],
+        "socket_source": [
+          704,
+          211
+        ],
+        "logical_per_source_px": 0.054500412881915775
+      },
+      "crane-hook": {
+        "source": "source/crane-bracket-gpt-image-2.webp",
+        "sha256": "761a1047be3f5391fd7a57e6779e9636f1fa33802bb818504ec0598c792f1692",
+        "source_size": [
+          2172,
+          724
+        ],
+        "source_rect": [
+          278,
+          115,
+          1890,
+          560
+        ],
+        "socket_source": [
+          1808,
+          495
+        ],
+        "logical_per_source_px": 0.02729528535980149
+      }
+    },
+    "cut": "old screw-eye above y=211 excluded; complete paper and remaining cord retained",
+    "motion": "whole pendant pivots at the fixed eye; no wing deformation"
+  },
+  "lamp": {
+    "source_size": [
+      1024,
+      1536
+    ],
+    "alpha_threshold": "alpha > 89 of 255",
+    "bracket_arm_rows": [
+      62,
+      191
+    ],
+    "bracket_arm_width_px": 528.0,
+    "link_root_row": 265,
+    "static_rect": [
+      155,
+      62,
+      683,
+      409
+    ],
+    "moving_rect": [
+      274,
+      265,
+      833,
+      1478
+    ],
+    "paper_rect": [
+      275,
+      476,
+      830,
+      1297
+    ],
+    "alpha_partition": "a three-row band at y=265 over the upper link's own columns is removed, which disconnects the lower arch from the hook; each side is then the connected component seeded in the wood arm (static bracket: wall arm, support leg and upper link) and in the shade (moving lamp: lower arch, caps, paper and peg). That mask is hole-filled only to seed the components and to bound each cell: every cell's alpha is the master's AUTHORED alpha multiplied by its own partition coverage, so the link's genuine inner opening and the anti-aliased edges stay as transparent as the master authored them and no pixel is drawn by both parts. No luminance key and no opaque patch anywhere.",
+    "paper_test": "moving coverage with luminance > 110 and a warm (r >= b) hue, hole-filled and eroded 1 px; dark recesses are never keyed out by luminance and the lamp layer keeps its full authored alpha"
+  },
+  "lamp_halo": {
+    "method": "warm circular two-lobe radial falloff, smooth to alpha zero",
+    "radius_logical": 72.0,
+    "centre_br": [
+      31.1,
+      -87.2
+    ],
+    "colour_rgb": [
+      255,
+      177,
+      82
+    ],
+    "peak_alpha": 0.6,
+    "motion": "same hanging pivot, lampAngle and lampEnergy as the paper",
+    "replaces": "rejected rectangular lamp-wood-glow overlay"
+  },
+  "atlas": {
+    "file": "frame-atlas.png",
+    "size": [
+      2048,
+      2048
+    ],
+    "gutter_px": 4,
+    "alpha": "straight RGBA; RGB zeroed exactly where alpha is zero",
+    "cells": {
+      "left-rail": [
+        4,
+        4,
+        208,
+        1024
+      ],
+      "right-rail": [
+        216,
+        4,
+        208,
+        1024
+      ],
+      "corner-tl": [
+        428,
+        4,
+        416,
+        416
+      ],
+      "corner-tr": [
+        848,
+        4,
+        416,
+        416
+      ],
+      "corner-bl": [
+        1268,
+        4,
+        416,
+        416
+      ],
+      "lamp": [
+        1688,
+        4,
+        235,
+        509
+      ],
+      "corner-br": [
+        4,
+        1032,
+        416,
+        416
+      ],
+      "lamp-halo": [
+        424,
+        1032,
+        576,
+        576
+      ],
+      "lamp-paper": [
+        1004,
+        1032,
+        235,
+        509
+      ],
+      "crane": [
+        1243,
+        1032,
+        264,
+        189
+      ],
+      "lamp-bracket": [
+        1567,
+        1032,
+        222,
+        146
+      ],
+      "bamboo-roll": [
+        4,
+        1612,
+        331,
+        68
+      ],
+      "bamboo-slat": [
+        339,
+        1612,
+        331,
+        52
+      ],
+      "tie-near": [
+        674,
+        1612,
+        38,
+        114
+      ],
+      "tie-far": [
+        716,
+        1612,
+        38,
+        114
+      ],
+      "crane-hook": [
+        428,
+        424,
+        176,
+        49
+      ],
+      "top-rail": [
+        792,
+        1612,
+        1024,
+        208
+      ],
+      "bottom-rail": [
+        4,
+        1824,
+        1024,
+        208
+      ]
+    }
+  },
+  "art_module": "packages/config/src/effect/rainlit/frame-02-art.ts",
+  "art_metadata": {
+    "atlas": "./assets/rainlit-frames/02/design-faithful/frame-atlas.png",
+    "atlasSize": [
+      2048,
+      2048
+    ],
+    "corners": {
+      "tl": [
+        428,
+        4,
+        416,
+        416
+      ],
+      "tr": [
+        848,
+        4,
+        416,
+        416
+      ],
+      "bl": [
+        1268,
+        4,
+        416,
+        416
+      ],
+      "br": [
+        4,
+        1032,
+        416,
+        416
+      ]
+    },
+    "cornerSize": {
+      "top": [
+        104,
+        104
+      ],
+      "bottom": [
+        104,
+        104
+      ]
+    },
+    "rails": {
+      "top": [
+        792,
+        1612,
+        1024,
+        208
+      ],
+      "bottom": [
+        4,
+        1824,
+        1024,
+        208
+      ],
+      "left": [
+        4,
+        4,
+        208,
+        1024
+      ],
+      "right": [
+        216,
+        4,
+        208,
+        1024
+      ]
+    },
+    "railPeriod": {
+      "horizontal": 256,
+      "vertical": 256
+    },
+    "lightPlacement": {
+      "anchor": "br",
+      "offset": [
+        31.1,
+        -87.2
+      ],
+      "spread": [
+        114.4,
+        88.4
+      ],
+      "derivation": "measured paper centroid in logical root coordinates (553,883) source -> BR+(31.1,-87.2); bounded spill = max(3.9 x measured paper half-width 29.1, 2.2 insets) by max(1.9 x measured paper half-height 43.1, 1.7 insets), so the exp(-d^2) falloff crosses the 52 px ring and reaches about one inset into the client",
+      "paper_rect_source": [
+        275,
+        476,
+        830,
+        1297
+      ],
+      "paper_half_extent_logical": [
+        29.14,
+        43.1
+      ]
+    },
+    "layers": [
+      {
+        "id": "bamboo-slat",
+        "cell": [
+          339,
+          1612,
+          331,
+          52
+        ],
+        "source_cell_size": [
+          331,
+          52
+        ],
+        "anchor": "tl",
+        "offset": [
+          40.5,
+          18.5
+        ],
+        "size": [
+          165.5,
+          26.0
+        ],
+        "pivot": [
+          82.75,
+          -17.0
+        ],
+        "reveal": "bambooReveal",
+        "revealMode": "slide",
+        "translateY": "bambooTranslateY",
+        "angle": "bambooAngle"
+      },
+      {
+        "id": "bamboo-roll",
+        "cell": [
+          4,
+          1612,
+          331,
+          68
+        ],
+        "source_cell_size": [
+          331,
+          68
+        ],
+        "anchor": "tl",
+        "offset": [
+          40.5,
+          -15.5
+        ],
+        "size": [
+          165.5,
+          34.0
+        ],
+        "pivot": [
+          82.75,
+          17.0
+        ],
+        "translateY": "bambooTranslateY",
+        "angle": "bambooAngle"
+      },
+      {
+        "id": "tie-near",
+        "cell": [
+          674,
+          1612,
+          38,
+          114
+        ],
+        "source_cell_size": [
+          38,
+          114
+        ],
+        "anchor": "tl",
+        "offset": [
+          61.0,
+          -17.0
+        ],
+        "size": [
+          19.0,
+          57.0
+        ],
+        "pivot": [
+          9.5,
+          2.0
+        ]
+      },
+      {
+        "id": "tie-far",
+        "cell": [
+          716,
+          1612,
+          38,
+          114
+        ],
+        "source_cell_size": [
+          38,
+          114
+        ],
+        "anchor": "tl",
+        "offset": [
+          165.0,
+          -17.0
+        ],
+        "size": [
+          19.0,
+          57.0
+        ],
+        "pivot": [
+          9.5,
+          2.0
+        ]
+      },
+      {
+        "id": "crane",
+        "cell": [
+          1243,
+          1032,
+          264,
+          189
+        ],
+        "source_cell_size": [
+          264,
+          189
+        ],
+        "anchor": "tr",
+        "offset": [
+          0.582,
+          48.0
+        ],
+        "size": [
+          66.0,
+          47.306
+        ],
+        "pivot": [
+          32.918,
+          0.0
+        ],
+        "angle": "craneAngle"
+      },
+      {
+        "id": "crane-hook",
+        "cell": [
+          428,
+          424,
+          176,
+          49
+        ],
+        "source_cell_size": [
+          176,
+          49
+        ],
+        "anchor": "tr",
+        "offset": [
+          -8.262,
+          37.628
+        ],
+        "size": [
+          44.0,
+          12.146
+        ],
+        "pivot": [
+          41.762,
+          10.372
+        ]
+      },
+      {
+        "id": "lamp-halo",
+        "cell": [
+          424,
+          1032,
+          576,
+          576
+        ],
+        "source_cell_size": [
+          576,
+          576
+        ],
+        "anchor": "br",
+        "offset": [
+          -40.9,
+          -159.2
+        ],
+        "size": [
+          144.0,
+          144.0
+        ],
+        "pivot": [
+          70.9,
+          9.2
+        ],
+        "angle": "lampAngle",
+        "emission": "lampEnergy"
+      },
+      {
+        "id": "lamp-bracket",
+        "cell": [
+          1567,
+          1032,
+          222,
+          146
+        ],
+        "source_cell_size": [
+          222,
+          146
+        ],
+        "anchor": "br",
+        "offset": [
+          -10.635,
+          -173.415
+        ],
+        "size": [
+          55.44,
+          36.435
+        ],
+        "pivot": [
+          40.635,
+          23.415
+        ]
+      },
+      {
+        "id": "lamp",
+        "cell": [
+          1688,
+          4,
+          235,
+          509
+        ],
+        "source_cell_size": [
+          235,
+          509
+        ],
+        "anchor": "br",
+        "offset": [
+          1.86,
+          -152.1
+        ],
+        "size": [
+          58.695,
+          127.365
+        ],
+        "pivot": [
+          28.14,
+          2.1
+        ],
+        "angle": "lampAngle"
+      },
+      {
+        "id": "lamp-paper",
+        "cell": [
+          1004,
+          1032,
+          235,
+          509
+        ],
+        "source_cell_size": [
+          235,
+          509
+        ],
+        "anchor": "br",
+        "offset": [
+          1.86,
+          -152.1
+        ],
+        "size": [
+          58.695,
+          127.365
+        ],
+        "pivot": [
+          28.14,
+          2.1
+        ],
+        "angle": "lampAngle",
+        "emission": "lampEnergy"
+      }
+    ]
+  },
+  "offline_review_art": {
+    "frame": "frame-864x560.png",
+    "corners": "four-corners-working-size.png",
+    "method": "Offline actual atlas composition, not native capture"
+  },
+  "not_claimed": [
+    "native rendering",
+    "animation verification",
+    "hot reload"
+  ],
+  "baseline_builder": "tools/build-rainlit-02.py",
+  "baseline_checks": {
+    "corner-tl": {
+      "alpha_bbox": [
+        0,
+        0,
+        416,
+        416
+      ],
+      "coverage": 0.7489,
+      "beam_band_fill": 0.997,
+      "leg_band_fill": 0.9989,
+      "inner_quadrant_fill": 0.0,
+      "inner_turn_px": [
+        208,
+        208
+      ]
+    },
+    "corner-tr": {
+      "alpha_bbox": [
+        0,
+        0,
+        416,
+        416
+      ],
+      "coverage": 0.7498,
+      "beam_band_fill": 0.9995,
+      "leg_band_fill": 0.9997,
+      "inner_quadrant_fill": 0.0,
+      "inner_turn_px": [
+        208,
+        208
+      ]
+    },
+    "corner-bl": {
+      "alpha_bbox": [
+        0,
+        0,
+        416,
+        416
+      ],
+      "coverage": 0.7498,
+      "beam_band_fill": 0.9996,
+      "leg_band_fill": 0.9995,
+      "inner_quadrant_fill": 0.0001,
+      "inner_turn_px": [
+        208,
+        208
+      ]
+    },
+    "corner-br": {
+      "alpha_bbox": [
+        0,
+        0,
+        416,
+        416
+      ],
+      "coverage": 0.7491,
+      "beam_band_fill": 0.9995,
+      "leg_band_fill": 0.9993,
+      "inner_quadrant_fill": 0.0,
+      "inner_turn_px": [
+        208,
+        208
+      ]
+    },
+    "top-rail": {
+      "size": [
+        1024,
+        208
+      ],
+      "alpha_min": 255,
+      "alpha_max": 255
+    },
+    "bottom-rail": {
+      "size": [
+        1024,
+        208
+      ],
+      "alpha_min": 255,
+      "alpha_max": 255
+    },
+    "left-rail": {
+      "size": [
+        208,
+        1024
+      ],
+      "alpha_min": 255,
+      "alpha_max": 255
+    },
+    "right-rail": {
+      "size": [
+        208,
+        1024
+      ],
+      "alpha_min": 255,
+      "alpha_max": 255
+    },
+    "crane": {
+      "size": [
+        320,
+        256
+      ],
+      "coverage": 0.3482,
+      "touches_bbox": [
+        0,
+        0,
+        320,
+        256
+      ],
+      "apex_px": [
+        662.6,
+        212
+      ],
+      "cord_removed": [
+        652,
+        0,
+        685,
+        280
+      ],
+      "authored_transparent_px_inside_body_mask": 0
+    },
+    "lamp": {
+      "static_moving_overlap_px": 0,
+      "static_moving_union_matches_solid": true,
+      "static_rect": [
+        155,
+        62,
+        683,
+        409
+      ],
+      "moving_rect": [
+        274,
+        265,
+        833,
+        1478
+      ],
+      "paper_rect": [
+        275,
+        476,
+        830,
+        1297
+      ],
+      "authored_transparent_px_inside_bracket_hull": 1330,
+      "authored_transparent_px_inside_moving_hull": 7432
+    },
+    "lamp-halo": {
+      "shape": "circular radial falloff with zero-alpha square edges",
+      "radius_logical": 72.0,
+      "centre_br": [
+        31.1,
+        -87.2
+      ],
+      "shares_lamp_pivot": true,
+      "maximum_lamp_angle_radians": 0.017,
+      "contained_in_outsets_and_outside_client": true
+    },
+    "layer:bamboo-slat": {
+      "size": [
+        331,
+        52
+      ],
+      "alpha_coverage": 1.0
+    },
+    "layer:bamboo-roll": {
+      "size": [
+        331,
+        68
+      ],
+      "alpha_coverage": 0.9953
+    },
+    "layer:tie-near": {
+      "size": [
+        38,
+        114
+      ],
+      "alpha_coverage": 0.7068
+    },
+    "layer:tie-far": {
+      "size": [
+        38,
+        114
+      ],
+      "alpha_coverage": 0.7223
+    },
+    "layer:crane-hook": {
+      "size": [
+        30,
+        44
+      ],
+      "alpha_coverage": 0.3818
+    },
+    "layer:crane": {
+      "size": [
+        320,
+        256
+      ],
+      "alpha_coverage": 0.3554
+    },
+    "layer:lamp-halo": {
+      "size": [
+        576,
+        576
+      ],
+      "alpha_coverage": 0.6179
+    },
+    "layer:lamp-bracket": {
+      "size": [
+        222,
+        146
+      ],
+      "alpha_coverage": 0.5665
+    },
+    "layer:lamp": {
+      "size": [
+        235,
+        509
+      ],
+      "alpha_coverage": 0.7412
+    },
+    "layer:lamp-paper": {
+      "size": [
+        235,
+        509
+      ],
+      "alpha_coverage": 0.608
+    },
+    "unchanged_ornaments": [
+      "bamboo-slat",
+      "bamboo-roll",
+      "tie-near",
+      "tie-far",
+      "crane-hook",
+      "crane",
+      "lamp-bracket",
+      "lamp",
+      "lamp-paper"
+    ],
+    "unchanged_corner_alpha": true,
+    "unchanged_artwork_geometry": true
+  },
+  "baseline_outputs": {
+    "frame-atlas.png": {
+      "sha256": "c5bcfa77c113ef22f19f602a8d95b4f3ba7672999f3dd8c62d97cc7c5492f929",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    "layers/top-rail.png": {
+      "sha256": "de0a17024ebab2e8fb7673edd2251447453e17505d0b9a1e33c172b1f15bd7d4",
+      "size": [
+        1024,
+        208
+      ]
+    },
+    "layers/bottom-rail.png": {
+      "sha256": "6c423b9730189246bde3e04ae5681b3e17655660634dafd3121a701575d2ac3d",
+      "size": [
+        1024,
+        208
+      ]
+    },
+    "layers/corner-tl.png": {
+      "sha256": "afd0b0147abc2957d1b9a42d716014095f785e7a1ed282ed829353a90c721470",
+      "size": [
+        416,
+        416
+      ]
+    },
+    "layers/corner-tr.png": {
+      "sha256": "15314da7f879783132eca58d2f14d3aadd55283f54c051d96927f476f716443e",
+      "size": [
+        416,
+        416
+      ]
+    },
+    "layers/corner-bl.png": {
+      "sha256": "cb49a2903c4033d1e6f7a6d574015a7fbc6ffd1be3a6ccaca827cacf43320319",
+      "size": [
+        416,
+        416
+      ]
+    },
+    "layers/corner-br.png": {
+      "sha256": "df2392d7aa958759f5ebe4f2d04a97d99fb8ca737ad36dc32b102f34faacc633",
+      "size": [
+        416,
+        416
+      ]
+    },
+    "layers/left-rail.png": {
+      "sha256": "1f1b708f367e5d3a83f78d16d8593b924d3dcf1ea1639f8f9839373e3b4fef94",
+      "size": [
+        208,
+        1024
+      ]
+    },
+    "layers/right-rail.png": {
+      "sha256": "f8aa635d372c85e8c44ecd1c3641ba3a5bf97eb493e6e3f3b81bf4b04bd58111",
+      "size": [
+        208,
+        1024
+      ]
+    },
+    "layers/crane.png": {
+      "sha256": "f21174ac3eae53d168c4b4e2e4cc070f20ce9aa6f4d4a6c9facae5b5a41063d0",
+      "size": [
+        320,
+        256
+      ]
+    },
+    "layers/lamp.png": {
+      "sha256": "db52651d673a6918d21e39fd6f789087598def21cc406b06411eb4948cbda623",
+      "size": [
+        235,
+        509
+      ]
+    },
+    "layers/lamp-paper.png": {
+      "sha256": "7d17b218a041d0dc6711a80eee5fc54663aca3123d49ddcd077864fa18b4d409",
+      "size": [
+        235,
+        509
+      ]
+    },
+    "layers/lamp-bracket.png": {
+      "sha256": "24a17e0d86604dc5791b37c86f9708641e9f86c28bdf6a6384fc2f9a0d97fe76",
+      "size": [
+        222,
+        146
+      ]
+    },
+    "layers/bamboo-roll.png": {
+      "sha256": "213b9fa9fe86cda85ab0e2f700b490136bdbcf677c4aabafb015c5f7a0b4da79",
+      "size": [
+        331,
+        68
+      ]
+    },
+    "layers/bamboo-slat.png": {
+      "sha256": "13e9bb4c9820912cf3c0ed98f0bfc23432e127bd96c2a8992054223c11719094",
+      "size": [
+        331,
+        52
+      ]
+    },
+    "layers/tie-near.png": {
+      "sha256": "792d8afa040e009a072ac28c56949068247986e44b4430bb5892939d5749cdef",
+      "size": [
+        38,
+        114
+      ]
+    },
+    "layers/tie-far.png": {
+      "sha256": "c0a498b7b25e9db302d2a6bbb2c04b13b95448e6ad59b894d6d50b29f3c78588",
+      "size": [
+        38,
+        114
+      ]
+    },
+    "layers/crane-hook.png": {
+      "sha256": "fecf57f048f6d53383b07bd0dc5f9d154ec4b30ecc116a1ce5bb0c102d2e1960",
+      "size": [
+        30,
+        44
+      ]
+    },
+    "layers/lamp-halo.png": {
+      "sha256": "002cb064d29f86f9ba04c2973052f3619b9ead6a5abbc6b669d6a40f7e064c6f",
+      "size": [
+        576,
+        576
+      ]
+    }
+  },
+  "outputs": {
+    "controls/plate-hover.png": {
+      "sha256": "ccedb1be12a467b8c48a9ce177070298e02b99742ebf9313bcddc04cc8d6c12b",
+      "bytes": 40610
+    },
+    "controls/plate.png": {
+      "sha256": "c08e432954b6c54e575d66ea44a37cefddc6d6ad6c3b77287acb8696f141a079",
+      "bytes": 39511
+    },
+    "frame-atlas.png": {
+      "sha256": "0123fe5ff9ea178ac8f2d72867697306a13b2a08ac65ac313c785d25971a5acc",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    "layers/bamboo-roll.png": {
+      "sha256": "213b9fa9fe86cda85ab0e2f700b490136bdbcf677c4aabafb015c5f7a0b4da79",
+      "bytes": 31802
+    },
+    "layers/bamboo-slat.png": {
+      "sha256": "13e9bb4c9820912cf3c0ed98f0bfc23432e127bd96c2a8992054223c11719094",
+      "bytes": 23242
+    },
+    "layers/bottom-rail.png": {
+      "sha256": "274da4de578602f9d264ac4a7310f37857649e49324731e5e02c4efcdc97fd1d",
+      "bytes": 208452
+    },
+    "layers/corner-bl.png": {
+      "sha256": "9ca48b1affd5bda60d284397e0c3dd24d5bc7fef37aafe4e37979a57a99bf61c",
+      "bytes": 174326
+    },
+    "layers/corner-br.png": {
+      "sha256": "ecf24d6cec17e924e7c4c91813067b3343d680f2d576ba1b5ba7bfbad64723e8",
+      "bytes": 175159
+    },
+    "layers/corner-tl.png": {
+      "sha256": "a65ff74dd4d5c72d5460ee64985df8ba4b4480a18a7295e2f6ff8063db51ff3f",
+      "bytes": 173305
+    },
+    "layers/corner-tr.png": {
+      "sha256": "aa0e4779c6fa9ce3a50bc980cba49cdb602b259b9bf395f997f32a08fe1012f8",
+      "bytes": 173590
+    },
+    "layers/crane-hook.png": {
+      "sha256": "be468b724e0ab55009327344b83532b220c838710f9f91e2c4d4c01c9edaeb45",
+      "size": [
+        176,
+        49
+      ]
+    },
+    "layers/crane.png": {
+      "sha256": "604c3163e2b52484c447a40e7f9cb3f7482e64fed3f6f0eca9afa7139cbb4db2",
+      "size": [
+        264,
+        189
+      ]
+    },
+    "layers/lamp-bracket.png": {
+      "sha256": "24a17e0d86604dc5791b37c86f9708641e9f86c28bdf6a6384fc2f9a0d97fe76",
+      "bytes": 38997
+    },
+    "layers/lamp-halo.png": {
+      "sha256": "002cb064d29f86f9ba04c2973052f3619b9ead6a5abbc6b669d6a40f7e064c6f",
+      "bytes": 37959
+    },
+    "layers/lamp-paper.png": {
+      "sha256": "7d17b218a041d0dc6711a80eee5fc54663aca3123d49ddcd077864fa18b4d409",
+      "bytes": 113800
+    },
+    "layers/lamp.png": {
+      "sha256": "db52651d673a6918d21e39fd6f789087598def21cc406b06411eb4948cbda623",
+      "bytes": 147157
+    },
+    "layers/left-rail.png": {
+      "sha256": "f120af5a48b7cd2f9171ed0ccca126be58592887cff50b836c561ad415b063d8",
+      "bytes": 259520
+    },
+    "layers/right-rail.png": {
+      "sha256": "f075995197c27323242503f696348a282cce88d7cbd260f13de4135d86fc4bb9",
+      "bytes": 262553
+    },
+    "layers/tie-far.png": {
+      "sha256": "c0a498b7b25e9db302d2a6bbb2c04b13b95448e6ad59b894d6d50b29f3c78588",
+      "bytes": 9274
+    },
+    "layers/tie-near.png": {
+      "sha256": "792d8afa040e009a072ac28c56949068247986e44b4430bb5892939d5749cdef",
+      "bytes": 8998
+    },
+    "layers/top-rail.png": {
+      "sha256": "a874ea1419e4b9857418011189e01386983642b70ac5eb5c11fe9621e7644549",
+      "bytes": 215481
+    },
+    "source/legacy/crane-hook.png": {
+      "sha256": "fecf57f048f6d53383b07bd0dc5f9d154ec4b30ecc116a1ce5bb0c102d2e1960",
+      "bytes": 1552
+    },
+    "source/legacy/lamp-wood-glow.png": {
+      "sha256": "2f91db585afe910ba6b0584f6404f98a592c1f066ee73f42c9574824a457d125",
+      "bytes": 22364
+    },
+    "source/legacy/roll.png": {
+      "sha256": "213b9fa9fe86cda85ab0e2f700b490136bdbcf677c4aabafb015c5f7a0b4da79",
+      "bytes": 31802
+    },
+    "source/legacy/slat.png": {
+      "sha256": "13e9bb4c9820912cf3c0ed98f0bfc23432e127bd96c2a8992054223c11719094",
+      "bytes": 23242
+    },
+    "source/legacy/tie-a.png": {
+      "sha256": "792d8afa040e009a072ac28c56949068247986e44b4430bb5892939d5749cdef",
+      "bytes": 8998
+    },
+    "source/legacy/tie-b.png": {
+      "sha256": "c0a498b7b25e9db302d2a6bbb2c04b13b95448e6ad59b894d6d50b29f3c78588",
+      "bytes": 9274
+    }
+  },
+  "pre_approved_corners": {
+    "pieces": {
+      "tl": {
+        "sheet_rect": [
+          45,
+          65,
+          589,
+          595
+        ],
+        "piece_size": [
+          544,
+          523
+        ],
+        "arm_leg_width_src": 269,
+        "arm_beam_thickness_src": 275,
+        "arm_length_src": [
+          544,
+          523
+        ],
+        "anisotropy": 1.0223,
+        "arm_leg_width_logical": 52.0,
+        "arm_beam_thickness_logical": 52.0
+      },
+      "tr": {
+        "sheet_rect": [
+          665,
+          63,
+          1209,
+          594
+        ],
+        "piece_size": [
+          543,
+          524
+        ],
+        "arm_leg_width_src": 267,
+        "arm_beam_thickness_src": 277,
+        "arm_length_src": [
+          543,
+          524
+        ],
+        "anisotropy": 1.0375,
+        "arm_leg_width_logical": 52.0,
+        "arm_beam_thickness_logical": 52.0
+      },
+      "bl": {
+        "sheet_rect": [
+          45,
+          657,
+          588,
+          1178
+        ],
+        "piece_size": [
+          543,
+          515
+        ],
+        "arm_leg_width_src": 269,
+        "arm_beam_thickness_src": 269,
+        "arm_length_src": [
+          543,
+          515
+        ],
+        "anisotropy": 1.0,
+        "arm_leg_width_logical": 52.0,
+        "arm_beam_thickness_logical": 52.0
+      },
+      "br": {
+        "sheet_rect": [
+          666,
+          657,
+          1210,
+          1179
+        ],
+        "piece_size": [
+          543,
+          515
+        ],
+        "arm_leg_width_src": 268,
+        "arm_beam_thickness_src": 270,
+        "arm_length_src": [
+          543,
+          515
+        ],
+        "anisotropy": 1.0075,
+        "arm_leg_width_logical": 52.0,
+        "arm_beam_thickness_logical": 52.0
+      }
+    },
+    "normalisation": "each measured piece maps its inner arm turn to exactly (52,52) logical inside the 104x104 canvas and fills both 52 px arms, with the two segment scales differing only by the piece's own arm asymmetry (anisotropy recorded per corner, all well inside the bounded 1.2)",
+    "hardware": "the sheet's own joinery and brass stay once per corner; nothing repeats along the rails"
+  },
+  "pre_approved_rails": {
+    "cross_section_match": "corner board channels/bevel profile with genuinely long outpainted grain; timber-only arm transitions; corner core/brass/alpha unchanged",
+    "timber_match": {
+      "authority": "corner-tl board profiles; genuinely long outpainted timber grain",
+      "neutral_cuts": {
+        "horizontal": [
+          384,
+          66,
+          1088,
+          208
+        ],
+        "vertical_rotated": [
+          384,
+          598,
+          1088,
+          208
+        ]
+      },
+      "native_px_per_logical": 4,
+      "reference_rgb": [
+        69.652,
+        45.596,
+        40.86
+      ],
+      "corners": {
+        "tl": {
+          "wood_pixels": 114208,
+          "preserved_hardware_pixels": 20608,
+          "wood_mean_rgb": [
+            69.875,
+            45.747,
+            40.995
+          ]
+        },
+        "tr": {
+          "wood_pixels": 110396,
+          "preserved_hardware_pixels": 21864,
+          "wood_mean_rgb": [
+            69.83,
+            45.731,
+            40.981
+          ]
+        },
+        "bl": {
+          "wood_pixels": 112660,
+          "preserved_hardware_pixels": 19190,
+          "wood_mean_rgb": [
+            69.869,
+            45.739,
+            40.988
+          ]
+        },
+        "br": {
+          "wood_pixels": 111762,
+          "preserved_hardware_pixels": 19551,
+          "wood_mean_rgb": [
+            69.858,
+            45.731,
+            40.981
+          ]
+        }
+      },
+      "joins": {
+        "tl-horizontal": {
+          "profile_rms_rgb": 4.377
+        },
+        "tl-vertical": {
+          "profile_rms_rgb": 6.631
+        },
+        "tr-horizontal": {
+          "profile_rms_rgb": 4.377
+        },
+        "tr-vertical": {
+          "profile_rms_rgb": 6.631
+        },
+        "bl-horizontal": {
+          "profile_rms_rgb": 4.377
+        },
+        "bl-vertical": {
+          "profile_rms_rgb": 6.631
+        },
+        "br-horizontal": {
+          "profile_rms_rgb": 4.377
+        },
+        "br-vertical": {
+          "profile_rms_rgb": 6.631
+        }
+      }
+    },
+    "neutral_cut": "1088px long authored intervals, no hardware or short-crop quilting",
+    "wrap": "a connected minimum-error ownership cut through source stock; no crossfade"
+  },
+  "pre_approved_generation": {
+    "provider": "openai-codex",
+    "requested_model": "openai-codex/gpt-image-2",
+    "actual_model": "gpt-image-2-codex",
+    "manifest": "source/generation-manifest.json",
+    "wood_polish_manifest": "source/wood-polish-generation.json",
+    "wood_detail_manifest": "source/wood-detail-generation.json",
+    "active_timber_source": "source/wood-grain-redrawn-gpt-image-2.webp",
+    "wood_long_manifest": "source/wood-long-corner-generation.json",
+    "retained_wood_attempts": "earlier wood manifests are rejected generation history",
+    "source_files": {
+      "brass-gpt-image-2.webp": {
+        "sha256": "539eac87e9e091958bdbe537eefccb4619d2ed258d6c3b3d363c1fc12e49f8a5",
+        "bytes": 992596
+      },
+      "corners-gpt-image-2.webp": {
+        "sha256": "decbf63d62e8423c86347c0a70de60d797992251fbacfef288372a10ed4efe70",
+        "bytes": 954038
+      },
+      "crane-gpt-image-2.webp": {
+        "sha256": "6ef8bfa0a22a3bf488efc82e8aaa8a4d2e4d61c864426d6772c559d673dbf37f",
+        "bytes": 461012
+      },
+      "generation-manifest.json": {
+        "sha256": "fd8312328deb99bbedd4ba0b2be30e01328c9979b6524de3ef90fb4101ebe59f",
+        "bytes": 3062
+      },
+      "lamp-gpt-image-2.webp": {
+        "sha256": "eca788dc71325565b192726ac951bff5290b4786f78d5e111b1c7096977940bb",
+        "bytes": 688560
+      },
+      "legacy/crane-hook.png": {
+        "sha256": "fecf57f048f6d53383b07bd0dc5f9d154ec4b30ecc116a1ce5bb0c102d2e1960",
+        "bytes": 1552
+      },
+      "legacy/lamp-wood-glow.png": {
+        "sha256": "2f91db585afe910ba6b0584f6404f98a592c1f066ee73f42c9574824a457d125",
+        "bytes": 22364
+      },
+      "legacy/roll.png": {
+        "sha256": "213b9fa9fe86cda85ab0e2f700b490136bdbcf677c4aabafb015c5f7a0b4da79",
+        "bytes": 31802
+      },
+      "legacy/slat.png": {
+        "sha256": "13e9bb4c9820912cf3c0ed98f0bfc23432e127bd96c2a8992054223c11719094",
+        "bytes": 23242
+      },
+      "legacy/tie-a.png": {
+        "sha256": "792d8afa040e009a072ac28c56949068247986e44b4430bb5892939d5749cdef",
+        "bytes": 8998
+      },
+      "legacy/tie-b.png": {
+        "sha256": "c0a498b7b25e9db302d2a6bbb2c04b13b95448e6ad59b894d6d50b29f3c78588",
+        "bytes": 9274
+      },
+      "wood-detail-generation.json": {
+        "sha256": "b1bb10fa877565ff33a65d3ded5eff5bd92d2955f289eaba016689eebe95569b",
+        "bytes": 900
+      },
+      "wood-detail-gpt-image-2.webp": {
+        "sha256": "697a10127929da33fd3f976e144c5156fff2dd3c2cbf0f2cf00e6dd56c798ae4",
+        "bytes": 1216154
+      },
+      "wood-gpt-image-2.webp": {
+        "sha256": "e1a0e2380a778b48f20cbd31109ac841de57eed941193de4ed9a830fe2f4722d",
+        "bytes": 821602
+      },
+      "wood-long-corner-generation.json": {
+        "sha256": "8523018c4af6cc27a053480c5803d5818d20ebcb939dd435a50204a70ebe0d6f",
+        "bytes": 770
+      },
+      "wood-long-corner-gpt-image-2.webp": {
+        "sha256": "b9dee6a12824ce7a937d512a973528fedcb55f574e67671d19c619ab7d58e389",
+        "bytes": 835000
+      },
+      "wood-polish-generation.json": {
+        "sha256": "951b27477d5744f4d103c8faa4c1ce770fb8a15e68b87d931771dbb395f499dc",
+        "bytes": 1288
+      },
+      "wood-polished-gpt-image-2.webp": {
+        "sha256": "6ae2da7905556b3a56cae1fd1a7c543b5cfa8379936f420c954034e8e6800725",
+        "bytes": 1052386
+      },
+      "wood-grain-redrawn-gpt-image-2.webp": {
+        "sha256": "cd5f0088c7e9f65e9bbbf4b9743d3e760712c95b297c86ea52809298c42b0a2c",
+        "bytes": 1043302
+      }
+    },
+    "pixel_units": {
+      "source": "source px exactly as delivered by the generator; actual dimensions are used, never the requested ones",
+      "components": "4 atlas px per logical px (corners, crane, lamp)",
+      "rails": "4 native atlas px per logical px; 256 logical px neutral repeats",
+      "legacy_cells": "accepted bamboo/hook cells retain their authored pixels",
+      "lamp_halo": "analytic radial RGBA at4 atlas px per logical px"
+    },
+    "alpha": "every generated master carries genuine near-opaque alpha with anti-aliased edges; alpha is preserved as authored, never re-keyed from luminance, and all resampling runs in premultiplied alpha so the decoder-visible garbage RGB under alpha 0 can never bleed into an edge. Where one master is split into parts (the lamp's static bracket and moving body) each cell's alpha is the master's authored alpha MULTIPLIED by that part's measured coverage, so a genuine transparent opening such as the hanging link's inner hole stays transparent instead of becoming an opaque patch of decoder RGB",
+    "self_contained": "the builder reads only the production copies listed here under design-faithful/source/ and never reads or re-copies the ignored scratch directory",
+    "wood_redraw_manifest": "source/wood-redraw-request.json"
+  },
+  "pre_approved_checks": {
+    "status": "authored; native rendering, joins and owner approval unverified; not applied",
+    "provider": "openai-codex",
+    "requested_model": "openai-codex/gpt-image-2",
+    "actual_model": "gpt-image-2-codex",
+    "reported_generation_quality": "low",
+    "accepted_for_assembly": "wood-grain-redrawn-gpt-image-2.webp",
+    "master_sha256": "cd5f0088c7e9f65e9bbbf4b9743d3e760712c95b297c86ea52809298c42b0a2c",
+    "rejected_attempt": "rejected-too-soft.webp (insufficient new grain)",
+    "request_sha256": "7bfe62857b7a7d48a0a47665f703596707c22d6430f8041cb61e8191e705dd68",
+    "baseline_atlas_sha256": "c5bcfa77c113ef22f19f602a8d95b4f3ba7672999f3dd8c62d97cc7c5492f929",
+    "result_atlas_sha256": "67d372aeb4f7efd772b91b4f78fab72153fe4419dd28672d86f8f2feeaf12b0c",
+    "crops_xyxy": {
+      "top-rail": [
+        68,
+        166,
+        1468,
+        419
+      ],
+      "left-rail": [
+        68,
+        590,
+        1468,
+        844
+      ]
+    },
+    "source_to_stock": [
+      1088,
+      208
+    ],
+    "periodic_overlap_source_px": 64,
+    "texture_transfer": "new generated luminance variation with original per-row wood chroma and relief; minimum-error overlap; original four-pixel transverse rims",
+    "alpha_identical": true,
+    "non_rail_pixels_identical": true,
+    "atlas_size": [
+      2048,
+      2048
+    ],
+    "decoded_atlas_bytes": 16777216,
+    "geometry_and_module_files_unchanged": true,
+    "rails": {
+      "top-rail": {
+        "size": [
+          1024,
+          208
+        ],
+        "alpha_identical": true,
+        "outer_inner_rims_identical": true,
+        "mean_rgb_before": [
+          76.02,
+          49.762,
+          44.595
+        ],
+        "mean_rgb_after": [
+          75.791,
+          49.612,
+          44.463
+        ]
+      },
+      "left-rail": {
+        "size": [
+          208,
+          1024
+        ],
+        "alpha_identical": true,
+        "outer_inner_rims_identical": true,
+        "mean_rgb_before": [
+          83.67,
+          54.778,
+          49.082
+        ],
+        "mean_rgb_after": [
+          83.613,
+          54.74,
+          49.049
+        ]
+      },
+      "bottom-rail": {
+        "size": [
+          1024,
+          208
+        ],
+        "alpha_identical": true,
+        "outer_inner_rims_identical": true,
+        "mean_rgb_before": [
+          76.02,
+          49.762,
+          44.595
+        ],
+        "mean_rgb_after": [
+          75.791,
+          49.612,
+          44.463
+        ]
+      },
+      "right-rail": {
+        "size": [
+          208,
+          1024
+        ],
+        "alpha_identical": true,
+        "outer_inner_rims_identical": true,
+        "mean_rgb_before": [
+          83.67,
+          54.778,
+          49.082
+        ],
+        "mean_rgb_after": [
+          83.613,
+          54.74,
+          49.049
+        ]
+      }
+    }
+  },
+  "pre_approved_rail_redraw": {
+    "status": "authored; native rendering, joins and owner approval unverified; not applied",
+    "provider": "openai-codex",
+    "requested_model": "openai-codex/gpt-image-2",
+    "actual_model": "gpt-image-2-codex",
+    "reported_generation_quality": "low",
+    "accepted_for_assembly": "wood-grain-redrawn-gpt-image-2.webp",
+    "master_sha256": "cd5f0088c7e9f65e9bbbf4b9743d3e760712c95b297c86ea52809298c42b0a2c",
+    "rejected_attempt": "rejected-too-soft.webp (insufficient new grain)",
+    "request_sha256": "7bfe62857b7a7d48a0a47665f703596707c22d6430f8041cb61e8191e705dd68",
+    "baseline_atlas_sha256": "c5bcfa77c113ef22f19f602a8d95b4f3ba7672999f3dd8c62d97cc7c5492f929",
+    "result_atlas_sha256": "67d372aeb4f7efd772b91b4f78fab72153fe4419dd28672d86f8f2feeaf12b0c",
+    "crops_xyxy": {
+      "top-rail": [
+        68,
+        166,
+        1468,
+        419
+      ],
+      "left-rail": [
+        68,
+        590,
+        1468,
+        844
+      ]
+    },
+    "source_to_stock": [
+      1088,
+      208
+    ],
+    "periodic_overlap_source_px": 64,
+    "texture_transfer": "new generated luminance variation with original per-row wood chroma and relief; minimum-error overlap; original four-pixel transverse rims",
+    "alpha_identical": true,
+    "non_rail_pixels_identical": true,
+    "atlas_size": [
+      2048,
+      2048
+    ],
+    "decoded_atlas_bytes": 16777216,
+    "geometry_and_module_files_unchanged": true,
+    "rails": {
+      "top-rail": {
+        "size": [
+          1024,
+          208
+        ],
+        "alpha_identical": true,
+        "outer_inner_rims_identical": true,
+        "mean_rgb_before": [
+          76.02,
+          49.762,
+          44.595
+        ],
+        "mean_rgb_after": [
+          75.791,
+          49.612,
+          44.463
+        ]
+      },
+      "left-rail": {
+        "size": [
+          208,
+          1024
+        ],
+        "alpha_identical": true,
+        "outer_inner_rims_identical": true,
+        "mean_rgb_before": [
+          83.67,
+          54.778,
+          49.082
+        ],
+        "mean_rgb_after": [
+          83.613,
+          54.74,
+          49.049
+        ]
+      },
+      "bottom-rail": {
+        "size": [
+          1024,
+          208
+        ],
+        "alpha_identical": true,
+        "outer_inner_rims_identical": true,
+        "mean_rgb_before": [
+          76.02,
+          49.762,
+          44.595
+        ],
+        "mean_rgb_after": [
+          75.791,
+          49.612,
+          44.463
+        ]
+      },
+      "right-rail": {
+        "size": [
+          208,
+          1024
+        ],
+        "alpha_identical": true,
+        "outer_inner_rims_identical": true,
+        "mean_rgb_before": [
+          83.67,
+          54.778,
+          49.082
+        ],
+        "mean_rgb_after": [
+          83.613,
+          54.74,
+          49.049
+        ]
+      }
+    }
+  },
+  "pre_approved_wood": {
+    "source": "source/wood-grain-redrawn-gpt-image-2.webp",
+    "crops_xyxy": {
+      "top-rail": [
+        68,
+        166,
+        1468,
+        419
+      ],
+      "left-rail": [
+        68,
+        590,
+        1468,
+        844
+      ]
+    }
+  },
+  "corners": {
+    "tl": {
+      "panel_xyxy": [
+        23,
+        41,
+        603,
+        602
+      ],
+      "source_cross_xy": [
+        174,
+        153
+      ],
+      "atlas_size": [
+        416,
+        416
+      ],
+      "logical_size": [
+        104,
+        104
+      ],
+      "cross_axis_anisotropy": 1.1373,
+      "master_corner_source_xyxy": [
+        0,
+        0,
+        348,
+        306
+      ],
+      "tongue_preservation": "tongue fits within first84 logical px; only neutral tails fade beyond84"
+    },
+    "tr": {
+      "panel_xyxy": [
+        651,
+        41,
+        1232,
+        602
+      ],
+      "source_cross_xy": [
+        175,
+        153
+      ],
+      "atlas_size": [
+        416,
+        416
+      ],
+      "logical_size": [
+        104,
+        104
+      ],
+      "cross_axis_anisotropy": 1.1438,
+      "master_corner_source_xyxy": [
+        0,
+        0,
+        350,
+        306
+      ],
+      "tongue_preservation": "tongue fits within first84 logical px; only neutral tails fade beyond84"
+    },
+    "bl": {
+      "panel_xyxy": [
+        23,
+        652,
+        603,
+        1182
+      ],
+      "source_cross_xy": [
+        174,
+        164
+      ],
+      "atlas_size": [
+        416,
+        416
+      ],
+      "logical_size": [
+        104,
+        104
+      ],
+      "cross_axis_anisotropy": 1.061,
+      "master_corner_source_xyxy": [
+        0,
+        0,
+        348,
+        328
+      ],
+      "tongue_preservation": "tongue fits within first84 logical px; only neutral tails fade beyond84"
+    },
+    "br": {
+      "panel_xyxy": [
+        651,
+        652,
+        1232,
+        1182
+      ],
+      "source_cross_xy": [
+        175,
+        164
+      ],
+      "atlas_size": [
+        416,
+        416
+      ],
+      "logical_size": [
+        104,
+        104
+      ],
+      "cross_axis_anisotropy": 1.0671,
+      "master_corner_source_xyxy": [
+        0,
+        0,
+        350,
+        328
+      ],
+      "tongue_preservation": "tongue fits within first84 logical px; only neutral tails fade beyond84"
+    }
+  },
+  "rails": {
+    "top-rail": {
+      "source_corners": [
+        "tl",
+        "tr"
+      ],
+      "source_direction": "h",
+      "native_stock_lengths_atlas_px": [
+        481,
+        483
+      ],
+      "stocks_used": 3,
+      "overlap_atlas_px": 48,
+      "wrap_overlap_atlas_px": 64,
+      "native_long_axis_scale": 1.0,
+      "period_logical": 256,
+      "method": "Full native-scale neutral beam runs from approved artwork, connected minimum-error overlaps; no short sculptural crop stretching."
+    },
+    "bottom-rail": {
+      "source_corners": [
+        "bl",
+        "br"
+      ],
+      "source_direction": "h",
+      "native_stock_lengths_atlas_px": [
+        449,
+        450
+      ],
+      "stocks_used": 3,
+      "overlap_atlas_px": 48,
+      "wrap_overlap_atlas_px": 64,
+      "native_long_axis_scale": 1.0,
+      "period_logical": 256,
+      "method": "Full native-scale neutral beam runs from approved artwork, connected minimum-error overlaps; no short sculptural crop stretching."
+    },
+    "left-rail": {
+      "source_corners": [
+        "tl",
+        "bl"
+      ],
+      "source_direction": "v",
+      "native_stock_lengths_atlas_px": [
+        329,
+        292
+      ],
+      "stocks_used": 4,
+      "overlap_atlas_px": 48,
+      "wrap_overlap_atlas_px": 64,
+      "native_long_axis_scale": 1.0,
+      "period_logical": 256,
+      "method": "Full native-scale neutral beam runs from approved artwork, connected minimum-error overlaps; no short sculptural crop stretching."
+    },
+    "right-rail": {
+      "source_corners": [
+        "tr",
+        "br"
+      ],
+      "source_direction": "v",
+      "native_stock_lengths_atlas_px": [
+        327,
+        290
+      ],
+      "stocks_used": 4,
+      "overlap_atlas_px": 48,
+      "wrap_overlap_atlas_px": 64,
+      "native_long_axis_scale": 1.0,
+      "period_logical": 256,
+      "method": "Full native-scale neutral beam runs from approved artwork, connected minimum-error overlaps; no short sculptural crop stretching."
+    }
+  },
+  "checks": {
+    "status": "packed from owner-approved artwork; all eight joins reviewed offline at three root sizes; native runtime unverified; deployment tracked separately",
+    "owner_approved_master_sha256": "8433cd73d14c4dade9b3578a2207e3c93d818601334a172378760e04e70f7633",
+    "result_atlas_sha256": "81a3c342645f9acc5ee4e4c865b1812ae10038aad77cff15e3aaf1e970c354ec",
+    "baseline_atlas_sha256": "67d372aeb4f7efd772b91b4f78fab72153fe4419dd28672d86f8f2feeaf12b0c",
+    "geometry_and_runtime_code_unchanged": true,
+    "all_non_ring_atlas_pixels_identical": true,
+    "alpha": "Geometric L extraction from opaque presentation master; no wood/brass luminance key. Corner tails beyond84logical fade over opaque rails. Client quadrant transparent.",
+    "corners": {
+      "tl": {
+        "panel_xyxy": [
+          23,
+          41,
+          603,
+          602
+        ],
+        "source_cross_xy": [
+          174,
+          153
+        ],
+        "atlas_size": [
+          416,
+          416
+        ],
+        "logical_size": [
+          104,
+          104
+        ],
+        "cross_axis_anisotropy": 1.1373,
+        "master_corner_source_xyxy": [
+          0,
+          0,
+          348,
+          306
+        ],
+        "tongue_preservation": "tongue fits within first84 logical px; only neutral tails fade beyond84"
+      },
+      "tr": {
+        "panel_xyxy": [
+          651,
+          41,
+          1232,
+          602
+        ],
+        "source_cross_xy": [
+          175,
+          153
+        ],
+        "atlas_size": [
+          416,
+          416
+        ],
+        "logical_size": [
+          104,
+          104
+        ],
+        "cross_axis_anisotropy": 1.1438,
+        "master_corner_source_xyxy": [
+          0,
+          0,
+          350,
+          306
+        ],
+        "tongue_preservation": "tongue fits within first84 logical px; only neutral tails fade beyond84"
+      },
+      "bl": {
+        "panel_xyxy": [
+          23,
+          652,
+          603,
+          1182
+        ],
+        "source_cross_xy": [
+          174,
+          164
+        ],
+        "atlas_size": [
+          416,
+          416
+        ],
+        "logical_size": [
+          104,
+          104
+        ],
+        "cross_axis_anisotropy": 1.061,
+        "master_corner_source_xyxy": [
+          0,
+          0,
+          348,
+          328
+        ],
+        "tongue_preservation": "tongue fits within first84 logical px; only neutral tails fade beyond84"
+      },
+      "br": {
+        "panel_xyxy": [
+          651,
+          652,
+          1232,
+          1182
+        ],
+        "source_cross_xy": [
+          175,
+          164
+        ],
+        "atlas_size": [
+          416,
+          416
+        ],
+        "logical_size": [
+          104,
+          104
+        ],
+        "cross_axis_anisotropy": 1.0671,
+        "master_corner_source_xyxy": [
+          0,
+          0,
+          350,
+          328
+        ],
+        "tongue_preservation": "tongue fits within first84 logical px; only neutral tails fade beyond84"
+      }
+    },
+    "rails": {
+      "top-rail": {
+        "source_corners": [
+          "tl",
+          "tr"
+        ],
+        "source_direction": "h",
+        "native_stock_lengths_atlas_px": [
+          481,
+          483
+        ],
+        "stocks_used": 3,
+        "overlap_atlas_px": 48,
+        "wrap_overlap_atlas_px": 64,
+        "native_long_axis_scale": 1.0,
+        "period_logical": 256,
+        "method": "Full native-scale neutral beam runs from approved artwork, connected minimum-error overlaps; no short sculptural crop stretching."
+      },
+      "bottom-rail": {
+        "source_corners": [
+          "bl",
+          "br"
+        ],
+        "source_direction": "h",
+        "native_stock_lengths_atlas_px": [
+          449,
+          450
+        ],
+        "stocks_used": 3,
+        "overlap_atlas_px": 48,
+        "wrap_overlap_atlas_px": 64,
+        "native_long_axis_scale": 1.0,
+        "period_logical": 256,
+        "method": "Full native-scale neutral beam runs from approved artwork, connected minimum-error overlaps; no short sculptural crop stretching."
+      },
+      "left-rail": {
+        "source_corners": [
+          "tl",
+          "bl"
+        ],
+        "source_direction": "v",
+        "native_stock_lengths_atlas_px": [
+          329,
+          292
+        ],
+        "stocks_used": 4,
+        "overlap_atlas_px": 48,
+        "wrap_overlap_atlas_px": 64,
+        "native_long_axis_scale": 1.0,
+        "period_logical": 256,
+        "method": "Full native-scale neutral beam runs from approved artwork, connected minimum-error overlaps; no short sculptural crop stretching."
+      },
+      "right-rail": {
+        "source_corners": [
+          "tr",
+          "br"
+        ],
+        "source_direction": "v",
+        "native_stock_lengths_atlas_px": [
+          327,
+          290
+        ],
+        "stocks_used": 4,
+        "overlap_atlas_px": 48,
+        "wrap_overlap_atlas_px": 64,
+        "native_long_axis_scale": 1.0,
+        "period_logical": 256,
+        "method": "Full native-scale neutral beam runs from approved artwork, connected minimum-error overlaps; no short sculptural crop stretching."
+      }
+    },
+    "native_runtime": "unverified",
+    "live_install": false,
+    "crane": {
+      "joint_tr": [
+        33.5,
+        48.0
+      ],
+      "unrelated_atlas_pixels_unchanged": true,
+      "parts": {
+        "layers/crane.png": {
+          "size": [
+            264,
+            189
+          ]
+        },
+        "layers/crane-hook.png": {
+          "size": [
+            176,
+            49
+          ]
+        }
+      }
+    },
+    "layer:crane": {
+      "size": [
+        264,
+        189
+      ],
+      "alpha_coverage": 0.3485
+    },
+    "layer:crane-hook": {
+      "size": [
+        176,
+        49
+      ],
+      "alpha_coverage": 0.2897
+    }
+  },
+  "wood": {
+    "source": "source/approved-four-corners-matched-fasteners.webp",
+    "authority": "Owner-approved new four-corner artwork; corners and neutral rails use the same material."
+  },
+  "generation": {
+    "provider": "openai-codex",
+    "actual_model": "gpt-image-2-codex",
+    "reported_quality": "low",
+    "master": "source/approved-four-corners-matched-fasteners.webp",
+    "master_sha256": "8433cd73d14c4dade9b3578a2207e3c93d818601334a172378760e04e70f7633",
+    "actual_size": [
+      1254,
+      1254
+    ],
+    "manifest": "source/approved-four-corners-generation.json",
+    "assembly": "source/approved-frame-assembly.json",
+    "source_files": {
+      "approved-four-corners-generation.json": {
+        "sha256": "a8e4000ae581f1bca5755a4a43e98765373fc0f8d68021123bde4f5415450729",
+        "bytes": 14470
+      },
+      "approved-four-corners-matched-fasteners.webp": {
+        "sha256": "8433cd73d14c4dade9b3578a2207e3c93d818601334a172378760e04e70f7633",
+        "bytes": 1174432
+      },
+      "approved-frame-assembly.json": {
+        "sha256": "d5294ce72d7b6bc2517e42e44ed4ca7e9be657a2701793fc6df87034bd910e78",
+        "bytes": 4858
+      },
+      "brass-gpt-image-2.webp": {
+        "sha256": "539eac87e9e091958bdbe537eefccb4619d2ed258d6c3b3d363c1fc12e49f8a5",
+        "bytes": 992596
+      },
+      "corners-gpt-image-2.webp": {
+        "sha256": "decbf63d62e8423c86347c0a70de60d797992251fbacfef288372a10ed4efe70",
+        "bytes": 954038
+      },
+      "crane-bracket-gpt-image-2.webp": {
+        "sha256": "761a1047be3f5391fd7a57e6779e9636f1fa33802bb818504ec0598c792f1692",
+        "bytes": 310624
+      },
+      "crane-gpt-image-2.webp": {
+        "sha256": "6ef8bfa0a22a3bf488efc82e8aaa8a4d2e4d61c864426d6772c559d673dbf37f",
+        "bytes": 461012
+      },
+      "crane-washi-generation.json": {
+        "sha256": "cad7ff5f246faa6dbf0e362a535eda2a193c38ebc75bb2b37fa3eee7ee0d6187",
+        "bytes": 26114
+      },
+      "crane-washi-gpt-image-2.webp": {
+        "sha256": "1a268ac4f7ae4a8dd8302f70b7e9e3d53a7b7b7b146d20fb5834e02482672e9a",
+        "bytes": 528870
+      },
+      "generation-manifest.json": {
+        "sha256": "fd8312328deb99bbedd4ba0b2be30e01328c9979b6524de3ef90fb4101ebe59f",
+        "bytes": 3062
+      },
+      "lamp-gpt-image-2.webp": {
+        "sha256": "eca788dc71325565b192726ac951bff5290b4786f78d5e111b1c7096977940bb",
+        "bytes": 688560
+      },
+      "legacy/crane-hook.png": {
+        "sha256": "fecf57f048f6d53383b07bd0dc5f9d154ec4b30ecc116a1ce5bb0c102d2e1960",
+        "bytes": 1552
+      },
+      "legacy/lamp-wood-glow.png": {
+        "sha256": "2f91db585afe910ba6b0584f6404f98a592c1f066ee73f42c9574824a457d125",
+        "bytes": 22364
+      },
+      "legacy/roll.png": {
+        "sha256": "213b9fa9fe86cda85ab0e2f700b490136bdbcf677c4aabafb015c5f7a0b4da79",
+        "bytes": 31802
+      },
+      "legacy/slat.png": {
+        "sha256": "13e9bb4c9820912cf3c0ed98f0bfc23432e127bd96c2a8992054223c11719094",
+        "bytes": 23242
+      },
+      "legacy/tie-a.png": {
+        "sha256": "792d8afa040e009a072ac28c56949068247986e44b4430bb5892939d5749cdef",
+        "bytes": 8998
+      },
+      "legacy/tie-b.png": {
+        "sha256": "c0a498b7b25e9db302d2a6bbb2c04b13b95448e6ad59b894d6d50b29f3c78588",
+        "bytes": 9274
+      },
+      "wood-detail-generation.json": {
+        "sha256": "b1bb10fa877565ff33a65d3ded5eff5bd92d2955f289eaba016689eebe95569b",
+        "bytes": 900
+      },
+      "wood-detail-gpt-image-2.webp": {
+        "sha256": "697a10127929da33fd3f976e144c5156fff2dd3c2cbf0f2cf00e6dd56c798ae4",
+        "bytes": 1216154
+      },
+      "wood-gpt-image-2.webp": {
+        "sha256": "e1a0e2380a778b48f20cbd31109ac841de57eed941193de4ed9a830fe2f4722d",
+        "bytes": 821602
+      },
+      "wood-grain-redrawn-gpt-image-2.webp": {
+        "sha256": "cd5f0088c7e9f65e9bbbf4b9743d3e760712c95b297c86ea52809298c42b0a2c",
+        "bytes": 1043302
+      },
+      "wood-long-corner-generation.json": {
+        "sha256": "8523018c4af6cc27a053480c5803d5818d20ebcb939dd435a50204a70ebe0d6f",
+        "bytes": 770
+      },
+      "wood-long-corner-gpt-image-2.webp": {
+        "sha256": "b9dee6a12824ce7a937d512a973528fedcb55f574e67671d19c619ab7d58e389",
+        "bytes": 835000
+      },
+      "wood-polish-generation.json": {
+        "sha256": "951b27477d5744f4d103c8faa4c1ce770fb8a15e68b87d931771dbb395f499dc",
+        "bytes": 1288
+      },
+      "wood-polished-gpt-image-2.webp": {
+        "sha256": "6ae2da7905556b3a56cae1fd1a7c543b5cfa8379936f420c954034e8e6800725",
+        "bytes": 1052386
+      },
+      "wood-redraw-request.json": {
+        "sha256": "7bfe62857b7a7d48a0a47665f703596707c22d6430f8041cb61e8191e705dd68",
+        "bytes": 13833
+      }
+    },
+    "crane_manifest": "source/crane-washi-generation.json"
+  }
+}

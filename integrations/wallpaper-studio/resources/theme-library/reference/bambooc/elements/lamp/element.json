@@ -1,0 +1,17 @@
+{
+  "kind": "object",
+  "roles": [
+    "foreground",
+    "accent-light"
+  ],
+  "unique": true,
+  "components": [
+    "body",
+    "paper",
+    "halo",
+    "bracket"
+  ],
+  "source": "assets/design-faithful/source.json",
+  "motion": "pendant at fixed bracket; one causal energy signal",
+  "approval": "master/construction accepted in recorded source; animation runtime unverified"
+}

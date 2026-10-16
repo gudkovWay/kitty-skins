@@ -1,0 +1,195 @@
+{
+  "status": "packed from owner-approved artwork; all eight joins reviewed offline at three root sizes; native runtime unverified; deployment tracked separately",
+  "owner_approved_master_sha256": "8433cd73d14c4dade9b3578a2207e3c93d818601334a172378760e04e70f7633",
+  "result_atlas_sha256": "81a3c342645f9acc5ee4e4c865b1812ae10038aad77cff15e3aaf1e970c354ec",
+  "baseline_atlas_sha256": "67d372aeb4f7efd772b91b4f78fab72153fe4419dd28672d86f8f2feeaf12b0c",
+  "geometry_and_runtime_code_unchanged": true,
+  "all_non_ring_atlas_pixels_identical": true,
+  "alpha": "Geometric L extraction from opaque presentation master; no wood/brass luminance key. Corner tails beyond84logical fade over opaque rails. Client quadrant transparent.",
+  "corners": {
+    "tl": {
+      "panel_xyxy": [
+        23,
+        41,
+        603,
+        602
+      ],
+      "source_cross_xy": [
+        174,
+        153
+      ],
+      "atlas_size": [
+        416,
+        416
+      ],
+      "logical_size": [
+        104,
+        104
+      ],
+      "cross_axis_anisotropy": 1.1373,
+      "master_corner_source_xyxy": [
+        0,
+        0,
+        348,
+        306
+      ],
+      "tongue_preservation": "tongue fits within first84 logical px; only neutral tails fade beyond84"
+    },
+    "tr": {
+      "panel_xyxy": [
+        651,
+        41,
+        1232,
+        602
+      ],
+      "source_cross_xy": [
+        175,
+        153
+      ],
+      "atlas_size": [
+        416,
+        416
+      ],
+      "logical_size": [
+        104,
+        104
+      ],
+      "cross_axis_anisotropy": 1.1438,
+      "master_corner_source_xyxy": [
+        0,
+        0,
+        350,
+        306
+      ],
+      "tongue_preservation": "tongue fits within first84 logical px; only neutral tails fade beyond84"
+    },
+    "bl": {
+      "panel_xyxy": [
+        23,
+        652,
+        603,
+        1182
+      ],
+      "source_cross_xy": [
+        174,
+        164
+      ],
+      "atlas_size": [
+        416,
+        416
+      ],
+      "logical_size": [
+        104,
+        104
+      ],
+      "cross_axis_anisotropy": 1.061,
+      "master_corner_source_xyxy": [
+        0,
+        0,
+        348,
+        328
+      ],
+      "tongue_preservation": "tongue fits within first84 logical px; only neutral tails fade beyond84"
+    },
+    "br": {
+      "panel_xyxy": [
+        651,
+        652,
+        1232,
+        1182
+      ],
+      "source_cross_xy": [
+        175,
+        164
+      ],
+      "atlas_size": [
+        416,
+        416
+      ],
+      "logical_size": [
+        104,
+        104
+      ],
+      "cross_axis_anisotropy": 1.0671,
+      "master_corner_source_xyxy": [
+        0,
+        0,
+        350,
+        328
+      ],
+      "tongue_preservation": "tongue fits within first84 logical px; only neutral tails fade beyond84"
+    }
+  },
+  "rails": {
+    "top-rail": {
+      "source_corners": [
+        "tl",
+        "tr"
+      ],
+      "source_direction": "h",
+      "native_stock_lengths_atlas_px": [
+        481,
+        483
+      ],
+      "stocks_used": 3,
+      "overlap_atlas_px": 48,
+      "wrap_overlap_atlas_px": 64,
+      "native_long_axis_scale": 1.0,
+      "period_logical": 256,
+      "method": "Full native-scale neutral beam runs from approved artwork, connected minimum-error overlaps; no short sculptural crop stretching."
+    },
+    "bottom-rail": {
+      "source_corners": [
+        "bl",
+        "br"
+      ],
+      "source_direction": "h",
+      "native_stock_lengths_atlas_px": [
+        449,
+        450
+      ],
+      "stocks_used": 3,
+      "overlap_atlas_px": 48,
+      "wrap_overlap_atlas_px": 64,
+      "native_long_axis_scale": 1.0,
+      "period_logical": 256,
+      "method": "Full native-scale neutral beam runs from approved artwork, connected minimum-error overlaps; no short sculptural crop stretching."
+    },
+    "left-rail": {
+      "source_corners": [
+        "tl",
+        "bl"
+      ],
+      "source_direction": "v",
+      "native_stock_lengths_atlas_px": [
+        329,
+        292
+      ],
+      "stocks_used": 4,
+      "overlap_atlas_px": 48,
+      "wrap_overlap_atlas_px": 64,
+      "native_long_axis_scale": 1.0,
+      "period_logical": 256,
+      "method": "Full native-scale neutral beam runs from approved artwork, connected minimum-error overlaps; no short sculptural crop stretching."
+    },
+    "right-rail": {
+      "source_corners": [
+        "tr",
+        "br"
+      ],
+      "source_direction": "v",
+      "native_stock_lengths_atlas_px": [
+        327,
+        290
+      ],
+      "stocks_used": 4,
+      "overlap_atlas_px": 48,
+      "wrap_overlap_atlas_px": 64,
+      "native_long_axis_scale": 1.0,
+      "period_logical": 256,
+      "method": "Full native-scale neutral beam runs from approved artwork, connected minimum-error overlaps; no short sculptural crop stretching."
+    }
+  },
+  "native_runtime": "unverified",
+  "live_install": false
+}

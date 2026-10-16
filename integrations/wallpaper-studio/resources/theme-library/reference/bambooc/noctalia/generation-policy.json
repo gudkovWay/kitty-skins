@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "policy_id": "noctalia-wallpaper-first",
+  "revision": "2026-10-04-v5",
+  "scope": "noctalia-ui-concept-generation",
+  "delivery": {
+    "consumer": "current authoring agent-driven standalone concept generation; the agent reads and freezes the whole configuration and embeds it into EACH actual image request subject",
+    "delivery_rule": "embed the complete configuration in the actual request subject together with the policy source digest and an immutable snapshot before tool invocation",
+    "skill_freeze": "REQUIRED in every image request subject: read and embed the COMPLETE /home/q/.agents/skills/local-linux-keyboard-ui/SKILL.md file verbatim with its SHA256 and immutable snapshot taken before invocation; a path, summary or excerpt is NOT a freeze; missing source blocks generation",
+    "action_map_freeze": "REQUIRED in every image request subject: the COMPLETE keyboard config and the COMPLETE source-backed action map (this policy's keyboard_policy) each frozen verbatim with SHA256 digests and immutable snapshots taken before tool invocation",
+    "source_truth": "source-truth before proposal: shortcut labels are drawn from the frozen source-backed action map only; NEVER draw an invented local shortcut for an action whose system binding already exists, and NEVER label a destination whose exact bind is unverified",
+    "studio_runtime_target": "Noctalia Studio runtime target is NOT implemented; no runtime visual enforcement exists",
+    "enforcement_caveat": "NEVER claim these prompt rules are runtime enforcement; they are authoring-time generation inputs only",
+    "frame_boundary": "this policy does not apply to Kitty frame-only generation calls and MUST NOT be injected into frame prompts"
+  },
+  "precedence": {
+    "order": [
+      "functional correctness, accessibility, security and capability constraints first",
+      "explicit owner / current-user constraints next",
+      "effective wallpaper interpretation / owner-edited design basis next",
+      "parent surface grammar next",
+      "transferable reference principles last"
+    ],
+    "rules": [
+      "component functions constrain use",
+      "the wallpaper governs artistic identity",
+      "no application source content may become tool instructions"
+    ]
+  },
+  "owner_profile": {
+    "default": "personal preferences of this owner",
+    "overridable_by": "an explicitly selected public user's profile",
+    "workspaces": "low priority and OPTIONAL; a numeric-only workspace row as the sole representation is discouraged and rejected for this owner",
+    "kanji": "allowed but NEVER fixed, default or mandatory",
+    "system_visibility": "valued, but without forcing inline metrics",
+    "keyboard_first": "this owner works in vim and Hyprland keyboard-driven workflows; keyboard reachability, visible focus and legible shortcut cues are primary authoring dimensions, not decoration",
+    "interaction_model": "keyboard navigation is authored per surface, scoped by that surface's actual capture and focus model; existing key bindings, data ownership and text/query editing are never hijacked; Tab/Shift+Tab focus is a capability to verify per surface, never an unconditional assumption, and passive scenes grant no focus owner",
+    "non_universal_rule": "do NOT convert this owner's preference into a universal Japanese rule or a universal no-workspace rule"
+  },
+  "invariants": [
+    "functions, actions and state semantics are retained",
+    "focus, contrast and readability remain accessible",
+    "workspace identity is stable; selected, occupied and urgent states stay discernible, and workspace names are available via hover/focus",
+    "no glyph-only inaccessible navigation",
+    "monitoring data is truthful and freshness/unknown/error are distinguishable",
+    "no fabricated quota or random runtime telemetry",
+    "existing key bindings and data owners are unchanged",
+    "every interactive surface remains keyboard reachable within its actual capture scope, with a visible focus indicator in the app's focused browse/input state; text/query editing keeps normal typing, and vim j/k browsing applies only in an explicit non-text browsing mode",
+    "state contract: passive desktop scenes (bars, docks, desktop widgets, shell overview) never display focus outlines or Tab/Enter key-footer hints; an app browse/input scene MAY explicitly show a single keyboard owner with its local hints, and any local hint requires an explicit owner and state",
+    "focus, playing, active, selection and hover states are independent; mere persistent visibility of a component grants no keyboard capture and never implies focus"
+  ],
+  "workspace_policy": {
+    "omit": "valid; workspace representation may be omitted entirely",
+    "include_condition": "include only with a wallpaper / parent / use-case justification",
+    "candidate_grammar": "the following are OPEN examples, not a fixed symbol deck: semantic silhouettes; miniature spatial or art landmarks; typography/ligatures; material notches; meaningful ideograms",
+    "prohibitions": [
+      "no 1/2/3-only numeric row",
+      "no recurring default Japanese alphabet",
+      "no meaningless redraw of IDs on every hover or every frame",
+      "no duplicated navigation across bar, dock and strip"
+    ],
+    "stability": "stable per accepted design/identity; reselect only on an explicit new generation, never on runtime events"
+  },
+  "monitoring_policy": {
+    "choice": "conditional choice among (a) inline compact telemetry, (b) dashboard-first System entry, or (c) hybrid",
+    "dashboard_first": "a dashboard-first bar entry exposes a short truthful hover/focus summary and a click opens System directly, NOT an arbitrary Overview",
+    "reachability": "full metrics remain reachable",
+    "native_vs_proposed": "distinguish existing native behavior from a proposed destination until it is implemented",
+    "placement_decision": "the model decides placement based on composition, readability and user needs, not a rigid always-inline or never-inline rule",
+    "truthfulness": "no fabricated metrics presented as real evidence"
+  },
+  "variation_policy": {
+    "filtering": "filter candidates through the invariants, the current user's constraints and wallpaper coherence before choosing",
+    "seed_scope": "selection seed/history applies to eligible design decisions only; it does NOT guarantee deterministic LLM/raster image outputs (the image tool has no seed argument)",
+    "freeze": "freeze the chosen branch, its reasons, the wallpaper identity, the configuration digest and reference versions; preserve both rejected and accepted decisions",
+    "diversity": "avoid repeated visual grammar and the same anatomy across concept directions",
+    "cadence": "selection is per design generation, not runtime random jitter",
+    "no_invented_constraints": "no invented fixed probabilities and no forced Japanese quota",
+    "owner_priority": "an explicit owner revision has priority over novelty"
+  },
+  "wallpaper_first": {
+    "process": [
+      "source / effective wallpaper direction",
+      "use-case plus keyboard needs and capability constraints",
+      "shell topology candidate selection",
+      "geometry, width and reserved-space decisions",
+      "per-surface art grammar plus action/focus mapping",
+      "image generation",
+      "independent visual and owner acceptance"
+    ],
+    "design_decisions": "count, roles and placement are design decisions, not an assumed left/center/right strip",
+    "derivation": "derive a common material / light / contour / spacing / type / motion grammar from the observed wallpaper plus the effective edited design basis and the parent grammar",
+    "evidence": "identify missing evidence; allow scoped reanalysis only if necessary and authorized; NEVER switch the wallpaper or the live desktop in order to gather evidence",
+    "adaptation": "transfer why and how a reference works, then adapt working code to these principles; do not copy motifs by default, trace screens, or splice conflicting geometries",
+    "application": "one shared art direction is applied at module-specific functional density, not identical windows everywhere",
+    "rights": "reference/code provenance and rights are separate from local availability and from publication approval"
+  },
+  "topology_policy": {
+    "open_set": "topologies are open-ended; examples include a single bar, split panels/islands, an optional dock, permanent desktop widgets, and a visible music stage paired with a side or bottom system panel",
+    "mandate": "neither a dock nor a popout is mandated; persistent music is a valid first-class arrangement and may be the primary surface",
+    "freeze_semantics": "style-only freezes topology, placement, component membership and geometry; suggest-layout only proposes; auto-layout is permitted only within explicit allowed capabilities and constraints",
+    "capability_caveat": "an unsupported topology is proposed, never claimed as a native implementation"
+  },
+  "width_policy": {
+    "semantics": [
+      "content-sized",
+      "bounded-content",
+      "available-width"
+    ],
+    "semantic_note": "these are semantic width policies, not literal QML/CSS values",
+    "full_width_caveat": "full width does not imply mandatory giant gaps",
+    "record": "record anchor/group alignment, maximum screen fraction, overflow and long-text behavior, and a stable width policy with no runtime jitter"
+  },
+  "surface_rules": {
+    "bar": "compact composition; no mandatory navigation; the Cut Stone owner branch is content-sized (bounded-content compact rail based on the preferred r02 geometry, no legacy workspace digits)",
+    "launcher": "preserve native search, providers and keyboard behavior; optional attachment to bar/dock; no mandatory workspace strip; global open is the resolved Win+D binding; the current Applications selector's next/previous filter and next/previous result hints remain PROPOSED until source-verified — render them only in a focused launcher scene with proposed-status labels, never as native affordances",
+    "dashboard": "Summary/System entry; density hierarchy; no placeholder quota dials; section navigation stays dashboard-local (proposed Ctrl+j/k within the open dashboard only, no global scope claims); the focused dashboard scene shows visible section focus (System -> AI -> Music order for this workbench comparison); opening System itself has no resolved shortcut and MUST NOT carry a shortcut label",
+    "game_picker": "preserve real games, library, selection, keyboard and gamepad actions; the UI is not an invented game",
+    "ai": "limits, analysis, bot, logs, memory and genuine quota state; not a generic chat",
+    "music": "Home/Search/Library/Clients/EQ; transport, queue, ratings and providers preserved; a real EQ with 10 bands, no five-band replacement; persistent music is a valid primary surface",
+    "wallpaper_studio_and_other_plugins": "preserve context, generation, select, library, feedback and apply actions; no silent reorganization of backend services or authority; inherit keyboard reachability, focus and shortcuts with existing functional parity without forced regeneration"
+  },
+  "philosophy_diversity": {
+    "dimensions": "directions must differ in at least information architecture, spatial composition/navigation and disclosure, alongside visual grammar",
+    "documentation": "before image production, document those differences and reject a restyled clone",
+    "bar_constraint": "a bar at constrained height may share basic data roles but not identical construction",
+    "hypotheses": {
+      "selected_by": "main",
+      "comparison_scope": "these three hypotheses belong to the current owner comparison only; they are not a closed style catalogue or a mandatory count for future generation",
+      "count": 3,
+      "names": [
+        "relational spatial field",
+        "contextual staged scene",
+        "dense adaptive workbench"
+      ],
+      "caveat": "names do not establish quality or acceptance"
+    }
+  },
+  "owner_feedback": {
+    "development_basis": "the exact Cut Stone bar-r02 (NOT r03) is the development basis",
+    "launcher": "launcher r02/r03 has no meaningful difference for the owner; do NOT rerun the comparison as proof",
+    "liked": [
+      "Cut Stone dashboard-r02 liked (not a complete runtime acceptance)",
+      "Cut Stone music-r02 liked (not a complete runtime acceptance)",
+      "Folded Field liked, with several contour/height-transition bar compositions required"
+    ],
+    "folded_field_crop": "the attached crop is contour-only evidence; NEVER copy its numeric workspace row",
+    "not_current": "Orbital Instrument and Signal Press are not appealing and are not current development directions; preserve their history, and do NOT treat this as a global ban on circular/editorial principles",
+    "cut_stone": "the Cut Stone owner branch is content-sized with the preferred r02 geometry and no legacy workspace digits",
+    "stagecraft": {
+      "correction": "the current stepped combined rail is not accepted for daily use",
+      "candidates": [
+        "persistent desktop music widget plus side system panel",
+        "permanent top-centre music scene plus side system panel",
+        "permanent top-centre music scene plus bottom system panel"
+      ],
+      "forbidden_collapse": "do NOT collapse every candidate into a thin bar plus a music popout",
+      "capability_record": "per-monitor usable geometry, wallpaper focal-area / negative-space occupancy, and tiling / exclusive-zone / layer / input considerations are design and capability records, not native implementation claims"
+    }
+  },
+  "keyboard_policy": {
+    "profile": "owner is keyboard-first (vim and Hyprland workflows); render shortcuts from the frozen source-backed action map: resolved global entries are config-observed and labelable on their exact destinations, while proposed local entries carry proposed status and scope",
+    "no_runtime_bindings": "image guidance does not add or change runtime bindings; existing bindings and data ownership are preserved",
+    "launcher": {
+      "next_filter": "Ctrl+Tab - next Applications/launcher filter",
+      "previous_filter": "Ctrl+Shift+Tab - previous launcher filter",
+      "next_result": "Ctrl+N - next result",
+      "previous_result": "Ctrl+P - previous result",
+      "open": "Enter - open",
+      "close": "Esc - close",
+      "browse_mode": "vim j/k navigate only in an explicit browsing focus/mode and NEVER hijack text search or query editing",
+      "filter_state": "filters keep the query and a visible current state; boundary/cycling semantics are recorded, not silently invented",
+      "global_open": "resolved: Win+D toggles the launcher (binds.lua, 'panel-toggle launcher'); render this label only for the launcher surface itself",
+      "status": "Ctrl+Tab / Ctrl+Shift+Tab / Ctrl+N / Ctrl+P / Enter / Esc above remain PROPOSED unless verified in source; never present them as native"
+    },
+    "dashboard": {
+      "open_system": "no resolved binding exists for the exact System destination; render NO shortcut label for opening System until the exact destination/bind is established",
+      "open_music": "resolved global: Win+Alt+M toggles q/tmus:library (binds.lua, 'panel-toggle q/tmus:library'); render this label only when the surface's exact destination is q/tmus:library",
+      "open_ai": "resolved global: Win+Alt+A toggles q/ai-triage:triage (binds.lua, 'panel-toggle q/ai-triage:triage'); render this label only when the surface's exact destination is q/ai-triage:triage",
+      "no_proposed_alt_chords": "the previously proposed Alt+S / Alt+M / Alt+A dashboard-local chords are withdrawn; they MUST NOT appear in any image",
+      "next_section": "Ctrl+J - next section (proposed dashboard-local only, no global scope)",
+      "previous_section": "Ctrl+K - previous section (proposed dashboard-local only, no global scope)",
+      "vertical_sections": "Ctrl+J / Ctrl+K, and j/k in non-text browsing mode, move vertically through sections while the dashboard owns focus",
+      "section_order": "logical sequence System -> AI -> Music for this workbench comparison; other anatomies record a consistent own order",
+      "focus": "the focused section is visible; Enter activates the focused action; focus does not silently launch a plugin",
+      "preserve": "text controls retain normal editing; proposed local mappings avoid compositor/global conflicts and stay configurable"
+    },
+    "global": {
+      "resolved_map": {
+        "status": "config-observed in ~/.config/hypr/config/binds.lua (read 2026-10-04); NOT runtime-exercised",
+        "launcher": "Win+D - panel-toggle launcher",
+        "wallpaper_studio": "Win+Alt+W - panel-toggle q/wallpaper-studio:studio",
+        "ai_triage": "Win+Alt+A - panel-toggle q/ai-triage:triage",
+        "music_library": "Win+Alt+M - panel-toggle q/tmus:library",
+        "control_center": "Win+X - panel-toggle control-center",
+        "session_lock": "Win+Alt+L - session lock"
+      },
+      "tab_focus": "Tab/Shift+Tab focus access is NOT a blanket assumption: it is claimed only where the target surface's capture model establishes it; a visible focus indicator applies in an app's focused browse/input state",
+      "hyprland_scope": "proposed bindings stay panel-local and MUST NOT require or claim Hyprland global scope changes; the resolved global map above is recorded from source, not modified",
+      "rendered_map_only": "shortcut labels MUST correspond to the frozen source-backed action map and the surface's exact destination and focus scope; NEVER invent letter bindings for unmapped actions; never draw an invented local shortcut for a system action that already has a resolved global binding; Tab changes focus where a focus model exists, never activates Power; j/k section navigation MUST NOT double as media transport in the same focus mode",
+      "no_native_claim": "generic keyboard reachability is an authoring/design requirement and MUST NOT be claimed as a host-native capability; distinguish config-observed from runtime-exercised in every record",
+      "parity": "all other plugin surfaces inherit keyboard reachability, focus and shortcuts with existing functional parity, without forced regeneration"
+    },
+    "tmus_compatibility": {
+      "status": "recorded from deployed source ~/.config/hypr/noctalia-plugins/tmus (plugin.toml capture_keys, panel.luau onKey); config/source-observed, NOT runtime-exercised; this profile is preserved, not redesigned",
+      "section_nav": "Ctrl+j / Ctrl+k (with Cyrillic ctrl+о/л twins) move sections GLOBALLY within the open panel, including during search insert and over the help modal; only media keys and these section chords punch through the modal",
+      "buffer_toggle": "Tab / Ctrl+h / Ctrl+l (respectively Cyrillic ctrl+р / ctrl+д) TOGGLE between the two buffers (central list <-> queue) in both directions; it is a toggle, not directional focus cycling",
+      "shift_tab": "Shift+Tab is NOT established in the capture; no image may depict a Shift+Tab behavior or hint",
+      "modality": "plain keys split by mode: content/browse keys (j/k, arrows, Enter, Space, n/p, <, >, h/l, digits, g) act in normal/browse, while the same letters insert as text in search insert (i / slash / period enter insert; Esc or jj/jk pair exits); h/l are EQ band/preset keys in the EQ view and grid/± movement elsewhere",
+      "modal_first": "the help modal (?) and playlist-name input and playlist picker claim keys first, except the explicitly reserved routes above; unrecognized keys in the queue buffer fall through to the global map",
+      "no_fallthrough_copy": "the hidden central-content fallthrough of unrecognized keys is an implementation detail; NEVER copy or depict it as designed behavior",
+      "global_open": "Win+Alt+M opens/toggles this panel from the compositor; inside the panel the keys above apply"
+    },
+    "scenario_contract": {
+      "passive": "bars, docks, persistent desktop widgets and the shell overview are passive by default: no focus outlines, no Tab/Enter key footers, no owner hints; focus/playing/active/selection/hover are independent states and persistent visibility grants no capture",
+      "focused": "only an app scene in an explicit browse/input state may show a single keyboard owner with that owner's local hints; hints must name the owner and state and match the frozen action map"
+    },
+    "status": "resolved global keys are config-observed from binds.lua; dashboard Ctrl+j/k and all launcher filter/result keys are proposed local-only for this comparison, not established or native"
+  },
+  "revision_rules": {
+    "one_surface": "one actual UI surface per image; no collages, no state insets, no multiple apps",
+    "topology_overview_exception": "narrow exception - a clearly labelled topology-overview may be one coherent desktop shell composition using the same wallpaper and multiple coordinated shell components; it is NOT a collage of app screenshots or state insets and does NOT combine acceptance; each component remains independently revisable and accepted",
+    "acceptance_scope": "acceptance is per family / surface / variant / revision, not whole-family acceptance",
+    "no_forced_regen": "accepted siblings are not regenerated absent an explicit dependency",
+    "status_separation": "keep concept / implemented / runtime-exercised / owner-accepted as separate statuses",
+    "static_proof": "no static image can prove hover, anchoring, audio animation or native capability"
+  },
+  "request_record": {
+    "required": [
+      "request policy source, digest and snapshot",
+      "selected variant and reason",
+      "owner profile and version",
+      "effective wallpaper basis identity",
+      "parent grammar",
+      "reference roles and digests",
+      "action/state mapping",
+      "role, topology and geometry decisions",
+      "proposed keybinding map and scope",
+      "frozen local-linux-keyboard-ui skill: full verbatim snapshot and SHA256 digest from /home/q/.agents/skills/local-linux-keyboard-ui/SKILL.md; missing source blocks generation",
+      "frozen complete keyboard config and complete source-backed action map with SHA256 digests and immutable snapshots",
+      "exact source/capture/handler map: per rendered shortcut the exact source line, capture_keys entry (if any) and handler status (config-observed / source-observed / runtime-exercised / proposed)",
+      "keyboard focus owner and scenario: named owner component, its state (passive or focused browse/input), and confirmation that passive scenes carry no focus outline or key-footer hints",
+      "capability status including unsupported capabilities",
+      "chosen monitoring/workspace branch",
+      "exact tool request/response/output metadata",
+      "individual owner decision and status"
+    ],
+    "synthetic_content": "concepts may use clearly marked synthetic comparison content, but NEVER secrets or actual personal data in public assets",
+    "publication": "publication is not authorized automatically"
+  }
+}

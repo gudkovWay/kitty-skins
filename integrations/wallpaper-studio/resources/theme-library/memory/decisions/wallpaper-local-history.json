@@ -1,0 +1,8 @@
+{
+  "status": "accepted",
+  "scope": [
+    "all"
+  ],
+  "source": "owner feedback in current architecture task",
+  "decision": "Creative history is wallpaper-local; common rule/reference knowledge has its own scoped history."
+}

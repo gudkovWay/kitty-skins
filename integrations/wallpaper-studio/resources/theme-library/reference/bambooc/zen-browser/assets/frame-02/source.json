@@ -1,0 +1,27 @@
+{
+  "source_atlas_sha256": "0123fe5ff9ea178ac8f2d72867697306a13b2a08ac65ac313c785d25971a5acc",
+  "source_brass_sha256": "c08e432954b6c54e575d66ea44a37cefddc6d6ad6c3b77287acb8696f141a079",
+  "source_identity": "rainlit-frames/02/design-faithful, approved-four-corner-fasteners",
+  "cuts_xyxy": {
+    "wood-horizontal.png": [
+      792,
+      1618,
+      1816,
+      1814
+    ],
+    "wood-vertical.png": [
+      10,
+      4,
+      206,
+      1028
+    ]
+  },
+  "logical_repeat_px": 256,
+  "sampling": "neutral rail stock only; opaque original RGBA; source pixels preserved",
+  "brass_usage": "border-image without center fill; original rivet is not a browser glyph",
+  "outputs": {
+    "wood-horizontal.png": "593e38357be7ad1f33a920294909605689dae9b814560dffb007efbd0a321525",
+    "wood-vertical.png": "50994fd4f24d691abf6d77dd5c16943b23f6cbbef373bfff331ed2aa679d8456",
+    "brass.png": "c08e432954b6c54e575d66ea44a37cefddc6d6ad6c3b77287acb8696f141a079"
+  }
+}

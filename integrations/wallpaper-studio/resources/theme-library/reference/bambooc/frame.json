@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "id": "bambooc-frame-02",
+  "renderer": "shojiwm/rainlit",
+  "units": "logical pixels unless explicitly source pixels",
+  "readiness": "accepted source construction; runtime unverified in this task",
+  "master": "frame.png",
+  "approved_master": "assets/master.webp",
+  "source_metadata": "assets/design-faithful/source.json",
+  "source_asset_base": "assets/design-faithful",
+  "atlas": "assets/design-faithful/frame-atlas.png",
+  "ring": {
+    "inset_logical": 52,
+    "corner_canvas_logical": [
+      104,
+      104
+    ],
+    "corner_arm_logical": [
+      52,
+      52
+    ],
+    "rail_period_logical": {
+      "horizontal": 256,
+      "vertical": 256
+    },
+    "minimum_root": [
+      480,
+      320
+    ],
+    "outsets": {
+      "left": 0,
+      "right": 112,
+      "top": 24,
+      "bottom": 0
+    }
+  },
+  "crane": {
+    "design": "compact warm washi crane, rigid cotton cord, fixed brass support",
+    "joint_tr": [
+      33.5,
+      48.0
+    ],
+    "parts": {
+      "crane": {
+        "source": "source/crane-washi-gpt-image-2.webp",
+        "sha256": "1a268ac4f7ae4a8dd8302f70b7e9e3d53a7b7b7b146d20fb5834e02482672e9a",
+        "source_size": [
+          1406,
+          1119
+        ],
+        "source_rect": [
+          100,
+          211,
+          1311,
+          1079
+        ],
+        "socket_source": [
+          704,
+          211
+        ],
+        "logical_per_source_px": 0.054500412881915775
+      },
+      "crane-hook": {
+        "source": "source/crane-bracket-gpt-image-2.webp",
+        "sha256": "761a1047be3f5391fd7a57e6779e9636f1fa33802bb818504ec0598c792f1692",
+        "source_size": [
+          2172,
+          724
+        ],
+        "source_rect": [
+          278,
+          115,
+          1890,
+          560
+        ],
+        "socket_source": [
+          1808,
+          495
+        ],
+        "logical_per_source_px": 0.02729528535980149
+      }
+    },
+    "cut": "old screw-eye above y=211 excluded; complete paper and remaining cord retained",
+    "motion": "whole pendant pivots at the fixed eye; no wing deformation"
+  },
+  "lamp": {
+    "source_size": [
+      1024,
+      1536
+    ],
+    "alpha_threshold": "alpha > 89 of 255",
+    "bracket_arm_rows": [
+      62,
+      191
+    ],
+    "bracket_arm_width_px": 528.0,
+    "link_root_row": 265,
+    "static_rect": [
+      155,
+      62,
+      683,
+      409
+    ],
+    "moving_rect": [
+      274,
+      265,
+      833,
+      1478
+    ],
+    "paper_rect": [
+      275,
+      476,
+      830,
+      1297
+    ],
+    "alpha_partition": "a three-row band at y=265 over the upper link's own columns is removed, which disconnects the lower arch from the hook; each side is then the connected component seeded in the wood arm (static bracket: wall arm, support leg and upper link) and in the shade (moving lamp: lower arch, caps, paper and peg). That mask is hole-filled only to seed the components and to bound each cell: every cell's alpha is the master's AUTHORED alpha multiplied by its own partition coverage, so the link's genuine inner opening and the anti-aliased edges stay as transparent as the master authored them and no pixel is drawn by both parts. No luminance key and no opaque patch anywhere.",
+    "paper_test": "moving coverage with luminance > 110 and a warm (r >= b) hue, hole-filled and eroded 1 px; dark recesses are never keyed out by luminance and the lamp layer keeps its full authored alpha"
+  },
+  "unique_ornaments": [
+    "lamp",
+    "crane",
+    "four corner fasteners"
+  ],
+  "static_exception": {
+    "zen-browser": "authored static adaptation; no motion emitted by the browser adapter"
+  }
+}

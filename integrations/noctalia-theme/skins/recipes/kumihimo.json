@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "target": "noctalia",
+  "family": "kumihimo",
+  "name": "Kumihimo",
+  "topology": "hanging-tags",
+  "colors": {
+    "surface": "#241C1D",
+    "surface_variant": "#302326",
+    "text": "#E7D7BC",
+    "muted": "#B5A38F",
+    "accent": "#C28C59",
+    "outline": "#70514B"
+  },
+  "density": "comfortable",
+  "preview": "previews/kumihimo.webp"
+}

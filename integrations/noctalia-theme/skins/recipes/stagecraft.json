@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "target": "noctalia",
+  "family": "stagecraft",
+  "name": "Stagecraft",
+  "topology": "top-music-side",
+  "colors": {
+    "surface": "#22262F",
+    "surface_variant": "#2C313C",
+    "text": "#E7E9EE",
+    "muted": "#A5ACB9",
+    "accent": "#B2A3EE",
+    "outline": "#9DA4B4"
+  },
+  "density": "comfortable",
+  "preview": "previews/stagecraft.webp"
+}

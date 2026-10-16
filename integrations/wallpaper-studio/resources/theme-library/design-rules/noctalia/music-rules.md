@@ -1,0 +1,2 @@
+# Music representation
+The music backend/player remains the data owner when a representation moves from bar to widget. Preserve play/pause, seek, queue, current track, unknown/stale/error and accessibility. Artwork may surround the presentation, never obstruct controls, progress or long titles. Playing does not imply keyboard focus. Explain placement using wallpaper negative space and actual component capability.

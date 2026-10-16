@@ -1,0 +1,2 @@
+# Noctalia shell
+Wallpaper governs identity; native functions, action owners, data freshness and accessibility are invariant. Check the live surface catalog: implemented, preserved and concept-only are different states. One or two bars and external widgets require an explicit topology justification; do not pretend an unavailable component exists. Keep decoration lower-density than a large frame. Global selection never enables a bar or reloads the running shell by itself. Existing generation-policy and action map remain authoritative and are frozen into actual requests.

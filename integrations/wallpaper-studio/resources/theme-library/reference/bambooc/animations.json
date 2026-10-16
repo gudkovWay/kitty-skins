@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "renderer": "shojiwm/rainlit",
+  "runtime_verification": "unverified in this task",
+  "clock": {
+    "period_s": 120,
+    "ambient_harmonic_period_s": 20,
+    "owner": "frame-02.ts:createMotion"
+  },
+  "channels": {
+    "lamp": {
+      "parts": [
+        "lamp",
+        "lamp-paper",
+        "lamp-halo"
+      ],
+      "energy_owner": "lampPulse",
+      "angle_owner": "lampAngle",
+      "support": "lamp-bracket fixed",
+      "consumers": [
+        "paper emission",
+        "halo",
+        "frame interior reflection",
+        "scene spill"
+      ]
+    },
+    "crane": {
+      "parts": [
+        "crane"
+      ],
+      "pivot": [
+        32.918,
+        0
+      ],
+      "support": "crane-hook fixed",
+      "wind_owner": "common wind signal",
+      "deformation": "none"
+    }
+  },
+  "scene": {
+    "quiet_s": [
+      0,
+      100
+    ],
+    "creep_s": [
+      100,
+      105
+    ],
+    "press_s": [
+      110.6,
+      111.2
+    ],
+    "causality": [
+      "height-aware fall",
+      "impact/settle",
+      "character approach",
+      "button press",
+      "bamboo rise",
+      "departure/rest"
+    ]
+  },
+  "exceptions": {
+    "zen-browser": "authored static rest, no CSS motion"
+  },
+  "source": [
+    "kitty/source/frame-02.ts",
+    "kitty/source/scene-02.ts",
+    "kitty/source/frame-02-art.ts"
+  ]
+}

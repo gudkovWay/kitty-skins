@@ -1,0 +1,443 @@
+{
+  "schema_version": 1,
+  "id": "bambooc",
+  "status": "partial",
+  "default_transfer": "principle",
+  "components": {
+    "frame": {
+      "status": "accepted-source",
+      "renderer": "shojiwm",
+      "evidence": "frame.json"
+    },
+    "animation": {
+      "status": "source-recorded/runtime-unverified",
+      "evidence": "animations.json"
+    },
+    "kitty": {
+      "status": "construction-reference/not-kitty-runtime-proof",
+      "source_renderer": "shojiwm"
+    },
+    "zen-browser": {
+      "status": "installed-static-source/runtime-unverified",
+      "evidence": "zen-browser/frame-02-chrome.css"
+    },
+    "noctalia": {
+      "status": "partial-reference/not-complete-bambooc-release",
+      "evidence": "noctalia/generation-policy.json"
+    }
+  },
+  "files": [
+    {
+      "path": "animations.json",
+      "sha256": "7ec8c3a19dc44f39ebfe0356e7bfeeea8cf99af63b67c5297a3b2d6ecfe1561f"
+    },
+    {
+      "path": "assets/design-faithful/controls/close.svg",
+      "sha256": "06c696ace2a016ce844b7020966b91e291b015683fa750259eb942af1a9f64c1"
+    },
+    {
+      "path": "assets/design-faithful/controls/maximize.svg",
+      "sha256": "c0260050ed19da05b3a4c7a6acf4059dd62372748d5e69a4b2679f5c12ebb2eb"
+    },
+    {
+      "path": "assets/design-faithful/controls/minus.svg",
+      "sha256": "d0e22c5a67d593b5023165162b68f17da3a6a2afb844ca086b5ef9e313bda165"
+    },
+    {
+      "path": "assets/design-faithful/controls/plate-hover.png",
+      "sha256": "ccedb1be12a467b8c48a9ce177070298e02b99742ebf9313bcddc04cc8d6c12b"
+    },
+    {
+      "path": "assets/design-faithful/controls/plate.png",
+      "sha256": "c08e432954b6c54e575d66ea44a37cefddc6d6ad6c3b77287acb8696f141a079"
+    },
+    {
+      "path": "assets/design-faithful/controls/restore.svg",
+      "sha256": "ae460f182c2af81ac72915ec06bdfe2ee1cdbb9e3f97d09d0dd56f8a16548daa"
+    },
+    {
+      "path": "assets/design-faithful/frame-atlas.png",
+      "sha256": "0123fe5ff9ea178ac8f2d72867697306a13b2a08ac65ac313c785d25971a5acc"
+    },
+    {
+      "path": "assets/design-faithful/layers/bamboo-roll.png",
+      "sha256": "213b9fa9fe86cda85ab0e2f700b490136bdbcf677c4aabafb015c5f7a0b4da79"
+    },
+    {
+      "path": "assets/design-faithful/layers/bamboo-slat.png",
+      "sha256": "13e9bb4c9820912cf3c0ed98f0bfc23432e127bd96c2a8992054223c11719094"
+    },
+    {
+      "path": "assets/design-faithful/layers/bottom-rail.png",
+      "sha256": "274da4de578602f9d264ac4a7310f37857649e49324731e5e02c4efcdc97fd1d"
+    },
+    {
+      "path": "assets/design-faithful/layers/corner-bl.png",
+      "sha256": "9ca48b1affd5bda60d284397e0c3dd24d5bc7fef37aafe4e37979a57a99bf61c"
+    },
+    {
+      "path": "assets/design-faithful/layers/corner-br.png",
+      "sha256": "ecf24d6cec17e924e7c4c91813067b3343d680f2d576ba1b5ba7bfbad64723e8"
+    },
+    {
+      "path": "assets/design-faithful/layers/corner-tl.png",
+      "sha256": "a65ff74dd4d5c72d5460ee64985df8ba4b4480a18a7295e2f6ff8063db51ff3f"
+    },
+    {
+      "path": "assets/design-faithful/layers/corner-tr.png",
+      "sha256": "aa0e4779c6fa9ce3a50bc980cba49cdb602b259b9bf395f997f32a08fe1012f8"
+    },
+    {
+      "path": "assets/design-faithful/layers/crane-hook.png",
+      "sha256": "be468b724e0ab55009327344b83532b220c838710f9f91e2c4d4c01c9edaeb45"
+    },
+    {
+      "path": "assets/design-faithful/layers/crane.png",
+      "sha256": "604c3163e2b52484c447a40e7f9cb3f7482e64fed3f6f0eca9afa7139cbb4db2"
+    },
+    {
+      "path": "assets/design-faithful/layers/lamp-bracket.png",
+      "sha256": "24a17e0d86604dc5791b37c86f9708641e9f86c28bdf6a6384fc2f9a0d97fe76"
+    },
+    {
+      "path": "assets/design-faithful/layers/lamp-halo.png",
+      "sha256": "002cb064d29f86f9ba04c2973052f3619b9ead6a5abbc6b669d6a40f7e064c6f"
+    },
+    {
+      "path": "assets/design-faithful/layers/lamp-paper.png",
+      "sha256": "7d17b218a041d0dc6711a80eee5fc54663aca3123d49ddcd077864fa18b4d409"
+    },
+    {
+      "path": "assets/design-faithful/layers/lamp.png",
+      "sha256": "db52651d673a6918d21e39fd6f789087598def21cc406b06411eb4948cbda623"
+    },
+    {
+      "path": "assets/design-faithful/layers/left-rail.png",
+      "sha256": "f120af5a48b7cd2f9171ed0ccca126be58592887cff50b836c561ad415b063d8"
+    },
+    {
+      "path": "assets/design-faithful/layers/right-rail.png",
+      "sha256": "f075995197c27323242503f696348a282cce88d7cbd260f13de4135d86fc4bb9"
+    },
+    {
+      "path": "assets/design-faithful/layers/tie-far.png",
+      "sha256": "c0a498b7b25e9db302d2a6bbb2c04b13b95448e6ad59b894d6d50b29f3c78588"
+    },
+    {
+      "path": "assets/design-faithful/layers/tie-near.png",
+      "sha256": "792d8afa040e009a072ac28c56949068247986e44b4430bb5892939d5749cdef"
+    },
+    {
+      "path": "assets/design-faithful/layers/top-rail.png",
+      "sha256": "a874ea1419e4b9857418011189e01386983642b70ac5eb5c11fe9621e7644549"
+    },
+    {
+      "path": "assets/design-faithful/source/approved-four-corners-generation.json",
+      "sha256": "a8e4000ae581f1bca5755a4a43e98765373fc0f8d68021123bde4f5415450729"
+    },
+    {
+      "path": "assets/design-faithful/source/approved-four-corners-matched-fasteners.webp",
+      "sha256": "8433cd73d14c4dade9b3578a2207e3c93d818601334a172378760e04e70f7633"
+    },
+    {
+      "path": "assets/design-faithful/source/approved-frame-assembly.json",
+      "sha256": "d5294ce72d7b6bc2517e42e44ed4ca7e9be657a2701793fc6df87034bd910e78"
+    },
+    {
+      "path": "assets/design-faithful/source/brass-gpt-image-2.webp",
+      "sha256": "539eac87e9e091958bdbe537eefccb4619d2ed258d6c3b3d363c1fc12e49f8a5"
+    },
+    {
+      "path": "assets/design-faithful/source/corners-gpt-image-2.webp",
+      "sha256": "decbf63d62e8423c86347c0a70de60d797992251fbacfef288372a10ed4efe70"
+    },
+    {
+      "path": "assets/design-faithful/source/crane-bracket-gpt-image-2.webp",
+      "sha256": "761a1047be3f5391fd7a57e6779e9636f1fa33802bb818504ec0598c792f1692"
+    },
+    {
+      "path": "assets/design-faithful/source/crane-gpt-image-2.webp",
+      "sha256": "6ef8bfa0a22a3bf488efc82e8aaa8a4d2e4d61c864426d6772c559d673dbf37f"
+    },
+    {
+      "path": "assets/design-faithful/source/crane-washi-generation.json",
+      "sha256": "cad7ff5f246faa6dbf0e362a535eda2a193c38ebc75bb2b37fa3eee7ee0d6187"
+    },
+    {
+      "path": "assets/design-faithful/source/crane-washi-gpt-image-2.webp",
+      "sha256": "1a268ac4f7ae4a8dd8302f70b7e9e3d53a7b7b7b146d20fb5834e02482672e9a"
+    },
+    {
+      "path": "assets/design-faithful/source/generation-manifest.json",
+      "sha256": "fd8312328deb99bbedd4ba0b2be30e01328c9979b6524de3ef90fb4101ebe59f"
+    },
+    {
+      "path": "assets/design-faithful/source/lamp-gpt-image-2.webp",
+      "sha256": "eca788dc71325565b192726ac951bff5290b4786f78d5e111b1c7096977940bb"
+    },
+    {
+      "path": "assets/design-faithful/source/legacy/crane-hook.png",
+      "sha256": "fecf57f048f6d53383b07bd0dc5f9d154ec4b30ecc116a1ce5bb0c102d2e1960"
+    },
+    {
+      "path": "assets/design-faithful/source/legacy/lamp-wood-glow.png",
+      "sha256": "2f91db585afe910ba6b0584f6404f98a592c1f066ee73f42c9574824a457d125"
+    },
+    {
+      "path": "assets/design-faithful/source/legacy/roll.png",
+      "sha256": "213b9fa9fe86cda85ab0e2f700b490136bdbcf677c4aabafb015c5f7a0b4da79"
+    },
+    {
+      "path": "assets/design-faithful/source/legacy/slat.png",
+      "sha256": "13e9bb4c9820912cf3c0ed98f0bfc23432e127bd96c2a8992054223c11719094"
+    },
+    {
+      "path": "assets/design-faithful/source/legacy/tie-a.png",
+      "sha256": "792d8afa040e009a072ac28c56949068247986e44b4430bb5892939d5749cdef"
+    },
+    {
+      "path": "assets/design-faithful/source/legacy/tie-b.png",
+      "sha256": "c0a498b7b25e9db302d2a6bbb2c04b13b95448e6ad59b894d6d50b29f3c78588"
+    },
+    {
+      "path": "assets/design-faithful/source/wood-detail-generation.json",
+      "sha256": "b1bb10fa877565ff33a65d3ded5eff5bd92d2955f289eaba016689eebe95569b"
+    },
+    {
+      "path": "assets/design-faithful/source/wood-detail-gpt-image-2.webp",
+      "sha256": "697a10127929da33fd3f976e144c5156fff2dd3c2cbf0f2cf00e6dd56c798ae4"
+    },
+    {
+      "path": "assets/design-faithful/source/wood-gpt-image-2.webp",
+      "sha256": "e1a0e2380a778b48f20cbd31109ac841de57eed941193de4ed9a830fe2f4722d"
+    },
+    {
+      "path": "assets/design-faithful/source/wood-grain-redrawn-gpt-image-2.webp",
+      "sha256": "cd5f0088c7e9f65e9bbbf4b9743d3e760712c95b297c86ea52809298c42b0a2c"
+    },
+    {
+      "path": "assets/design-faithful/source/wood-long-corner-generation.json",
+      "sha256": "8523018c4af6cc27a053480c5803d5818d20ebcb939dd435a50204a70ebe0d6f"
+    },
+    {
+      "path": "assets/design-faithful/source/wood-long-corner-gpt-image-2.webp",
+      "sha256": "b9dee6a12824ce7a937d512a973528fedcb55f574e67671d19c619ab7d58e389"
+    },
+    {
+      "path": "assets/design-faithful/source/wood-polish-generation.json",
+      "sha256": "951b27477d5744f4d103c8faa4c1ce770fb8a15e68b87d931771dbb395f499dc"
+    },
+    {
+      "path": "assets/design-faithful/source/wood-polished-gpt-image-2.webp",
+      "sha256": "6ae2da7905556b3a56cae1fd1a7c543b5cfa8379936f420c954034e8e6800725"
+    },
+    {
+      "path": "assets/design-faithful/source/wood-redraw-request.json",
+      "sha256": "7bfe62857b7a7d48a0a47665f703596707c22d6430f8041cb61e8191e705dd68"
+    },
+    {
+      "path": "assets/design-faithful/source.json",
+      "sha256": "52d7c466596b3f0c62d882e1ae45d6981ffbcf405d03b7ef936292539bf5d57f"
+    },
+    {
+      "path": "assets/master.webp",
+      "sha256": "a58cb8ed7f7f26365ee9a9a3e5e13cc95e44bba5ebff783a0b454df6f21ba58e"
+    },
+    {
+      "path": "assets/scene/character-atlas.png",
+      "sha256": "c17ee9932b37bfb08b75215146beebc581598a3291f1f61d0990b836f766c6fa"
+    },
+    {
+      "path": "assets/scene/source/actions-master.webp",
+      "sha256": "0658797cc0baa586918f41ef0ce67168805e1cd1fd064433951e8a8bdb280a39"
+    },
+    {
+      "path": "assets/scene/source/walk-master.webp",
+      "sha256": "754a9a6fbb36b88289ed7a4104f7e4ede55a4727659faf1ba466a3950c388826"
+    },
+    {
+      "path": "assets/scene/source.json",
+      "sha256": "53c0994075f236549157856d7058a8d41874f8a48a33a2918d0802fb6b7bd49e"
+    },
+    {
+      "path": "assets/source.json",
+      "sha256": "5a4e80712198ce84b0f197d63a860cc107fcd50494720c1bcfbb9e0b67fdb37a"
+    },
+    {
+      "path": "elements/lamp/element.json",
+      "sha256": "262f70721117358658b01251a47bd156eaaba73505a9b05808135ac655c863b5"
+    },
+    {
+      "path": "elements/lamp/element.png",
+      "sha256": "db52651d673a6918d21e39fd6f789087598def21cc406b06411eb4948cbda623"
+    },
+    {
+      "path": "elements/lamp/layers/lamp-bracket.png",
+      "sha256": "24a17e0d86604dc5791b37c86f9708641e9f86c28bdf6a6384fc2f9a0d97fe76"
+    },
+    {
+      "path": "elements/lamp/layers/lamp-halo.png",
+      "sha256": "002cb064d29f86f9ba04c2973052f3619b9ead6a5abbc6b669d6a40f7e064c6f"
+    },
+    {
+      "path": "elements/lamp/layers/lamp-paper.png",
+      "sha256": "7d17b218a041d0dc6711a80eee5fc54663aca3123d49ddcd077864fa18b4d409"
+    },
+    {
+      "path": "elements/lamp/usage.md",
+      "sha256": "49e20adcfed36fe03a74cbe70b8554e97765c634f00df0a739f3d56e21427868"
+    },
+    {
+      "path": "elements/paper-crane/element.json",
+      "sha256": "57a88831a02b7b4f092bb3911f2fe79b12946651cf4637c7d669439e5ee146c4"
+    },
+    {
+      "path": "elements/paper-crane/element.png",
+      "sha256": "604c3163e2b52484c447a40e7f9cb3f7482e64fed3f6f0eca9afa7139cbb4db2"
+    },
+    {
+      "path": "elements/paper-crane/layers/crane-hook.png",
+      "sha256": "be468b724e0ab55009327344b83532b220c838710f9f91e2c4d4c01c9edaeb45"
+    },
+    {
+      "path": "elements/paper-crane/usage.md",
+      "sha256": "31e00c89cd4b0b1768e1c1c03f544bec8843b01b453bfa23610346a1ad51a449"
+    },
+    {
+      "path": "frame.json",
+      "sha256": "2157638eee698ef9a1317699f662fcd4d9c909443e7eb15047a0484f5aa69e2a"
+    },
+    {
+      "path": "frame.png",
+      "sha256": "a46a7727e74819033384b8bee0bbf9b402db94777bef4bb1a9996e5e354e6d9c"
+    },
+    {
+      "path": "frame.webp",
+      "sha256": "a58cb8ed7f7f26365ee9a9a3e5e13cc95e44bba5ebff783a0b454df6f21ba58e"
+    },
+    {
+      "path": "kitty/source/bamboo-02-motion.ts",
+      "sha256": "203e230bf74056da746b9aca97d54de161b29046d942f256afadc55144b398f7"
+    },
+    {
+      "path": "kitty/source/frame-02-art.ts",
+      "sha256": "2d3aacf5c8607a0649a246ed2e7f5f5c49c3ea67fb22c7165b439ca9a2e66387"
+    },
+    {
+      "path": "kitty/source/frame-02.ts",
+      "sha256": "82db2c3c2315934e9b89ee35babf519a163f889fa9abf1f2f163b7e17e3f155f"
+    },
+    {
+      "path": "kitty/source/scene-02-assets.ts",
+      "sha256": "38fd638321f88663b323854085431bc971134c5a2f330a2cddd8383a967922fe"
+    },
+    {
+      "path": "kitty/source/scene-02.ts",
+      "sha256": "c84ab0197859f87be98c780061b75769c5d77086c866b915b23e6334bda09803"
+    },
+    {
+      "path": "noctalia/assets/corner-bl.png",
+      "sha256": "2cf54b163555b8a819ff681a22a211aaeac00bb5046e9307e714b233bc9461fc"
+    },
+    {
+      "path": "noctalia/assets/corner-br.png",
+      "sha256": "ea3f3d835864e64a63b835e640d0283527d108b3371f42697c88ff5535b34371"
+    },
+    {
+      "path": "noctalia/assets/corner-tl.png",
+      "sha256": "bd2b3dc248dbe2cc82627560ffc9944d42d1b67d4be170ccd6149d395f3cb4b1"
+    },
+    {
+      "path": "noctalia/assets/corner-tr.png",
+      "sha256": "473abc856aa8308252b5508d9183687045f960ad98b137d6ed090ca0d2050d0d"
+    },
+    {
+      "path": "noctalia/assets/emblem.png",
+      "sha256": "aaecb9497e00bf949bbd4612209c40e2526fbf6d91285e3347a2bb92243afd45"
+    },
+    {
+      "path": "noctalia/assets/kumihimo/cord.png",
+      "sha256": "5137466f84856c39e82ce954e83d67799d3f7fed289a083842b85bd0efabcc69"
+    },
+    {
+      "path": "noctalia/assets/kumihimo/cord.svg",
+      "sha256": "6193c779acc5a07e46a09b7817034e35f65053e512c0ae51276fbb6c373622d5"
+    },
+    {
+      "path": "noctalia/assets/kumihimo/fold.png",
+      "sha256": "8dd58434747d63e448211b1067164304733c5073bfcd9612c873afee9d0da900"
+    },
+    {
+      "path": "noctalia/assets/kumihimo/fold.svg",
+      "sha256": "4018a09b979808b677a927dda2b8efc7937f7d1ffd67a777ee358136cf031ce3"
+    },
+    {
+      "path": "noctalia/assets/kumihimo/hanger.png",
+      "sha256": "925b5774ad8c424bae0610f4eca4391742f8e75e5b328303d8b0062ddb51c588"
+    },
+    {
+      "path": "noctalia/assets/kumihimo/hanger.svg",
+      "sha256": "059183bf5b00c7b46402740c61d9b989f659d9dec5db4d81f6232c9e252ed993"
+    },
+    {
+      "path": "noctalia/assets/kumihimo/knot.png",
+      "sha256": "2444f45520eabb590ad6b560642547343803317f244e5a0726156ef9599a04cd"
+    },
+    {
+      "path": "noctalia/assets/kumihimo/knot.svg",
+      "sha256": "f65787e778dea33baea0389506bb3003f649633d1b9ecebefcf759b651483f9c"
+    },
+    {
+      "path": "noctalia/assets/kumihimo/lantern.png",
+      "sha256": "11e2079e6a2836dbf2b611522090feb5c4f8f5672aa9df6eb771c636c306c403"
+    },
+    {
+      "path": "noctalia/assets/kumihimo/lantern.svg",
+      "sha256": "630c5af5441970a422fbb0f0f09ed38bf10cb74ed152d3c479c3f357db4155b8"
+    },
+    {
+      "path": "noctalia/assets/rail-bottom.png",
+      "sha256": "37d43f10ed5297662f5ea343afafa418918af81467292a5df905dcfedc98f684"
+    },
+    {
+      "path": "noctalia/assets/rail-left.png",
+      "sha256": "66cbd844a065beae794750cb60508707b0727032a639a86af110114e868f41f4"
+    },
+    {
+      "path": "noctalia/assets/rail-right.png",
+      "sha256": "f7ebc39465cbe0b9ff55954ee181104cf7d5ed6868f5b4da2b62f18c9e3300da"
+    },
+    {
+      "path": "noctalia/assets/rail-top.png",
+      "sha256": "15eabafb53500f425ab7a197a7a9487f72f4afc1c4bdb24d1497b85fabbc823e"
+    },
+    {
+      "path": "noctalia/generation-policy.json",
+      "sha256": "3de5cc5bbe151c894a12b897222502c170f55d2fbd43ecd611a72986438bc855"
+    },
+    {
+      "path": "philosophy.md",
+      "sha256": "0c9b7d91aa6ccc1c34c2b5ff2d10a3128de3985939f0265451bc7c418c73a3b1"
+    },
+    {
+      "path": "zen-browser/assets/frame-02/brass.png",
+      "sha256": "c08e432954b6c54e575d66ea44a37cefddc6d6ad6c3b77287acb8696f141a079"
+    },
+    {
+      "path": "zen-browser/assets/frame-02/source.json",
+      "sha256": "ff67b9b29b443ec3e5bddd8f3bfa4489528a54b78e308689a4274e4383072f10"
+    },
+    {
+      "path": "zen-browser/assets/frame-02/wood-horizontal.png",
+      "sha256": "593e38357be7ad1f33a920294909605689dae9b814560dffb007efbd0a321525"
+    },
+    {
+      "path": "zen-browser/assets/frame-02/wood-vertical.png",
+      "sha256": "50994fd4f24d691abf6d77dd5c16943b23f6cbbef373bfff331ed2aa679d8456"
+    },
+    {
+      "path": "zen-browser/frame-02-chrome.css",
+      "sha256": "ec8ffddb819e7ede31663fb2c0f3c7abd187a679132a6842def81297906fa562"
+    }
+  ]
+}

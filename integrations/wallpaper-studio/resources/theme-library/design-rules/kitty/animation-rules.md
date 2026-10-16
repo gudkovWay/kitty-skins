@@ -1,0 +1,2 @@
+# Kitty renderer rules
+Honor the actual installed renderer profile and its atlas/layer limits. Reuse global frame construction and causal motion, not a new style. Shader strings or generated executable code are not theme data. Verify atlas boundaries, clipping, DPI, minimum window, focus/inactive and reduced motion in an isolated instance. A ShojiWM TypeScript source is a construction reference, not proof that Kitty can load it.

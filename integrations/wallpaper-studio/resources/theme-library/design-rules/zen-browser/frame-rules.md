@@ -1,0 +1,2 @@
+# Zen static exception
+Zen chrome is STATIC: no animation, timer, transition or extra moving lamp. Use the same approved material and authored rest light as the global frame; retain browser controls, native focus, tabs, Glance, scrolling and content visibility. Website content, fonts and colors are not themed. CSS is limited to browser chrome; no network resources, scripts, account settings or userContent injection. Owned include changes preserve unrelated userChrome content. Source: current frame-02-chrome.css.

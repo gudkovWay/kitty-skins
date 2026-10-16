@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "target": "noctalia",
+  "family": "wayfinding-field",
+  "name": "Wayfinding Field",
+  "topology": "compact-rail",
+  "colors": {
+    "surface": "#22262F",
+    "surface_variant": "#2C313C",
+    "text": "#E7E9EE",
+    "muted": "#A5ACB9",
+    "accent": "#B2A3EE",
+    "outline": "#9DA4B4"
+  },
+  "density": "comfortable",
+  "preview": "previews/wayfinding-field.webp"
+}

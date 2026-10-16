@@ -1,0 +1,15 @@
+{
+  "kind": "object",
+  "roles": [
+    "foreground",
+    "accent"
+  ],
+  "unique": true,
+  "components": [
+    "crane",
+    "fixed hook"
+  ],
+  "source": "assets/design-faithful/source.json",
+  "motion": "rigid pendant pivots at fixed eye; no wing deformation",
+  "approval": "master/construction accepted in recorded source; runtime unverified"
+}

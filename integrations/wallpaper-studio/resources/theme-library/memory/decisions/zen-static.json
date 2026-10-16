@@ -1,0 +1,9 @@
+{
+  "status": "accepted",
+  "scope": [
+    "zen-browser",
+    "system-design"
+  ],
+  "source": "owner architecture requirements and current frame-02-chrome.css",
+  "decision": "Zen uses the global frame grammar without animation; native websites remain untouched."
+}

@@ -1,0 +1,313 @@
+/* Frame 02 browser chrome. Native ShojiWM owns the foreground story and
+ * exterior ornaments; this sheet adds no animation or duplicate lamp.
+ * Raster assets are neutral cuts of the existing approved frame atlas.
+ * Install INSTEAD OF Blossom/ambient chrome, never on top of both.
+ * No userContent rules, client opacity or website font/color overrides. */
+@-moz-document url-prefix("chrome://") {
+  :root {
+    --frame02-unit: clamp(1px, min(calc(100vw / 1468), calc(100vh / 774)), 1.85px);
+    --frame02-sidebar-width: calc(100 * var(--frame02-unit));
+    --frame02-navbar-height: calc(56 * var(--frame02-unit));
+    --frame02-tab-height: calc(44 * var(--frame02-unit));
+    --frame02-ui-size: calc(14 * var(--frame02-unit));
+    --frame02-wood-horizontal: url("assets/frame-02/wood-horizontal.png");
+    --frame02-wood-vertical: url("assets/frame-02/wood-vertical.png");
+    --frame02-text: #eee3cf;
+    --frame02-muted: #bdad93;
+    --frame02-brass: #b99a60;
+    --frame02-selected: #a47b45e8;
+    --frame02-recess: #21160f;
+    --frame02-panel: #2c2018;
+    --frame02-hover: #483326;
+    --zen-toolbar-height: var(--frame02-navbar-height) !important;
+    /* Remove Zen's empty client perimeter, not native frame reservation. */
+    --zen-element-separation: 0px !important;
+    --zen-native-inner-radius: 0px !important;
+    --zen-border-radius: 0px !important;
+    --zen-main-browser-background: transparent !important;
+    --zen-main-browser-background-toolbar: transparent !important;
+    --zen-themed-toolbar-bg-transparent: transparent !important;
+    --zen-navigator-toolbox-background: transparent !important;
+    --toolbar-bgcolor: transparent !important;
+    --toolbar-background-color: transparent !important;
+    --toolbox-bgcolor-inactive: transparent !important;
+    --toolbar-color: var(--frame02-text) !important;
+    --lwt-text-color: var(--frame02-text) !important;
+    --zen-colors-primary: var(--frame02-hover) !important;
+    --zen-colors-secondary: var(--frame02-panel) !important;
+    --zen-colors-tertiary: var(--frame02-recess) !important;
+    --zen-colors-primary-foreground: var(--frame02-text) !important;
+    --zen-colors-border: #71503a !important;
+    --zen-colors-input-bg: var(--frame02-recess) !important;
+    --zen-toolbar-element-bg: var(--frame02-recess) !important;
+    --toolbar-field-background-color: var(--frame02-recess) !important;
+    --toolbar-field-color: var(--frame02-text) !important;
+    --toolbar-field-focus-color: var(--frame02-text) !important;
+    --toolbarbutton-background-color-hover: #00000030 !important;
+    --toolbarbutton-background-color-active: #00000060 !important;
+    --arrowpanel-background: var(--frame02-panel) !important;
+    --arrowpanel-color: var(--frame02-text) !important;
+    --arrowpanel-border-color: #71503a !important;
+    --panel-item-hover-bgcolor: var(--frame02-hover) !important;
+    --panel-item-active-bgcolor: var(--frame02-recess) !important;
+    --autocomplete-popup-background: var(--frame02-panel) !important;
+    --autocomplete-popup-color: var(--frame02-text) !important;
+    --autocomplete-popup-highlight-background: var(--frame02-hover) !important;
+    --focus-outline-color: var(--frame02-brass) !important;
+    --tab-selected-textcolor: var(--frame02-text) !important;
+    --tab-selected-bgcolor: var(--frame02-selected) !important;
+    --tab-background-color-hover: #00000035 !important;
+    --tab-line-color: var(--frame02-brass) !important;
+    --zen-folder-behind-bgcolor: #00000025 !important;
+    --zen-folder-front-bgcolor: #00000045 !important;
+    --zen-folder-stroke: #71503a !important;
+  }
+
+  @media (max-width: 1024px) {
+    :root { --frame02-sidebar-width: calc(88 * var(--frame02-unit)); }
+  }
+  @media (max-width: 780px) {
+    :root {
+      --frame02-sidebar-width: calc(76 * var(--frame02-unit));
+      --frame02-navbar-height: calc(48 * var(--frame02-unit));
+    }
+  }
+
+  /* One material reaches the actual client edge, including exposed gutters.
+   * The neutral stock repeats along its grain at the native 256px period.
+   * Zen's generic gradient layers must not paint grey above this material. */
+  #zen-main-app-wrapper {
+    background: var(--frame02-wood-horizontal) repeat 0 0 / 256px 52px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  #browser {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .zen-browser-generic-background::before,
+  .zen-browser-generic-background::after {
+    background: none !important;
+  }
+  .zen-browser-grain { display: none !important; }
+  #zen-tabbox-wrapper {
+    margin: 0 !important;
+    background: transparent !important;
+  }
+  #tabbrowser-tabpanels { background: transparent !important; }
+  .browserSidebarContainer:not(.zen-glance-overlay) {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Timber belongs to the outer toolbox, not each nested tab container. */
+  #navigator-toolbox {
+    background: var(--frame02-wood-vertical) repeat-y 0 0 / 100% 256px !important;
+    color: var(--frame02-text) !important;
+    border-radius: 0 !important;
+    border: 0 !important;
+    box-shadow: inset -2px 0 2px #110b08, inset -3px 0 #825738 !important;
+    font-family: "Kode Mono", "Noto Sans", sans-serif;
+    font-size: var(--frame02-ui-size) !important;
+  }
+  :root[zen-right-side="true"] #navigator-toolbox {
+    box-shadow: inset 2px 0 2px #110b08, inset 3px 0 #825738 !important;
+  }
+  :root[zen-sidebar-expanded="true"] {
+    --zen-sidebar-width: var(--frame02-sidebar-width) !important;
+    --zen-workspace-indicator-height: calc(44 * var(--frame02-unit)) !important;
+  }
+  #navigator-toolbox[zen-sidebar-expanded="true"] {
+    width: var(--frame02-sidebar-width) !important;
+    min-width: var(--frame02-sidebar-width) !important;
+    max-width: var(--frame02-sidebar-width) !important;
+  }
+  #navigator-toolbox[zen-sidebar-expanded="true"] #titlebar { min-width: 0 !important; }
+  #navigator-toolbox::before { content: none !important; }
+  #titlebar, #TabsToolbar, #tabbrowser-tabs, #zen-sidebar-top-buttons,
+  #zen-sidebar-top-buttons-customization-target, #zen-sidebar-bottom-buttons,
+  #zen-sidebar-foot-buttons, .zen-workspace-tabs-section {
+    background: transparent !important;
+  }
+  #zen-sidebar-top-buttons { border-bottom: 1px solid #160f0a; }
+  #tabbrowser-tabs { --tab-min-height: var(--frame02-tab-height); }
+  #navigator-toolbox[zen-sidebar-expanded="true"] #tabbrowser-tabs {
+    --toolbarbutton-padding-inner: calc(10 * var(--frame02-unit)) !important;
+    --tab-close-button-padding: calc(4 * var(--frame02-unit)) !important;
+  }
+  .tabbrowser-tab:not([pinned]):not([zen-essential]) {
+    min-height: var(--frame02-tab-height) !important;
+  }
+  .tabbrowser-tab:not(.tabbrowser-tab .tabbrowser-tab) .tab-background {
+    background: #00000028 !important;
+    border: 0 !important;
+    border-radius: 3px !important;
+    box-shadow: inset 0 1px 2px #090605b0, inset 0 -1px #9a694560 !important;
+  }
+  .tabbrowser-tab:not(.tabbrowser-tab .tabbrowser-tab):not([selected], [visuallyselected], [multiselected="true"]):hover .tab-background {
+    background: #00000045 !important;
+  }
+  .tabbrowser-tab:not(.tabbrowser-tab .tabbrowser-tab)[multiselected="true"] .tab-background {
+    background: #795632b0 !important;
+  }
+  /* Match the base row's specificity; the active tab must win for Essentials too. */
+  .tabbrowser-tab:not(.tabbrowser-tab .tabbrowser-tab):is([selected], [visuallyselected]) .tab-background {
+    background: var(--frame02-selected) !important;
+    box-shadow: inset 0 0 0 1px #e0bf7f, inset 3px 0 #f0d7a0, inset 0 1px #fff0ca80, 0 1px 3px #090605b0 !important;
+  }
+  .tabbrowser-tab:not(.tabbrowser-tab .tabbrowser-tab)[zen-essential]:is([selected], [visuallyselected])
+    > .tab-stack > .tab-background::before,
+  .tabbrowser-tab:not(.tabbrowser-tab .tabbrowser-tab)[zen-essential]:is([selected], [visuallyselected])
+    > .tab-stack > .tab-background::after {
+    content: none !important;
+  }
+  :root[zen-sidebar-expanded="true"] .tabbrowser-tab:not(.tabbrowser-tab .tabbrowser-tab)
+    :is(.tab-icon-stack, .tab-icon-image, .tab-icon-pending, .tab-icon-overlay, .tab-sharing-icon-overlay) {
+    width: calc(20 * var(--frame02-unit)) !important;
+    height: calc(20 * var(--frame02-unit)) !important;
+  }
+  :root[zen-sidebar-expanded="true"] .tabbrowser-tab:not(.tabbrowser-tab .tabbrowser-tab) .tab-close-button {
+    width: calc(24 * var(--frame02-unit));
+    height: calc(24 * var(--frame02-unit));
+  }
+  .zen-current-workspace-indicator {
+    color: var(--frame02-muted) !important;
+    border-radius: 3px !important;
+    box-shadow: inset 0 1px 2px #09060590, inset 0 -1px #9a694560;
+  }
+
+  /* The top rail paints once. All toolbar descendants expose that timber. */
+  #zen-appcontent-navbar-wrapper, #PersonalToolbar {
+    background: var(--frame02-wood-horizontal) repeat-x 0 0 / 256px 100% !important;
+    color: var(--frame02-text) !important;
+    border-radius: 0 !important;
+    border: 0 !important;
+    box-shadow: inset 0 1px #9a694560, inset 0 -2px 2px #110b08 !important;
+    font-family: "Kode Mono", "Noto Sans", sans-serif;
+    font-size: var(--frame02-ui-size) !important;
+  }
+  #zen-appcontent-navbar-container, #nav-bar, #nav-bar-customization-target {
+    background: transparent !important;
+    color: var(--frame02-text) !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  :root:not([zen-single-toolbar="true"]):not([zen-compact-mode="true"]) #zen-appcontent-navbar-wrapper {
+    height: var(--frame02-navbar-height) !important;
+    min-height: var(--frame02-navbar-height) !important;
+  }
+  :root:not([zen-single-toolbar="true"]) #zen-appcontent-navbar-container #nav-bar {
+    flex: 1 1 auto !important;
+  }
+  :root:not([zen-single-toolbar="true"]) #zen-appcontent-navbar-container
+    :is(#urlbar-container, #wrapper-urlbar-container) { flex: 400 1 auto !important; }
+  #zen-appcontent-navbar-wrapper,
+  :root[zen-sidebar-expanded="true"] :is(#navigator-toolbox, #zen-sidebar-top-buttons) {
+    --zen-toolbar-button-size: calc(20 * var(--frame02-unit)) !important;
+    --zen-toolbar-button-inner-padding: calc(6 * var(--frame02-unit)) !important;
+  }
+  /* Keep Firefox's actual icons and disabled states. Brass is an asset border,
+   * not a copied window-control glyph or the plate's central rivet. */
+  :is(#back-button, #forward-button, #reload-button, #stop-button) > .toolbarbutton-icon {
+    border: 2px solid transparent !important;
+    border-image: url("assets/frame-02/brass.png") 20 / 2px !important;
+    border-radius: 0 !important;
+    background: #00000050 !important;
+    color: var(--frame02-text) !important;
+  }
+  toolbarbutton:hover > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+    background-color: #00000030 !important;
+  }
+  toolbarbutton:focus-visible { outline: 2px solid var(--frame02-brass) !important; }
+  #urlbar {
+    color: var(--frame02-text) !important;
+    font-family: "Kode Mono", "Noto Sans", sans-serif;
+    font-size: var(--frame02-ui-size) !important;
+    --toolbarbutton-border-radius: 3px;
+  }
+  #urlbar:not([zen-floating-urlbar="true"]) {
+    --urlbar-height: calc(32 * var(--frame02-unit)) !important;
+    --urlbar-container-height: calc(48 * var(--frame02-unit)) !important;
+  }
+  #urlbar .urlbar-input { font-size: var(--frame02-ui-size) !important; }
+  #urlbar .urlbar-icon {
+    width: calc(20 * var(--frame02-unit)) !important;
+    height: calc(20 * var(--frame02-unit)) !important;
+  }
+  #urlbar-background, .urlbar-background {
+    background: var(--frame02-recess) !important;
+    border: 1px solid #825d3a !important;
+    border-radius: 3px !important;
+    box-shadow: inset 0 2px 3px #090605a0, 0 1px #ad7c5050 !important;
+  }
+  #urlbar[focused="true"] :is(#urlbar-background, .urlbar-background) {
+    border-color: var(--frame02-brass) !important;
+  }
+  .urlbarView, .urlbarView-body-outer {
+    background: var(--frame02-panel) !important;
+    color: var(--frame02-text) !important;
+  }
+
+  /* Ctrl+T keeps Zen's native floating geometry and handlers. Only its material
+   * changes: atlas timber outside, a recessed input, and brass selection. */
+  #urlbar[open][zen-floating-urlbar="true"] {
+    border-radius: 4px !important;
+    --urlbarView-results-padding: 12px !important;
+    --urlbar-popup-url-color: var(--frame02-muted);
+    --urlbar-popup-action-color: var(--frame02-muted);
+  }
+  #urlbar[open][zen-floating-urlbar="true"] :is(#urlbar-background, .urlbar-background) {
+    background: var(--frame02-wood-horizontal) repeat 0 0 / 256px 52px !important;
+    border: 3px solid transparent !important;
+    border-image: url("assets/frame-02/brass.png") 20 / 3px !important;
+    border-radius: 4px !important;
+    outline: none !important;
+    backdrop-filter: none !important;
+    box-shadow: inset 0 0 0 5px #160d0880, 0 16px 48px #090605b0 !important;
+  }
+  #urlbar[open][zen-floating-urlbar="true"] .urlbar-input-container {
+    margin: 9px !important;
+    padding-inline: 10px !important;
+    background: var(--frame02-recess) !important;
+    border: 1px solid var(--frame02-brass) !important;
+    border-radius: 2px !important;
+    box-shadow: inset 0 2px 4px #090605 !important;
+    color: var(--frame02-text) !important;
+  }
+  #urlbar[open][zen-floating-urlbar="true"] :is(.urlbarView, .urlbarView-body-outer, .urlbarView-body-inner) {
+    background: transparent !important;
+    border-color: #b99a6050 !important;
+  }
+  #urlbar[open][zen-floating-urlbar="true"] .urlbarView-row {
+    background: #21160fe8 !important;
+    color: var(--frame02-text) !important;
+    border-radius: 2px !important;
+  }
+  #urlbar[open][zen-floating-urlbar="true"] .urlbarView-row:not([selected]):hover {
+    background: var(--frame02-hover) !important;
+  }
+  #urlbar[open][zen-floating-urlbar="true"] .urlbarView-row[selected] {
+    background: #7d582e !important;
+    box-shadow: inset 3px 0 var(--frame02-brass) !important;
+  }
+  #urlbar[open][zen-floating-urlbar="true"] .urlbarView-row[selected] .urlbarView-row-inner {
+    background: transparent !important;
+    color: var(--frame02-text) !important;
+  }
+  #urlbar[open][zen-floating-urlbar="true"] :is(.urlbarView-url, .urlbarView-action),
+  #urlbar[open][zen-floating-urlbar="true"] .urlbarView-title-separator::before {
+    color: var(--frame02-muted) !important;
+  }
+  #urlbar[open][zen-floating-urlbar="true"] .urlbarView-row[selected]
+    :is(.urlbarView-title, .urlbarView-url, .urlbarView-action) {
+    color: var(--frame02-text) !important;
+  }
+  /* There is no separate Home destination in the modal-first workflow. */
+  #home-button { display: none !important; }
+  /* Native ShojiWM is the sole owner of window buttons; browser/tab controls
+   * remain native. No pointer-events change and no full-window opacity. */
+  .titlebar-buttonbox-container, .titlebar-buttonbox { display: none !important; }
+  :root:is([inDOMFullscreen="true"], [inFullscreen="true"]) #zen-main-app-wrapper {
+    background: transparent !important;
+  }
+}

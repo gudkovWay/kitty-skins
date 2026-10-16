@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2048" height="96" viewBox="0 0 256 12">
+  <!-- Кумихимо: горизонтальный плетёный шнур. Материал — бордовый
+       плетёный корд по тёмно-тёплой подложке; рисуется растяжением по
+       ширине, поэтому полотно тайлится паттерном. Авторский источник
+       (правится здесь), PNG — растрированный рантайм-ассет. -->
+  <rect width="256" height="12" fill="#241C1D"/>
+  <defs>
+    <pattern id="braid" width="16" height="12" patternUnits="userSpaceOnUse">
+      <path d="M-2,12 L6,1 L14,12" fill="none" stroke="#55242C" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6,12 L14,1 L22,12" fill="none" stroke="#7B343E" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M0,12 L8,3 L16,12" fill="none" stroke="#8E4150" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+    </pattern>
+  </defs>
+  <rect width="256" height="12" fill="url(#braid)"/>
+  <rect y="0" width="256" height="1" fill="#3a2a26" opacity="0.55"/>
+  <rect y="11" width="256" height="1" fill="#3a2a26" opacity="0.55"/>
+</svg>

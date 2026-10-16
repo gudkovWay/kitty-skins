@@ -1,0 +1,2 @@
+# Causal animation
+One owned clock per composition. Record signal -> moving layers -> shadows/light/reflections; a lamp pulse drives one shared energy value, not independent random pulses. Separate fixed supports, moving pendants, occlusion, revealed underlay, pivots and motion envelope. Static/reduced-motion has an authored rest state. State sequences have cause and finite timing; no arbitrary movement merely because an object exists. Animation acceptance requires actual renderer evidence; a still approves only the still. Source: bambooc frame-02.ts and scene-02.ts.

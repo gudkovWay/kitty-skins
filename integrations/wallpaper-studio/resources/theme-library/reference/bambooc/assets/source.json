@@ -1,0 +1,916 @@
+{
+  "pack": "02",
+  "title": "Bamboo roll, paper crane, paper lamp",
+  "builder": "tools/build-rainlit-02.py",
+  "deterministic": true,
+  "coordinate_semantics": {
+    "note": "frozen by the parent batch: identical for runtime renderer",
+    "anchor": "point; tl=(0,0), tr=(rootWidth,0), bl=(0,rootHeight), br=(rootWidth,rootHeight)",
+    "offset": "layer top-left translation from the anchor point, signed +x right/+y down; no automatic subtraction of layer size",
+    "pivot": "local logical pixel from layer top-left; angle radians",
+    "parent": "child offset/pivot relative to parent unrotated top-left; parent rotation applies to attachment plus accumulated child rotation",
+    "emission": "RGB light gain, typically ~1, preserves mask alpha (not an opacity pulse)",
+    "rail_period": "logical repeat: horizontal 256, vertical 128; cells hold exactly one period",
+    "paths": "asset references are relative to packages/config",
+    "scale": "4 atlas px per logical px"
+  },
+  "source": {
+    "master": "master.webp",
+    "master_sha256": "a58cb8ed7f7f26365ee9a9a3e5e13cc95e44bba5ebff783a0b454df6f21ba58e",
+    "approved_master": "master.webp",
+    "approved_master_sha256": "a58cb8ed7f7f26365ee9a9a3e5e13cc95e44bba5ebff783a0b454df6f21ba58e",
+    "master_size": [
+      1536,
+      1024
+    ],
+    "master_mode": "RGB, no embedded alpha",
+    "alpha_authority": "semantic masks derived from measured contours; the master has no embedded alpha"
+  },
+  "measured": {
+    "method": "numeric luminance/saturation profiles and colour-distance segmentation over the approved RGB master; no vision model involved",
+    "frame_outer": {
+      "left": 74,
+      "right": 1402,
+      "top": 104,
+      "bottom": 906
+    },
+    "client_opening": {
+      "left": 158,
+      "right": 1322,
+      "top": 190,
+      "bottom": 822
+    },
+    "rails": {
+      "top": {
+        "y": [
+          104,
+          190
+        ],
+        "note": "outer dark line at y104, specular band y106..110, body to the inner shadow at y184..190"
+      },
+      "bottom": {
+        "y": [
+          820,
+          906
+        ]
+      },
+      "left": {
+        "x": [
+          74,
+          158
+        ]
+      },
+      "right": {
+        "x": [
+          1316,
+          1402
+        ]
+      }
+    },
+    "corner_hardware": {
+      "tl_brass": "x75..123, y105..185",
+      "bl_brass": "x75..123, y830..894",
+      "br_brass": "x1316..1390, y822..900"
+    }
+  },
+  "cells": {
+    "top-rail": {
+      "atlas_rect": [
+        4,
+        4,
+        1024,
+        104
+      ],
+      "logical_size": [
+        256.0,
+        26.0
+      ],
+      "role": "rail/corner"
+    },
+    "bottom-rail": {
+      "atlas_rect": [
+        4,
+        112,
+        1024,
+        104
+      ],
+      "logical_size": [
+        256.0,
+        26.0
+      ],
+      "role": "rail/corner"
+    },
+    "left-rail": {
+      "atlas_rect": [
+        1032,
+        112,
+        104,
+        512
+      ],
+      "logical_size": [
+        26.0,
+        128.0
+      ],
+      "role": "rail/corner"
+    },
+    "right-rail": {
+      "atlas_rect": [
+        1140,
+        112,
+        104,
+        512
+      ],
+      "logical_size": [
+        26.0,
+        128.0
+      ],
+      "role": "rail/corner",
+      "reconstructed": "lamp bracket rows, plus the crane's baked wing tip (paper measured at source x1387..1401 / y253..267) which is cleared by the measured paper weight (rail wood <= 60, paper >= 90) and replaced from the rail's own clean rows immediately below at the same columns"
+    },
+    "corner-tl": {
+      "atlas_rect": [
+        1248,
+        112,
+        168,
+        168
+      ],
+      "logical_size": [
+        42.0,
+        42.0
+      ],
+      "role": "rail/corner",
+      "source_rect": [
+        74,
+        104,
+        242,
+        272
+      ],
+      "resampling": "1:1"
+    },
+    "corner-tr": {
+      "atlas_rect": [
+        1420,
+        112,
+        168,
+        168
+      ],
+      "logical_size": [
+        42.0,
+        42.0
+      ],
+      "role": "rail/corner",
+      "source_rect": [
+        1234,
+        104,
+        1402,
+        272
+      ],
+      "resampling": "1:1"
+    },
+    "corner-bl": {
+      "atlas_rect": [
+        1592,
+        112,
+        168,
+        168
+      ],
+      "logical_size": [
+        42.0,
+        42.0
+      ],
+      "role": "rail/corner",
+      "source_rect": [
+        74,
+        738,
+        242,
+        906
+      ],
+      "resampling": "1:1"
+    },
+    "corner-br": {
+      "atlas_rect": [
+        1764,
+        112,
+        168,
+        168
+      ],
+      "logical_size": [
+        42.0,
+        42.0
+      ],
+      "role": "rail/corner",
+      "source_rect": [
+        1234,
+        738,
+        1402,
+        906
+      ],
+      "resampling": "1:1"
+    },
+    "roll": {
+      "atlas_rect": [
+        4,
+        628,
+        331,
+        68
+      ],
+      "logical_size": [
+        82.75,
+        17.0
+      ],
+      "role": "static-ornament",
+      "source_rect": [
+        155,
+        486,
+        73,
+        141
+      ]
+    },
+    "slat": {
+      "atlas_rect": [
+        339,
+        628,
+        331,
+        52
+      ],
+      "logical_size": [
+        82.75,
+        13.0
+      ],
+      "role": "moving"
+    },
+    "tie-a": {
+      "atlas_rect": [
+        674,
+        628,
+        38,
+        114
+      ],
+      "logical_size": [
+        9.5,
+        28.5
+      ],
+      "role": "moving",
+      "source_rect": [
+        196,
+        234,
+        70,
+        184
+      ]
+    },
+    "tie-b": {
+      "atlas_rect": [
+        716,
+        628,
+        38,
+        114
+      ],
+      "logical_size": [
+        9.5,
+        28.5
+      ],
+      "role": "moving",
+      "source_rect": [
+        404,
+        442,
+        70,
+        184
+      ]
+    },
+    "crane-hook": {
+      "atlas_rect": [
+        758,
+        628,
+        30,
+        44
+      ],
+      "logical_size": [
+        7.5,
+        11.0
+      ],
+      "role": "static-ornament",
+      "source_rect": [
+        1428,
+        1458,
+        176,
+        220
+      ]
+    },
+    "crane": {
+      "atlas_rect": [
+        792,
+        628,
+        104,
+        108
+      ],
+      "logical_size": [
+        35.4,
+        32.4
+      ],
+      "role": "moving",
+      "source_rect": [
+        1390,
+        1508,
+        218,
+        326
+      ],
+      "alpha": "semantic crane silhouette, not RGB distance to the background: the plain matte is suppressed inside the crop's rail-overlap columns (source x1390..1405, the frame's right rail and dark outer edge) except where genuine bright paper is present (measured rail wood/edge <= 60, wing paper >= 90; threshold 80), so the crane's full wing survives while the vertical wood sliver and the background fringe do not; only the largest 4-connected region is kept (the crane: neck, full wing, folded paper, cord-attachment root) and the silhouette is anti-aliased with a 0.7 px Gaussian",
+      "prefilter": "the 118x108 corrected sprite is drawn at 35.4x32.4 logical px (1.2x the natural source scale), i.e. the display footprint is exactly 10/3 source px per axis, so the runtime's bilinear minification would fold frequencies above the display Nyquist into aliasing; the sprite is therefore band-limited offline with the exact area filter for that minification (a separable centred box average of 10/3 source px per axis) in premultiplied alpha, then packed into the frozen 104x108 cell by a premultiplied horizontal resample 118 -> 104 (interpolating Lanczos, so the already band-limited signal loses no further detail); alpha is re-premultiplied to the pack's straight RGBA with RGB zeroed exactly where alpha is zero, so no dark halo or fringe appears on the softened silhouette"
+    },
+    "lamp-bracket": {
+      "atlas_rect": [
+        900,
+        628,
+        110,
+        92
+      ],
+      "logical_size": [
+        27.5,
+        23.0
+      ],
+      "role": "static-ornament",
+      "source_rect": [
+        1392,
+        1502,
+        544,
+        636
+      ]
+    },
+    "lamp": {
+      "atlas_rect": [
+        1014,
+        628,
+        124,
+        236
+      ],
+      "logical_size": [
+        31.0,
+        59.0
+      ],
+      "role": "moving",
+      "source_rect": [
+        1406,
+        1530,
+        596,
+        832
+      ]
+    },
+    "lamp-paper": {
+      "atlas_rect": [
+        1142,
+        628,
+        124,
+        236
+      ],
+      "logical_size": [
+        31.0,
+        59.0
+      ],
+      "role": "moving"
+    },
+    "lamp-wood-glow": {
+      "atlas_rect": [
+        1270,
+        628,
+        80,
+        230
+      ],
+      "logical_size": [
+        20.0,
+        57.5
+      ],
+      "role": "moving",
+      "source_rect": [
+        1322,
+        1402,
+        590,
+        820
+      ]
+    }
+  },
+  "reconstruction": [
+    "corner-tl: the whole moving tie-a silhouette (full semantic extent x196..234 / y70..184 plus its anti-alias margin, not a red-pixel-only matte) and the static bamboo bundle overlap are removed from the corner and restored from a genuine clean top-beam wood patch sampled per row from the untouched beam band x520..1300, preserving the beam's real row profile and grain (not a flat per-row median); the bundle and ties are drawn only as their own layers, so no flat tassel-shaped ghost remains",
+    "roll: the two red support loops are removed from the bundle and rebuilt as independent foreground layers; the removed columns are filled by horizontal interpolation of neighbouring bamboo",
+    "right-rail: the lamp bracket overlapping source x1395..1402 / y545..645 is reconstructed from the rail's own clean rows (source y190..520), and the crane's wing tip baked onto the rail (paper measured at source x1387..1401 / y253..267) is removed and replaced from the rail's own clean rows immediately below at the same columns \u2014 real rail grain continued, not invented fill.  Measured in that band the rail wood and its edge never exceed luminance 60 and the wing paper never falls below 90, so a 60..90 ramp is an exact paper weight and no wood pixel is moved.  The wing is carried only by the moving crane layer",
+    "lamp-bracket: the static cell keeps only the genuine upper arm and left wall support (source RGB, measured semantic coverage); the whole moving lamp-cap overlap (source x1406..1502 / y596..636) is excluded from the static alpha together with its anti-alias margin and the genuine outside background stays transparent, so no tiled or invented rectangular material remains.  Where the support is genuinely hidden it is continued from the bracket's own aligned clean texture limited to measurable support coverage; the lamp cap is drawn once by the moving lamp layer",
+    "lamp-wood-glow: the spill is measured against the rail's unlit columns, gated by the rail's real wood material and capped at a low opacity while retaining the wood grain warmed toward the light colour; no opaque pale rectangle",
+    "crane: the cell keeps a measured crop extended left to x1390 (x1390..1508 / y218..326, 118x108) so the whole visible wing travels with the moving layer, but its alpha is the crane-only semantic silhouette.  The frame's right rail and its dark outer edge occupy source x1390..1405 inside that crop and the old plain RGB-distance matte matched them as object colour, baking a vertical wood sliver and its background fringe into the sprite; inside those columns the crane's wing is the only genuine material and it is bright paper, so the object is admitted there by luminance alone (measured: rail wood/edge <= 60, wing paper >= 90; threshold >= 80) and the frame is dropped.  Only the largest connected region is kept, so the silhouette is the crane itself \u2014 neck, full wing, folded paper and cord-attachment root \u2014 with no wood and no background edge.  The 118x108 sprite is prefiltered to its 35.4x32.4 logical draw and then packed into the frozen 104x108 cell by a premultiplied horizontal resample (see the crane alpha/prefilter provenance)",
+    "no second drawn copy of any moving ornament is left in the reconstructed material: the crane's wing that the master baked onto the right rail is removed from that static cell and drawn only by the moving crane layer"
+  ],
+  "atlas": {
+    "file": "frame-atlas.png",
+    "size": [
+      2048,
+      2048
+    ],
+    "gutter_px": 4,
+    "alpha": "straight RGBA; RGB zeroed exactly where alpha is zero",
+    "cells": {
+      "top-rail": [
+        4,
+        4,
+        1024,
+        104
+      ],
+      "bottom-rail": [
+        4,
+        112,
+        1024,
+        104
+      ],
+      "left-rail": [
+        1032,
+        112,
+        104,
+        512
+      ],
+      "right-rail": [
+        1140,
+        112,
+        104,
+        512
+      ],
+      "corner-tl": [
+        1248,
+        112,
+        168,
+        168
+      ],
+      "corner-tr": [
+        1420,
+        112,
+        168,
+        168
+      ],
+      "corner-bl": [
+        1592,
+        112,
+        168,
+        168
+      ],
+      "corner-br": [
+        1764,
+        112,
+        168,
+        168
+      ],
+      "roll": [
+        4,
+        628,
+        331,
+        68
+      ],
+      "slat": [
+        339,
+        628,
+        331,
+        52
+      ],
+      "tie-a": [
+        674,
+        628,
+        38,
+        114
+      ],
+      "tie-b": [
+        716,
+        628,
+        38,
+        114
+      ],
+      "crane-hook": [
+        758,
+        628,
+        30,
+        44
+      ],
+      "crane": [
+        792,
+        628,
+        104,
+        108
+      ],
+      "lamp-bracket": [
+        900,
+        628,
+        110,
+        92
+      ],
+      "lamp": [
+        1014,
+        628,
+        124,
+        236
+      ],
+      "lamp-paper": [
+        1142,
+        628,
+        124,
+        236
+      ],
+      "lamp-wood-glow": [
+        1270,
+        628,
+        80,
+        230
+      ]
+    }
+  },
+  "rails": {
+    "period_logical": {
+      "horizontal": 256,
+      "vertical": 128
+    },
+    "cut_source": {
+      "top-rail": [
+        496,
+        1320,
+        104,
+        190
+      ],
+      "bottom-rail": [
+        496,
+        1320,
+        820,
+        906
+      ],
+      "left-rail": [
+        74,
+        158,
+        300,
+        812
+      ],
+      "right-rail": [
+        1316,
+        1402,
+        190,
+        702
+      ]
+    },
+    "resampling": {
+      "top-rail": {
+        "from": [
+          824,
+          86
+        ],
+        "to": [
+          1024,
+          104
+        ]
+      },
+      "bottom-rail": {
+        "from": [
+          824,
+          86
+        ],
+        "to": [
+          1024,
+          104
+        ]
+      },
+      "left-rail": {
+        "from": [
+          84,
+          512
+        ],
+        "to": [
+          104,
+          512
+        ]
+      },
+      "right-rail": {
+        "from": [
+          86,
+          512
+        ],
+        "to": [
+          104,
+          512
+        ]
+      }
+    },
+    "wrap": "each rail cell is cross-faded at both ends so the neutral material tiles without a visible seam"
+  },
+  "logical_geometry": {
+    "insets": {
+      "left": 26,
+      "right": 26,
+      "top": 26,
+      "bottom": 26
+    },
+    "outsets": {
+      "left": 0,
+      "right": 34,
+      "top": 12,
+      "bottom": 0
+    },
+    "corner_size_logical": {
+      "top": [
+        42,
+        42
+      ],
+      "bottom": [
+        42,
+        42
+      ]
+    },
+    "minimum_root": [
+      240,
+      160
+    ],
+    "layers": {
+      "roll": {
+        "offset": [
+          20.25,
+          -7.75
+        ],
+        "size": [
+          82.75,
+          17.0
+        ]
+      },
+      "slat": {
+        "offset": [
+          20.25,
+          9.25
+        ],
+        "size": [
+          82.75,
+          13.0
+        ]
+      },
+      "tie-a": {
+        "offset": [
+          30.5,
+          -8.5
+        ],
+        "size": [
+          9.5,
+          28.5
+        ]
+      },
+      "tie-b": {
+        "offset": [
+          82.5,
+          -8.5
+        ],
+        "size": [
+          9.5,
+          28.5
+        ]
+      },
+      "crane-hook": {
+        "anchor": "tr",
+        "offset": [
+          6.5,
+          18.0
+        ],
+        "size": [
+          7.5,
+          11.0
+        ]
+      },
+      "crane": {
+        "anchor": "tr",
+        "offset": [
+          -5.65,
+          27.9
+        ],
+        "size": [
+          35.4,
+          32.4
+        ],
+        "pivot": [
+          15.9,
+          3.6
+        ],
+        "cell_supersample": "the 118 x 108 corrected sprite is packed into the frozen 104x108 cell by a premultiplied horizontal resample 118 -> 104, so the cell holds 104/118 cell px per source px horizontally and 1:1 vertically; drawn at 35.4x32.4 (1.2x the natural source scale), that is 2.938 x 3.333 cell px per logical px"
+      },
+      "lamp-bracket": {
+        "anchor": "br",
+        "offset": [
+          -2.5,
+          -90.5
+        ],
+        "size": [
+          27.5,
+          23.0
+        ]
+      },
+      "lamp": {
+        "anchor": "br",
+        "offset": [
+          1.0,
+          -77.5
+        ],
+        "size": [
+          31.0,
+          59.0
+        ],
+        "pivot": [
+          14.0,
+          2.5
+        ]
+      },
+      "lamp-paper": {
+        "anchor": "br",
+        "offset": [
+          1.0,
+          -77.5
+        ],
+        "size": [
+          31.0,
+          59.0
+        ],
+        "pivot": [
+          14.0,
+          2.5
+        ],
+        "emission": "lampEnergy"
+      },
+      "lamp-wood-glow": {
+        "anchor": "br",
+        "offset": [
+          -20.0,
+          -79.0
+        ],
+        "size": [
+          20.0,
+          57.5
+        ],
+        "emission": "lampEnergy"
+      }
+    },
+    "interior_light_placement": {
+      "anchor": "br",
+      "offset": [
+        16.5,
+        -48.0
+      ],
+      "spread": [
+        76,
+        48
+      ]
+    }
+  },
+  "declared_support": {
+    "minimum_root": [
+      240,
+      160
+    ],
+    "root_scales": "scale 1 and scale 2 roots are declared; all-size shrink behaviour is unverified",
+    "shrink_rule": "all shape sizes/offsets shrink uniformly below the declared minimum; the pack does not pretend full support at unsupported sizes",
+    "protected_client": "no authored layer cell overlaps the measured client opening x158..1322 / y190..822"
+  },
+  "omitted_source_objects": [
+    "the master's baked red support loops are not kept as a second static copy; they are rebuilt as the tie-a/tie-b layers",
+    "the master's baked lamp and crane are not kept inside the rails; each is a single independent layer"
+  ],
+  "not_claimed": [
+    "no runtime, geometry, hit-testing, alpha-compositing or performance claim",
+    "all-size joins and mitre behaviour are unverified",
+    "visual correctness is not asserted by alpha coverage alone"
+  ],
+  "outputs": {
+    "layers/top-rail.png": {
+      "sha256": "ea7dc9d8e1d3abaea421f135ec02b5177890a1e88520f9d7e908eb111a9a9f13",
+      "size": [
+        1024,
+        104
+      ]
+    },
+    "layers/bottom-rail.png": {
+      "sha256": "f288dcfa932cff0f870edf78a290f1ff05092aa0040214e219f3f2d9d3fa6a82",
+      "size": [
+        1024,
+        104
+      ]
+    },
+    "layers/left-rail.png": {
+      "sha256": "45f4d059483cc6a8f8f25f11aa16e2f49fbe2738f72ec29e747438a2d943987f",
+      "size": [
+        104,
+        512
+      ]
+    },
+    "layers/right-rail.png": {
+      "sha256": "d39deaaf613fc5f65efe87b423cfbe2d8352fd9fcaae7cc6a96cba455d7b4dd2",
+      "size": [
+        104,
+        512
+      ]
+    },
+    "layers/corner-tl.png": {
+      "sha256": "7cf70abd5f53a675d28f94508261c3a3db9f2b82eef4b6233b740297daf642c8",
+      "size": [
+        168,
+        168
+      ]
+    },
+    "layers/corner-tr.png": {
+      "sha256": "035243d24d741d2e710d49adaaddce1118cf71ad64ecf8111b96de49eb86695d",
+      "size": [
+        168,
+        168
+      ]
+    },
+    "layers/corner-bl.png": {
+      "sha256": "c959c71fdec58cff7f1e9d3cb797d0f1a1e532618c878d56df0b32aeac4ccf70",
+      "size": [
+        168,
+        168
+      ]
+    },
+    "layers/corner-br.png": {
+      "sha256": "57a537ae30d43e6d534eb26de41c71bb2c4abf39ed36c95ae6c0cd58ce5e4ea1",
+      "size": [
+        168,
+        168
+      ]
+    },
+    "layers/roll.png": {
+      "sha256": "213b9fa9fe86cda85ab0e2f700b490136bdbcf677c4aabafb015c5f7a0b4da79",
+      "size": [
+        331,
+        68
+      ]
+    },
+    "layers/slat.png": {
+      "sha256": "13e9bb4c9820912cf3c0ed98f0bfc23432e127bd96c2a8992054223c11719094",
+      "size": [
+        331,
+        52
+      ]
+    },
+    "layers/tie-a.png": {
+      "sha256": "792d8afa040e009a072ac28c56949068247986e44b4430bb5892939d5749cdef",
+      "size": [
+        38,
+        114
+      ]
+    },
+    "layers/tie-b.png": {
+      "sha256": "c0a498b7b25e9db302d2a6bbb2c04b13b95448e6ad59b894d6d50b29f3c78588",
+      "size": [
+        38,
+        114
+      ]
+    },
+    "layers/crane-hook.png": {
+      "sha256": "fecf57f048f6d53383b07bd0dc5f9d154ec4b30ecc116a1ce5bb0c102d2e1960",
+      "size": [
+        30,
+        44
+      ]
+    },
+    "layers/crane.png": {
+      "sha256": "61eff60ba1144f0849ed2bfdfbdc63ed25122ac47446b44e7f3b42d639fa82e8",
+      "size": [
+        104,
+        108
+      ]
+    },
+    "layers/lamp-bracket.png": {
+      "sha256": "5091470521845145567f9eef7c12b7fd12f2a3f8de3b0304a11bc26f64b1bbbc",
+      "size": [
+        110,
+        92
+      ]
+    },
+    "layers/lamp.png": {
+      "sha256": "26b141e411c2036c2fdd7e8d69e4c514851193ab067429950a540d4a9aaaf3b9",
+      "size": [
+        124,
+        236
+      ]
+    },
+    "layers/lamp-paper.png": {
+      "sha256": "6dbec765512eaf9c4ad928ffb14d4abffb8e38a0cd799825e4fa62b11ea9a7bc",
+      "size": [
+        124,
+        236
+      ]
+    },
+    "layers/lamp-wood-glow.png": {
+      "sha256": "2f91db585afe910ba6b0584f6404f98a592c1f066ee73f42c9574824a457d125",
+      "size": [
+        80,
+        230
+      ]
+    },
+    "frame-atlas.png": {
+      "sha256": "c7c12fa17a626b22a04d9c4940b6051ded5ae9b0cb2908416ed330dc7dd97d9e",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    "master.webp": {
+      "sha256": "a58cb8ed7f7f26365ee9a9a3e5e13cc95e44bba5ebff783a0b454df6f21ba58e",
+      "size": [
+        1536,
+        1024
+      ]
+    }
+  }
+}

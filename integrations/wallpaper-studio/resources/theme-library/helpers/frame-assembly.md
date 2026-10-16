@@ -1,0 +1,2 @@
+# Deterministic frame assembly
+Inputs: pinned approved master, layer/anchor metadata, renderer capability and explicit adaptation policy. Operations: allowed uniform scale, crop, authored rail/corner cuts and atlas packing. Outputs: exact assets, transform receipts, renderer metadata and validation evidence. Do not infer missing pivots or make unique ornaments repeat. Implementation: existing semantic_frame.py, reassemble.py and renderer-specific reviewed builders; helper prose is never executable.

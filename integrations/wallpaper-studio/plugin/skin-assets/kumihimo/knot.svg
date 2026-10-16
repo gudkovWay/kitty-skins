@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 14 14">
+  <!-- Отдельный узел-орнамент: тот же бордовый корд, уложенный петлёй.
+       Декоративная деталь на стыках, не элемент управления. -->
+  <circle cx="7" cy="7" r="5.2" fill="none" stroke="#55242C" stroke-width="2.6"/>
+  <circle cx="7" cy="7" r="5.2" fill="none" stroke="#7B343E" stroke-width="1.6"/>
+  <path d="M7,1.8 C9.8,4.4 9.8,9.6 7,12.2 C4.2,9.6 4.2,4.4 7,1.8 Z" fill="none" stroke="#8E4150" stroke-width="1" opacity="0.8"/>
+</svg>

@@ -1,0 +1,11 @@
+schema_version = 1
+# Text contracts only; no automatic command evaluation.
+[frame_assembly]
+document = "frame-assembly.md"
+implementation = "wallpaper-studio/backend/semantic_frame.py"
+[layer_authoring]
+document = "layer-authoring.md"
+[animation_authoring]
+document = "animation-authoring.md"
+[verification]
+document = "verification.md"

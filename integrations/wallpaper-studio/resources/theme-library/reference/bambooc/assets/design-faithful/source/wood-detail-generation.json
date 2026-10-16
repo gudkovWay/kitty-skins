@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-08",
+  "operation": "Detail-restoration image edit of existing two walnut beams; not a whole-frame redesign",
+  "provider": "openai-codex",
+  "requested_model": "openai-codex/gpt-image-2",
+  "actual_model": "gpt-image-2-codex",
+  "provider_reported_quality": "low",
+  "actual_size": [
+    1536,
+    1024
+  ],
+  "input": [
+    "wood-polished-gpt-image-2.webp",
+    "corners-gpt-image-2.webp"
+  ],
+  "output": "wood-detail-gpt-image-2.webp",
+  "output_sha256": "697a10127929da33fd3f976e144c5156fff2dd3c2cbf0f2cf00e6dd56c798ae4",
+  "derivation": "Native measured timber samples assembled at4 atlas px/logical px,256 logical repeat; no long-axis enlargement. Corners retain native4px/logical. Restore local lamp-wood-glow energy in builder; no shader or motion changes.",
+  "verification": "Offline assembly and authored detail inspection; live Kitty/Zen acceptance not asserted."
+}

@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-08",
+  "provider": "openai-codex",
+  "requested_model": "openai-codex/gpt-image-2",
+  "actual_model": "gpt-image-2-codex",
+  "quality": "medium",
+  "output": "wood-polished-gpt-image-2.webp",
+  "actual_size": [1536, 1024],
+  "reference": "corners-gpt-image-2.webp",
+  "reference_crop": [665, 63, 1209, 594],
+  "intent": "Replace only the four coarse timber rails with two crisp uninterrupted painted walnut beams; use one subdued warm dark walnut colour with narrow bevels and fine longitudinal grain. No hardware, corners, bamboo, lamp, UI, transverse seams or lighting pools in repeating stock.",
+  "guidance": "Image-stage frame construction contract and Gothic material/adaptation philosophy supplied as actual generation input; component-only scope takes precedence over whole-frame composition.",
+  "derivation": "tools/build-rainlit-02.py; existing atlas cell sizes, packing and rail periods unchanged (2 atlas px per logical px, horizontal 512 and vertical 256 logical px); minimum-error ownership cut instead of crossfade; preserve original corner joinery, alpha and measured brass silhouettes; recolour timber only.",
+  "verification": "Asset assembly and offline visual inspection only; native Kitty/Zen rendering and owner acceptance are not asserted."
+}

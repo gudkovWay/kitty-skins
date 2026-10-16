@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="80" viewBox="0 0 12 10">
+  <!-- Сдержанный фонарь: тёплое янтарное стекло под тёмным колпаком.
+       Отдельный индикатор «играет», не совпадает с фокусом/активной
+       вкладкой. -->
+  <line x1="6" y1="0" x2="6" y2="1.1" stroke="#70514B" stroke-width="0.7"/>
+  <rect x="3.1" y="1.1" width="5.8" height="1.3" rx="0.5" fill="#3a2a26"/>
+  <ellipse cx="6" cy="5.4" rx="2.9" ry="3.3" fill="#C28C59" opacity="0.28"/>
+  <ellipse cx="6" cy="5.4" rx="2.2" ry="2.7" fill="#C28C59"/>
+  <ellipse cx="6" cy="5.4" rx="1.2" ry="1.6" fill="#E7C08A"/>
+  <rect x="4.1" y="8.7" width="3.8" height="1" rx="0.4" fill="#3a2a26"/>
+</svg>

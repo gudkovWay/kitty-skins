@@ -1,0 +1,29 @@
+{
+  "provider": "openai-codex",
+  "requested_model": "openai-codex/gpt-image-2",
+  "actual_model": "gpt-image-2-codex",
+  "actual_quality": "low",
+  "actual_size": [
+    1536,
+    1024
+  ],
+  "sha256": "b9dee6a12824ce7a937d512a973528fedcb55f574e67671d19c619ab7d58e389",
+  "reference": "corners-gpt-image-2.webp",
+  "request_sha256": "feced412a25a16c374bab64e9f1750aac46bb6a70b5fea44550cc30bcb5ec54c",
+  "guidance_sha256": "1a978e4fc5545f798aa71c4d45254cb30b86da071c174f2246f6a0fd1fa50fde",
+  "neutral_cuts": {
+    "horizontal": [
+      384,
+      66,
+      1088,
+      208
+    ],
+    "vertical_rotated": [
+      384,
+      598,
+      1088,
+      208
+    ]
+  },
+  "method": "outpaint full-length corner material; remove non-neutral starting joinery from running stock"
+}
