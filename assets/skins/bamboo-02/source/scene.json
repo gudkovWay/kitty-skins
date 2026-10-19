@@ -1,0 +1,570 @@
+{
+  "pack": "02",
+  "title": "Native 120 s bamboo-girl scene character atlas",
+  "builder": "tools/build-rainlit-02-scene.py",
+  "deterministic": true,
+  "coordinate_semantics": {
+    "note": "frozen by the parent batch: identical for the runtime scene stage",
+    "units": "SOURCE pixels of the authored 384x512 cell unless stated otherwise",
+    "atlas_index": "row-major: 0..7 walk, 8..15 action; 11 is the press pose",
+    "paths": "asset references are relative to packages/config",
+    "runtime_conversion": "the runtime scales source pixels once by girlScale; girlX is the root-logical CELL LEFT and the runtime subtracts the root inset once",
+    "baseline": "shared ground-contact row measured from the cell top after normalization"
+  },
+  "source": {
+    "sheets": [
+      {
+        "name": "walk",
+        "path": "assets/rainlit-frames/02/scene/source/walk-master.webp",
+        "sha256": "754a9a6fbb36b88289ed7a4104f7e4ede55a4727659faf1ba466a3950c388826",
+        "size": [
+          1536,
+          1024
+        ],
+        "mode": "RGBA, straight alpha, authored"
+      },
+      {
+        "name": "action",
+        "path": "assets/rainlit-frames/02/scene/source/actions-master.webp",
+        "sha256": "0658797cc0baa586918f41ef0ce67168805e1cd1fd064433951e8a8bdb280a39",
+        "size": [
+          1536,
+          1024
+        ],
+        "mode": "RGBA, straight alpha, authored"
+      }
+    ],
+    "alpha_authority": "the authored sheets carry real per-pixel alpha; the builder copies it verbatim and never luminance-keys the dark hair/kimono",
+    "not_visible": "hidden RGB under fully transparent pixels is compression residue, not visible material",
+    "research_only": [
+      "character-master.webp / model-request.json (identity master, opaque magenta backing)"
+    ]
+  },
+  "normalization": {
+    "method": "one whole-sprite INTEGER translation per frame from measured alpha; no per-frame rescale, resample, crop or warp",
+    "visible_threshold_alpha": 16,
+    "border_ring_max_alpha": 8,
+    "baseline_target": 505,
+    "centerline_target": 192,
+    "centerline_band_fraction": [
+      0.45,
+      0.75
+    ],
+    "frames": [
+      {
+        "atlas_index": 0,
+        "sheet": "walk",
+        "sheet_cell": [
+          0,
+          0
+        ],
+        "source_bbox": [
+          87,
+          19,
+          285,
+          497
+        ],
+        "source_baseline": 497,
+        "source_torso_centerline": 191.37,
+        "source_height_px": 479,
+        "border_ring_max_alpha": 0,
+        "translation": [
+          1,
+          8
+        ],
+        "normalized_bbox": [
+          88,
+          27,
+          286,
+          505
+        ]
+      },
+      {
+        "atlas_index": 1,
+        "sheet": "walk",
+        "sheet_cell": [
+          1,
+          0
+        ],
+        "source_bbox": [
+          101,
+          19,
+          271,
+          496
+        ],
+        "source_baseline": 496,
+        "source_torso_centerline": 173.92,
+        "source_height_px": 478,
+        "border_ring_max_alpha": 1,
+        "translation": [
+          18,
+          9
+        ],
+        "normalized_bbox": [
+          119,
+          28,
+          289,
+          505
+        ]
+      },
+      {
+        "atlas_index": 2,
+        "sheet": "walk",
+        "sheet_cell": [
+          2,
+          0
+        ],
+        "source_bbox": [
+          61,
+          19,
+          273,
+          494
+        ],
+        "source_baseline": 494,
+        "source_torso_centerline": 163.67,
+        "source_height_px": 476,
+        "border_ring_max_alpha": 0,
+        "translation": [
+          28,
+          11
+        ],
+        "normalized_bbox": [
+          89,
+          30,
+          301,
+          505
+        ]
+      },
+      {
+        "atlas_index": 3,
+        "sheet": "walk",
+        "sheet_cell": [
+          3,
+          0
+        ],
+        "source_bbox": [
+          35,
+          19,
+          271,
+          496
+        ],
+        "source_baseline": 496,
+        "source_torso_centerline": 162.44,
+        "source_height_px": 478,
+        "border_ring_max_alpha": 0,
+        "translation": [
+          30,
+          9
+        ],
+        "normalized_bbox": [
+          65,
+          28,
+          301,
+          505
+        ]
+      },
+      {
+        "atlas_index": 4,
+        "sheet": "walk",
+        "sheet_cell": [
+          0,
+          1
+        ],
+        "source_bbox": [
+          64,
+          14,
+          303,
+          483
+        ],
+        "source_baseline": 483,
+        "source_torso_centerline": 193.52,
+        "source_height_px": 470,
+        "border_ring_max_alpha": 0,
+        "translation": [
+          -2,
+          22
+        ],
+        "normalized_bbox": [
+          62,
+          36,
+          301,
+          505
+        ]
+      },
+      {
+        "atlas_index": 5,
+        "sheet": "walk",
+        "sheet_cell": [
+          1,
+          1
+        ],
+        "source_bbox": [
+          88,
+          14,
+          285,
+          484
+        ],
+        "source_baseline": 484,
+        "source_torso_centerline": 180.11,
+        "source_height_px": 471,
+        "border_ring_max_alpha": 1,
+        "translation": [
+          12,
+          21
+        ],
+        "normalized_bbox": [
+          100,
+          35,
+          297,
+          505
+        ]
+      },
+      {
+        "atlas_index": 6,
+        "sheet": "walk",
+        "sheet_cell": [
+          2,
+          1
+        ],
+        "source_bbox": [
+          46,
+          14,
+          284,
+          482
+        ],
+        "source_baseline": 482,
+        "source_torso_centerline": 176.71,
+        "source_height_px": 469,
+        "border_ring_max_alpha": 0,
+        "translation": [
+          15,
+          23
+        ],
+        "normalized_bbox": [
+          61,
+          37,
+          299,
+          505
+        ]
+      },
+      {
+        "atlas_index": 7,
+        "sheet": "walk",
+        "sheet_cell": [
+          3,
+          1
+        ],
+        "source_bbox": [
+          30,
+          14,
+          278,
+          483
+        ],
+        "source_baseline": 483,
+        "source_torso_centerline": 167.18,
+        "source_height_px": 470,
+        "border_ring_max_alpha": 0,
+        "translation": [
+          25,
+          22
+        ],
+        "normalized_bbox": [
+          55,
+          36,
+          303,
+          505
+        ]
+      },
+      {
+        "atlas_index": 8,
+        "sheet": "action",
+        "sheet_cell": [
+          0,
+          0
+        ],
+        "source_bbox": [
+          139,
+          24,
+          286,
+          505
+        ],
+        "source_baseline": 505,
+        "source_torso_centerline": 196.59,
+        "source_height_px": 482,
+        "border_ring_max_alpha": 1,
+        "translation": [
+          -5,
+          0
+        ],
+        "normalized_bbox": [
+          134,
+          24,
+          281,
+          505
+        ]
+      },
+      {
+        "atlas_index": 9,
+        "sheet": "action",
+        "sheet_cell": [
+          1,
+          0
+        ],
+        "source_bbox": [
+          141,
+          22,
+          288,
+          505
+        ],
+        "source_baseline": 505,
+        "source_torso_centerline": 200.36,
+        "source_height_px": 484,
+        "border_ring_max_alpha": 1,
+        "translation": [
+          -8,
+          0
+        ],
+        "normalized_bbox": [
+          133,
+          22,
+          280,
+          505
+        ]
+      },
+      {
+        "atlas_index": 10,
+        "sheet": "action",
+        "sheet_cell": [
+          2,
+          0
+        ],
+        "source_bbox": [
+          57,
+          23,
+          284,
+          505
+        ],
+        "source_baseline": 505,
+        "source_torso_centerline": 187.86,
+        "source_height_px": 483,
+        "border_ring_max_alpha": 1,
+        "translation": [
+          4,
+          0
+        ],
+        "normalized_bbox": [
+          61,
+          23,
+          288,
+          505
+        ]
+      },
+      {
+        "atlas_index": 11,
+        "sheet": "action",
+        "sheet_cell": [
+          3,
+          0
+        ],
+        "source_bbox": [
+          12,
+          23,
+          293,
+          505
+        ],
+        "source_baseline": 505,
+        "source_torso_centerline": 193.34,
+        "source_height_px": 483,
+        "border_ring_max_alpha": 1,
+        "translation": [
+          -1,
+          0
+        ],
+        "normalized_bbox": [
+          11,
+          23,
+          292,
+          505
+        ]
+      },
+      {
+        "atlas_index": 12,
+        "sheet": "action",
+        "sheet_cell": [
+          0,
+          1
+        ],
+        "source_bbox": [
+          88,
+          19,
+          287,
+          501
+        ],
+        "source_baseline": 501,
+        "source_torso_centerline": 195.83,
+        "source_height_px": 483,
+        "border_ring_max_alpha": 1,
+        "translation": [
+          -4,
+          4
+        ],
+        "normalized_bbox": [
+          84,
+          23,
+          283,
+          505
+        ]
+      },
+      {
+        "atlas_index": 13,
+        "sheet": "action",
+        "sheet_cell": [
+          1,
+          1
+        ],
+        "source_bbox": [
+          139,
+          22,
+          296,
+          501
+        ],
+        "source_baseline": 501,
+        "source_torso_centerline": 201.65,
+        "source_height_px": 480,
+        "border_ring_max_alpha": 1,
+        "translation": [
+          -10,
+          4
+        ],
+        "normalized_bbox": [
+          129,
+          26,
+          286,
+          505
+        ]
+      },
+      {
+        "atlas_index": 14,
+        "sheet": "action",
+        "sheet_cell": [
+          2,
+          1
+        ],
+        "source_bbox": [
+          140,
+          22,
+          289,
+          501
+        ],
+        "source_baseline": 501,
+        "source_torso_centerline": 198.36,
+        "source_height_px": 480,
+        "border_ring_max_alpha": 1,
+        "translation": [
+          -6,
+          4
+        ],
+        "normalized_bbox": [
+          134,
+          26,
+          283,
+          505
+        ]
+      },
+      {
+        "atlas_index": 15,
+        "sheet": "action",
+        "sheet_cell": [
+          3,
+          1
+        ],
+        "source_bbox": [
+          43,
+          21,
+          290,
+          501
+        ],
+        "source_baseline": 501,
+        "source_torso_centerline": 181.0,
+        "source_height_px": 481,
+        "border_ring_max_alpha": 1,
+        "translation": [
+          11,
+          4
+        ],
+        "normalized_bbox": [
+          54,
+          25,
+          301,
+          505
+        ]
+      }
+    ]
+  },
+  "press_contact": {
+    "atlas_index": 11,
+    "method": "leftmost pixel with alpha >= threshold in the NORMALIZED press cell; y is the median visible row of that column (measured, not assumed)",
+    "contact": [
+      11,
+      180
+    ],
+    "contact_column_visible_rows": [
+      180
+    ]
+  },
+  "atlas": {
+    "file": "character-atlas.png",
+    "size": [
+      1536,
+      2048
+    ],
+    "cell_size": [
+      384,
+      512
+    ],
+    "grid": [
+      4,
+      4
+    ],
+    "mode": "RGBA",
+    "sha256": "c17ee9932b37bfb08b75215146beebc581598a3291f1f61d0990b836f766c6fa"
+  },
+  "exports": {
+    "module": "packages/config/src/effect/rainlit/scene-02-assets.ts",
+    "SCENE_02_ATLAS": "./assets/rainlit-frames/02/scene/character-atlas.png",
+    "SCENE_02_ATLAS_SIZE": [
+      1536,
+      2048
+    ],
+    "SCENE_02_CELL_SIZE": [
+      384,
+      512
+    ],
+    "SCENE_02_PRESS_CONTACT": [
+      11,
+      180
+    ],
+    "SCENE_02_BASELINE": 505,
+    "SCENE_02_SOURCE_HEIGHT": 512
+  },
+  "outputs": {
+    "character-atlas.png": {
+      "sha256": "c17ee9932b37bfb08b75215146beebc581598a3291f1f61d0990b836f766c6fa",
+      "size": [
+        1536,
+        2048
+      ]
+    },
+    "source.json": {
+      "file": "source.json",
+      "note": "this provenance record"
+    },
+    "metadata_module": {
+      "path": "packages/config/src/effect/rainlit/scene-02-assets.ts"
+    }
+  },
+  "not_claimed": [
+    "this atlas is asset assembly only: it does not prove renderer integration, native frame alignment, animation quality or owner acceptance",
+    "character identity comparison against the wallpaper reference is assistant-observed at the research stage, not re-derived here"
+  ]
+}

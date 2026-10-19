@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "id": "bamboo-02",
+  "renderer": "bamboo02",
+  "name": "Rainlit 02 — Bamboo, Washi Crane and Lantern",
+  "source": {
+    "kind": "existing-owner-authored-production-pack",
+    "root": "/home/q/.config/shojiwm",
+    "revision": "installed-production-bytes-2026-10-18",
+    "artwork_changes": false,
+    "frame_metadata": "source/frame.json",
+    "scene_metadata": "source/scene.json"
+  },
+  "assets": {
+    "frame-atlas.png": {
+      "sha256": "0123fe5ff9ea178ac8f2d72867697306a13b2a08ac65ac313c785d25971a5acc",
+      "width": 2048,
+      "height": 2048,
+      "source": "assets/rainlit-frames/02/design-faithful/frame-atlas.png"
+    },
+    "character-atlas.png": {
+      "sha256": "c17ee9932b37bfb08b75215146beebc581598a3291f1f61d0990b836f766c6fa",
+      "width": 1536,
+      "height": 2048,
+      "source": "assets/rainlit-frames/02/scene/character-atlas.png"
+    },
+    "content-lantern.png": {
+      "sha256": "84c336b87318166e4e5bd87040a59ecd7f3e495b0fff39a81a664079390c7c0d",
+      "width": 512,
+      "height": 1024,
+      "source": "assets/rain-shoji-v2/content-lantern.png"
+    },
+    "controls/close.png": {"sha256": "5368bd3643ffd8ec7a8ef192038f964cacef434898e9230f0a591d7a23c1506c", "derived_from": "controls/close.svg", "rasterization": "ImageMagick, transparent, 14x14"},
+    "controls/close.svg": {"sha256": "06c696ace2a016ce844b7020966b91e291b015683fa750259eb942af1a9f64c1"},
+    "controls/maximize.png": {"sha256": "71e5b83690b465e20edfbd8b3d2a40e1982520f3fbb978fe3de2fd43e51eca43", "derived_from": "controls/maximize.svg", "rasterization": "ImageMagick, transparent, 14x14"},
+    "controls/maximize.svg": {"sha256": "c0260050ed19da05b3a4c7a6acf4059dd62372748d5e69a4b2679f5c12ebb2eb"},
+    "controls/minus.png": {"sha256": "a83b1b1ef41fb366e58f4266b932a3e8e6a040196fa91881c249c60625975401", "derived_from": "controls/minus.svg", "rasterization": "ImageMagick, transparent, 14x14"},
+    "controls/minus.svg": {"sha256": "d0e22c5a67d593b5023165162b68f17da3a6a2afb844ca086b5ef9e313bda165"},
+    "controls/plate-hover.png": {"sha256": "ccedb1be12a467b8c48a9ce177070298e02b99742ebf9313bcddc04cc8d6c12b"},
+    "controls/plate.png": {"sha256": "c08e432954b6c54e575d66ea44a37cefddc6d6ad6c3b77287acb8696f141a079"},
+    "controls/restore.png": {"sha256": "8f13eeceddb197fb2a1a978b182939d389004d956b67bc950638997998d52b53", "derived_from": "controls/restore.svg", "rasterization": "ImageMagick, transparent, 14x14"},
+    "controls/restore.svg": {"sha256": "ae460f182c2af81ac72915ec06bdfe2ee1cdbb9e3f97d09d0dd56f8a16548daa"}
+  },
+  "geometry": {
+    "beam": 52,
+    "minimum_root": [480, 320],
+    "corner_size": [104, 104],
+    "rail_period": [256, 256],
+    "exterior_outsets": {"left": 0, "right": 112, "top": 24, "bottom": 0}
+  },
+  "period_seconds": {"story": 120, "ornaments": 20, "weather": 96},
+  "color_authority": "existing-kitty-config-and-noctalia",
+  "verification": {
+    "source_art": "byte-identical",
+    "hyprland_render": "unverified",
+    "kitty_custom_shaders": "not-used: dynamic compositor geometry/clock inputs unavailable"
+  }
+}
