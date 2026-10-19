@@ -3,6 +3,7 @@
 #include "ambient.hpp"
 #include "client_source.hpp"
 
+#include <array>
 #include <chrono>
 #include <stdexcept>
 #include <string_view>
@@ -41,6 +42,12 @@ namespace bamboo02 {
 namespace {
 using Clock = std::chrono::steady_clock;
 using namespace std::chrono_literals;
+// Layout clearance includes exterior sculpture; the painted ring stays 52px.
+constexpr std::array<double, 4> kReservedInsets = {164.0, 76.0, 164.0, 52.0}; // L/T/R/B
+static_assert(kReservedInsets[0] == kReservedInsets[2], "Keep the frame horizontally centered");
+static_assert(kReservedInsets[2] == kInset + 112.0, "Retain full right ornament clearance");
+static_assert(kReservedInsets[1] == kInset + 24.0 && kReservedInsets[3] == kInset);
+
 constexpr std::vector<std::string> parseTargets(std::string_view value) {
     if (value.empty() || value == "*") return {"kitty"};
     std::vector<std::string> targets;
@@ -406,8 +413,8 @@ class Decoration final : public IHyprWindowDecoration {
         info.edges = DECORATION_EDGE_TOP | DECORATION_EDGE_BOTTOM | DECORATION_EDGE_LEFT | DECORATION_EDGE_RIGHT;
         info.priority = 5000; info.reserved = !background;
         if (!background && wanted(*scene)) {
-            info.desiredExtents.topLeft = Vector2D(52,76);
-            info.desiredExtents.bottomRight = Vector2D(164,52);
+            info.desiredExtents.topLeft = Vector2D(kReservedInsets[0],kReservedInsets[1]);
+            info.desiredExtents.bottomRight = Vector2D(kReservedInsets[2],kReservedInsets[3]);
         }
         return info;
     }
