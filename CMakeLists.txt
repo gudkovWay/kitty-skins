@@ -50,3 +50,20 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 endif()
 
 set_target_properties(kitty-skins PROPERTIES PREFIX "lib")
+
+# Standalone bamboo02 compositor implementation; no legacy pack/model linkage.
+add_library(bamboo-02 SHARED
+  src/bamboo/plugin.cpp
+  src/bamboo/resources.cpp
+  src/bamboo/weather.cpp
+  src/bamboo/client_source.cpp
+  src/bamboo/ambient.cpp)
+target_link_libraries(bamboo-02 PRIVATE
+  PkgConfig::PNG
+  PkgConfig::HYPR
+  rt)
+target_compile_definitions(bamboo-02 PRIVATE VERSION="${PROJECT_VERSION}")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  target_compile_options(bamboo-02 PRIVATE -fno-gnu-unique)
+endif()
+set_target_properties(bamboo-02 PROPERTIES PREFIX "lib")
